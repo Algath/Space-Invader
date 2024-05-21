@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/gdx2d-helloDesktop.iml" filepath="$PROJECT_DIR$/gdx2d-helloDesktop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/space_invader.iml" filepath="$PROJECT_DIR$/space_invader.iml" />
     </modules>
   </component>
 </project>
