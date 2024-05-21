@@ -1,6 +1,6 @@
 package ch.hevs.gdx2d.hello
 
-import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.math.Interpolation
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.lib.GdxGraphics
@@ -13,14 +13,14 @@ import ch.hevs.gdx2d.desktop.PortableApplication
  * @author Pierre-André Mudry (mui)
  * @version 1.0
  */
-object HelloWorldScala {
+object Main {
 
   def main(args: Array[String]): Unit = {
-    new HelloWorldScala
+    new Main
   }
 }
 
-class HelloWorldScala extends PortableApplication {
+class Main extends PortableApplication {
   private var imgBitmap: BitmapImage = null
 
   override def onInit(): Unit = {
@@ -50,6 +50,7 @@ class HelloWorldScala extends PortableApplication {
     // Compute the angle of the image using an elastic interpolation
     val t = computePercentage
     val angle: Float = Interpolation.sine.apply(MIN_ANGLE, MAX_ANGLE, t)
+    val keybord = Gdx.input.isKeyPressed(Input.Keys.W)
 
     // Draw everything
     g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
