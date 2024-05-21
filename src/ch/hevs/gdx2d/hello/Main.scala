@@ -20,7 +20,7 @@ object Main {
   }
 }
 
-class Main extends PortableApplication {
+class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
   override def onInit(): Unit = {
