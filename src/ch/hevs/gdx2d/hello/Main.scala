@@ -58,7 +58,6 @@ class Main extends PortableApplication(1920, 1080) {
     // Compute the angle of the image using an elastic interpolation
     val t = computePercentage
     val angle: Float = Interpolation.sine.apply(MIN_ANGLE, MAX_ANGLE, t)
-    val keybord = Gdx.input.isKeyPressed(Input.Keys.W)
 
     // Draw everything
     //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
