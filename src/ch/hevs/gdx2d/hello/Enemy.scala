@@ -4,10 +4,15 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 
 import java.awt.{Point, Rectangle}
 
-class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage {
+class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage with PV {
   override var velocity: Point = new Point(0, 0)
+  override var position: Point = _position
 
-  var vie = _vie
+  override var id: Int = ID
+
+  override var pv: Int = _vie
+  override var maxPV: Int = _vie
+
 
   override def deplacement(): Unit = {
     var x = position.getX
@@ -22,8 +27,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage {
     position.setLocation(x + velocity.getX, y + velocity.getY)
   }
 
-  override var position: Point = _position
-
 
   for (i: Int <- Handler.projectile.indices) {
     /*
@@ -32,14 +35,15 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage {
     * si true, perte de point de vie
     * */
     if (Handler.projectile(i).id > 0) {
-      if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())){
-        vie -= 1
+      if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+        pv -= Handler.projectile(i).damage
+        // TODO
+        Handler.projectile.remove(i)
       }
     }
   }
 
   override def getHitBox(): Rectangle = {
-
     ID match {
       case -1 => return new Rectangle(position.getX.toInt, position.getY.toInt, 30, 30)
       case -2 => return new Rectangle(position.getX.toInt, position.getY.toInt, 50, 50)
@@ -51,16 +55,20 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage {
   override def onGraphicRender(g: GdxGraphics): Unit = {
     /*
     * regarde quel est le projectile fournit et regarde le nombre de dégat qu'il fait
+    * modification temps par rapport à l'ID plus tard
     * */
+    var count = 0
+    if (count == 600) {
+      Handler.projectile.append(new Projectile(ID, position, getDamage))
+    }
+    count += 1
   }
-
-  override var id: Int = ID
 
   override def getDamage: Int = {
     ID match {
-      case -1 => 10
-      case -2 => 30
-      case _ => 50
+      case -1 => return 10
+      case -2 => return 30
+      case _ => return 50
     }
   }
 }
