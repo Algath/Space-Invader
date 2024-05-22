@@ -2,13 +2,13 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 
-import java.awt.Rectangle
-import java.awt.geom.Point2D
+import java.awt.{Point, Rectangle}
 
 abstract class Object {
 
-  var position:Point2D
-  var velocity:Point2D
+  var position:Point
+  var velocity:Point
+  var id: Int
 
   def deplacement(): Unit
 

@@ -29,7 +29,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
-    s.registerScreen()
+//    s.registerScreen()
   }
 
   /**
