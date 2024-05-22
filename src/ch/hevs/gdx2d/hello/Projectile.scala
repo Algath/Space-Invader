@@ -3,9 +3,11 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 
 import java.awt.{Point, Rectangle}
 
-class Projectile(ID: Int, _position : Point) extends Object {
+class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
 
   override var position: Point = _position
+
+  var damage = _damage
 
   override def deplacement(): Unit = {
     if (ID < 0){
