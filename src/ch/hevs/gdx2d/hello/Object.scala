@@ -2,7 +2,7 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 
-import java.awt.Rectangle
+import java.awt.{Point, Rectangle}
 import java.awt.geom.Point2D
 
 abstract class Object {

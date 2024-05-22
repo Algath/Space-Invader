@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Interpolation
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.screen.Game
+import ch.hevs.gdx2d.screen.Menu
 
 
 /**
@@ -22,14 +24,18 @@ object Main {
 
 class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
-  private var s:ScreenManager = new ScreenManager()
+
+  var s:ScreenManager = new ScreenManager()
 
   override def onInit(): Unit = {
     setTitle("Hello World - mui 2024")
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
-    s.registerScreen()
+
+    s.registerScreen(classOf[Menu])
+    s.registerScreen(classOf[Game])
+
   }
 
   /**
@@ -55,10 +61,21 @@ class Main extends PortableApplication(1920, 1080) {
     val keybord = Gdx.input.isKeyPressed(Input.Keys.W)
 
     // Draw everything
-    g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
-    g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
-    g.drawFPS()
-    g.drawSchoolLogo()
+    //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
+    //g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
+    //g.drawFPS()
+    //g.drawSchoolLogo()
+
+    s.render(g)
+
+    if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+      s.transitionTo(1, ScreenManager.TransactionType.SLIDE)
+    }
+
+    if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
+      s.transitionTo(0, ScreenManager.TransactionType.SMOOTH)
+    }
+
   }
 
   /**

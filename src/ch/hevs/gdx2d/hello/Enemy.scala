@@ -32,6 +32,10 @@ class Enemy (ID: Int, vie: Int, _position: Point2D) extends Object {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
+
+
+
+
   }
 
 }
