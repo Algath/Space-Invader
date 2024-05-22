@@ -69,11 +69,11 @@ class Main extends PortableApplication(1920, 1080) {
     s.render(g)
 
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
-      s.transitionTo(1, ScreenManager.TransactionType.SLIDE)
+      s.transitionTo(1, ScreenManager.TransactionType.SLICE)
     }
 
-    if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
-      s.transitionTo(0, ScreenManager.TransactionType.SMOOTH)
+    else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
+      s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
     }
 
   }

@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.hello
 import ch.hevs.gdx2d.lib.GdxGraphics
+import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
@@ -26,6 +27,7 @@ class Projectile(ID: Int, _position : Point) extends Object {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, 20, 10, 0, Color.RED)
   }
 
   override var id: Int = ID
