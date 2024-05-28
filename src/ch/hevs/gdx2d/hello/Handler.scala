@@ -26,6 +26,7 @@ object Handler {
       if(enemy(i - removedEnemy).pv < 0)
         removeEnemy(i)
     }
+
     for (i: Int <- bonusObject.indices) {
       bonusObject(i).onGraphicRender(g)
     }
@@ -41,6 +42,10 @@ object Handler {
   def removeEnemy(index:Int): Unit = {
     enemy.remove(index)
     removedEnemy += 1
+  }
+
+  def removeBonusObject(index:Int): Unit = {
+    bonusObject.remove(index)
   }
 
 

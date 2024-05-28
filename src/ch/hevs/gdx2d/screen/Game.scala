@@ -16,14 +16,14 @@ class Game extends RenderingScreen {
 
   }
 
-  var shaderTime:Float = 0
+  var time:Float = 0
 
   override def onGraphicRender(gdxGraphics: GdxGraphics): Unit = {
 
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
 
-    gdxGraphics.drawShader(shaderTime);
-    shaderTime += 0.01f
+    gdxGraphics.drawShader(time);
+    time -= 0.01f
 
     gdxGraphics.drawStringCentered(1080 * 0.8f, "Playing")
 
@@ -42,8 +42,11 @@ class Game extends RenderingScreen {
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25,0,  Color.GREEN)
 
-    if (Random.between(1, 600) == 1) {
+    var num :Int = Random.between(1, 600)
+    println(num)
+    if (num == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+      println("*******************************************************************************************************************************************************")
     }
     if (Random.between(1, 10000) == 1){
       Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
