@@ -67,9 +67,13 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
         if (Handler.bonusObject(i).id > 2) {
           if (Handler.bonusObject(i).getHitBox().intersects(this.getHitBox())) {
             Handler.bonusObject(i).id match {
-              case 3 => pv += Random.between(20, 201)
+              case 3 => { pv += Random.between(20, 201)
+                Handler.removeBonusObject(i)
+              }
               case 4 => maxPV += 50
+                Handler.removeBonusObject(i)
               case _ => setDamage(damage * 2)
+                Handler.removeBonusObject(i)
             }
           }
         }
