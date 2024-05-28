@@ -1,14 +1,12 @@
 package ch.hevs.gdx2d.hello
 
-import com.badlogic.gdx.{Gdx, Input}
-import com.badlogic.gdx.math.Interpolation
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
+import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
-import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
-import ch.hevs.gdx2d.hello.Main.ctrl
-import ch.hevs.gdx2d.screen.Game
-import ch.hevs.gdx2d.screen.Menu
-import com.badlogic.gdx.controllers.{Controller, Controllers, PovDirection}
+import ch.hevs.gdx2d.screen.{Game, Menu}
+import com.badlogic.gdx.controllers.Controller
+import com.badlogic.gdx.math.Interpolation
+import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
 

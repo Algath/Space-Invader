@@ -79,10 +79,21 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     * modification temps par rapport à l'ID plus tard
     * */
 
-    if (count > 10) {
-      Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
-      count = 0
+    ID match {
+      case -1 => if (count > 50) {
+        Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
+        count = 0
+      }
+      case -2 => if (count > 25) {
+        Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
+        count = 0
+      }
+      case _ => if (count > 10) {
+        Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
+        count = 0
+      }
     }
+
     count += Random.between(1, 5)
 
     deplacement()
