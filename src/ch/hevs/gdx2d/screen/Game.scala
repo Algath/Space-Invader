@@ -35,8 +35,8 @@ class Game extends RenderingScreen {
 
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-      Handler.enemy.append(new Enemy(-1, 200, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+//      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
       Handler.enemy.append(new Enemy(-3, 1000, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
 
@@ -44,7 +44,7 @@ class Game extends RenderingScreen {
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25,0,  Color.GREEN)
 
 
-    if (Random.between(1, 60) == 1) {
+    if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
     if (Random.between(1, 10000) == 1){
