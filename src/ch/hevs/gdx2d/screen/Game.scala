@@ -44,7 +44,7 @@ class Game extends RenderingScreen {
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25,0,  Color.GREEN)
 
 
-    if (Random.between(1, 60) == 1) {
+    if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
     if (Random.between(1, 10000) == 1){

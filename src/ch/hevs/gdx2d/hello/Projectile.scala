@@ -29,6 +29,6 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, 20, 10, 0, Color.RED)
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.RED)
   }
 }
