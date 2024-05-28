@@ -39,24 +39,32 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
     new Rectangle(position.getX.toInt, position.getY.toInt, 50,50)
   }
 
-  for (i: Int <- Handler.projectile.indices){
-    if (Handler.projectile(i).id < 0){
-      if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())){
-        pv -= Handler.projectile(i).damage
-        // TODO
-        Handler.projectile.remove(i)
-      }
-    }
-  }
-
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-      Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage))
+      Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
       count = 0
     }
     count += 1
+
+
+    for (i: Int <- Handler.projectile.indices) {
+      try{
+        if (Handler.projectile(i).id < 0) {
+          if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+            pv -= Handler.projectile(i).damage
+            // TODO
+            Handler.projectile.remove(i)
+          }
+        }
+      }
+      catch {
+        case e:IndexOutOfBoundsException => {}
+      }
+
+    }
+
 
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GREEN)
 

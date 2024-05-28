@@ -105,13 +105,20 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       * compare si les hitbox se touchent (Handler.projectile(i).getHitBox.intersect(this.getHitBox))
       * si true, perte de point de vie
       * */
-      if (Handler.projectile(i).id > 0) {
-        if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
-          pv -= Handler.projectile(i).damage
-          // TODO
-          Handler.projectile.remove(i)
+
+      try{
+        if (Handler.projectile(i).id > 0) {
+          if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+            pv -= Handler.projectile(i).damage
+            Handler.removeProjectile(i)
+          }
         }
       }
+      catch{
+        case e:IndexOutOfBoundsException => {}
+      }
+
+
     }
 
   }
