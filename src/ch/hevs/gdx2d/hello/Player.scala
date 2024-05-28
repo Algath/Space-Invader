@@ -63,11 +63,20 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
             Handler.projectile.remove(i)
           }
         }
+      }
+      catch {
+        case e:IndexOutOfBoundsException => {}
+      }
+    }
 
+    for(i:Int <- Handler.bonusObject.indices){
+
+      try{
         if (Handler.bonusObject(i).id > 2) {
           if (Handler.bonusObject(i).getHitBox().intersects(this.getHitBox())) {
             Handler.bonusObject(i).id match {
-              case 3 => { pv += Random.between(20, 201)
+              case 3 => {
+                pv += Random.between(20, 201)
                 Handler.removeBonusObject(i)
               }
               case 4 => maxPV += 50
@@ -79,8 +88,9 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
         }
       }
       catch {
-        case e:IndexOutOfBoundsException => {}
+        case e: IndexOutOfBoundsException => {}
       }
+
     }
 
     if(pv < 0)

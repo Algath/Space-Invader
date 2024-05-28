@@ -78,7 +78,7 @@ class Main extends PortableApplication(1920, 1080) {
       Handler.player = new Player(1, new Point(50, 500), 200)
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
       g.setShader("data/shaders/stars.fp")
-      g.getShaderRenderer().setUniform("mouse", new Vector2(10, 10))
+      g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
