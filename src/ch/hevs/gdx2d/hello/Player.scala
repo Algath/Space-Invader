@@ -54,7 +54,6 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
         if (Handler.projectile(i).id < 0) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage
-            // TODO
             Handler.projectile.remove(i)
           }
         }
@@ -64,6 +63,9 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
       }
 
     }
+
+    if(pv < 0)
+      pv = 0
 
 
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GREEN)
