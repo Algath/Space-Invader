@@ -2,13 +2,13 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 
-import java.awt.Point
 import scala.collection.mutable.ArrayBuffer
 
 object Handler {
 
   var enemy: ArrayBuffer[Enemy] = new ArrayBuffer[Enemy]()
   var projectile: ArrayBuffer[Projectile] = new ArrayBuffer[Projectile]()
+  var bonusObject: ArrayBuffer[Bonus_Object] = new ArrayBuffer[Bonus_Object]()
 
   var player:Player = null
 
@@ -21,6 +21,9 @@ object Handler {
       enemy(i).onGraphicRender(g)
       if(enemy(i).pv < 0)
         enemy.remove(i)
+    }
+    for (i: Int <- bonusObject.indices) {
+      bonusObject(i).onGraphicRender(g)
     }
 
     player.onGraphicRender(g)

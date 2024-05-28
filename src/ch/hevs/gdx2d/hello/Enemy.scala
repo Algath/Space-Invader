@@ -7,6 +7,12 @@ import java.awt.{Point, Rectangle}
 import scala.util.Random
 
 class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage with PV {
+  /*
+  * ID: -1 = Soldat
+  * ID: -2 = Mini-boss
+  * ID: -3 = Boss
+  * */
+
   override var velocity: Point = new Point(0, 3)
   override var position: Point = _position
 
@@ -130,4 +136,8 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       case _ => return 50
     }
   }
+
+  override def setDamage(newDamage: Int): Unit = damage = 0
+
+  override var damage: Int = 0
 }

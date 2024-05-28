@@ -1,13 +1,19 @@
 package ch.hevs.gdx2d.hello
 
-import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.{Point, Rectangle}
+import scala.util.Random
 
 class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage with PV {
+  /*
+  * ID: 1 = Player 1
+  * ID: 2 = Player 2
+  * */
+
+
   override var position: Point = _position
   override var velocity: Point = new Point(1, 10)
 
@@ -57,11 +63,20 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
             Handler.projectile.remove(i)
           }
         }
+
+        if (Handler.bonusObject(i).id > 2) {
+          if (Handler.bonusObject(i).getHitBox().intersects(this.getHitBox())) {
+            Handler.bonusObject(i).id match {
+              case 3 => pv += Random.between(20, 201)
+              case 4 => maxPV += 50
+              case _ => setDamage(damage * 2)
+            }
+          }
+        }
       }
       catch {
         case e:IndexOutOfBoundsException => {}
       }
-
     }
 
     if(pv < 0)
@@ -72,5 +87,13 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
   }
 
-  override def getDamage: Int = 10
+  override def getDamage: Int = {
+    damage
+  }
+
+  def setDamage(newDamage: Int): Unit = {
+    damage = newDamage
+  }
+
+  override var damage: Int = 10
 }
