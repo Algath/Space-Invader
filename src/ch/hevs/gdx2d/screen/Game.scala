@@ -1,15 +1,13 @@
 package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
-import ch.hevs.gdx2d.hello.{Enemy, Handler, Projectile}
+import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
 import scala.util.Random
-
-import com.badlogic.gdx.math.Vector2
 
 class Game extends RenderingScreen {
   override def onInit(): Unit = {
