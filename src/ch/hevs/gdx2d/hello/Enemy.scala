@@ -90,11 +90,11 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
         Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
         count = 0
       }
-      case -2 => if (count > 25) {
+      case -2 => if (count > 40) {
         Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
         count = 0
       }
-      case _ => if (count > 10) {
+      case _ => if (count > 50) {
         Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
         count = 0
       }

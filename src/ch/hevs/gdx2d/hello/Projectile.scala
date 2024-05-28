@@ -21,9 +21,10 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   override def getHitBox(): Rectangle = {
     id match {
-      case -1 => return new Rectangle(position.getX.toInt, position.getY.toInt, 30 , 30)
-      case -2 => return new Rectangle(position.getX.toInt, position.getY.toInt, 50, 50)
-      case _ => return new Rectangle(position.getX.toInt, position.getY.toInt, 100, 100)
+      case -1 => return new Rectangle(position.getX.toInt, position.getY.toInt, 20 , 10)
+      case -2 => return new Rectangle(position.getX.toInt, position.getY.toInt, 30, 10)
+      case -3 => new Rectangle(position.getX.toInt, position.getY.toInt, 40, 10)
+      case _ => return new Rectangle(position.getX.toInt, position.getY.toInt, 20, 10)
     }
   }
 
