@@ -5,7 +5,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.controllers.Controller
-import com.badlogic.gdx.math.Interpolation
+import com.badlogic.gdx.math.{Interpolation, Vector2}
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -77,6 +77,8 @@ class Main extends PortableApplication(1920, 1080) {
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
       Handler.player = new Player(1, new Point(50, 500), 200)
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+      g.setShader("data/shaders/stars.fp")
+      g.getShaderRenderer().setUniform("mouse", new Vector2(10, 10))
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
