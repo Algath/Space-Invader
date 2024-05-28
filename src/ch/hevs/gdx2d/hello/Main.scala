@@ -4,9 +4,11 @@ import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.math.Interpolation
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
-import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
+import ch.hevs.gdx2d.hello.Main.ctrl
 import ch.hevs.gdx2d.screen.Game
 import ch.hevs.gdx2d.screen.Menu
+import com.badlogic.gdx.controllers.{Controller, Controllers, PovDirection}
 
 
 /**
@@ -16,6 +18,8 @@ import ch.hevs.gdx2d.screen.Menu
  * @version 1.0
  */
 object Main {
+
+  var ctrl:Controller = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -35,6 +39,9 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
+
+    //if (Controllers.getControllers().size > 0)
+      //ctrl = Controllers.getControllers().first();
 
   }
 
@@ -74,6 +81,12 @@ class Main extends PortableApplication(1920, 1080) {
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
     }
+
+//    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
+//      println("DOWN")
+//    }
+
+
 
   }
 

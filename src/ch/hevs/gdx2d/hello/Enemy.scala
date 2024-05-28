@@ -1,11 +1,13 @@
 package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.lib.GdxGraphics
+import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
+import scala.util.Random
 
 class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage with PV {
-  override var velocity: Point = new Point(0, 0)
+  override var velocity: Point = new Point(0, 3)
   override var position: Point = _position
 
   override var id: Int = ID
@@ -13,18 +15,54 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
   override var pv: Int = _vie
   override var maxPV: Int = _vie
 
+  var count = 0
+  var xAdvance:Int = 0;
+  var isVerticalDisplacement:Boolean = false
+
 
   override def deplacement(): Unit = {
     var x = position.getX
     var y = position.getY
 
-    if (x > 1910) x += -1
-    if (y > 10) y += -1
-    else if (y == 10 && x != x - 10) x += -1
-    else if (y < 1070) y += 1
-    else if (y == 1070 && x != x - 10) x += -1
+    if (position.x > 1860) x += -2
+    else{
 
-    position.setLocation(x + velocity.getX, y + velocity.getY)
+      if(position.y < 20) {
+        y = 20
+        isVerticalDisplacement = false
+        velocity.y *= -1
+      }
+
+      if (position.y > 1060) {
+        y = 1060
+        isVerticalDisplacement = false
+        velocity.y *= -1
+      }
+
+      if(!isVerticalDisplacement) {
+        xAdvance += 1
+        x -= 3
+      }
+
+      if(xAdvance > 50){
+        xAdvance = 0
+        isVerticalDisplacement = true
+      }
+
+    }
+
+    println(isVerticalDisplacement + " / " + xAdvance)
+
+    //if (y > 10) y += -1
+    //else if (y == 10 && x != x - 10) x += -1
+    //else if (y < 1070) y += 1
+    //else if (y == 1070 && x != x - 10) x += -1
+
+    if(isVerticalDisplacement)
+      position.setLocation(x + velocity.getX, y + velocity.getY)
+    else
+      position.setLocation(x + velocity.getX, y)
+
   }
 
 
@@ -57,11 +95,16 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     * regarde quel est le projectile fournit et regarde le nombre de dégat qu'il fait
     * modification temps par rapport à l'ID plus tard
     * */
-    var count = 0
-    if (count == 600) {
-      Handler.projectile.append(new Projectile(ID, position, getDamage))
+
+    if (count > 10) {
+      Handler.projectile.append(new Projectile(ID, position.clone.asInstanceOf[Point], getDamage))
+      count = 0
     }
-    count += 1
+    count += Random.between(1, 5)
+
+    deplacement()
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+
   }
 
   override def getDamage: Int = {
