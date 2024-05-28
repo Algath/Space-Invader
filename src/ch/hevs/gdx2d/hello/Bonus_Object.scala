@@ -30,7 +30,12 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.YELLOW)
+    id match {
+      case 3 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.YELLOW)
+      case 4 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ROYAL)
+      case _ => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GOLD)
+    }
+
   }
 
 }
