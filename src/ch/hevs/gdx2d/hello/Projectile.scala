@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
-class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
+class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new Point(10, 0)) extends Object {
 
   override var position: Point = _position
   override var id: Int = ID
-  override var velocity: Point = new Point(10, 0)
+  override var velocity: Point = _velocity
 
   var damage = _damage
 
