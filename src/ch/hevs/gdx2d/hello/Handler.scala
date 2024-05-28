@@ -12,15 +12,19 @@ object Handler {
 
   var player:Player = null
 
+  var removedEnemy:Int = 0
+
   def onGraphicRender(g: GdxGraphics): Unit = {
 
     for (i: Int <- projectile.indices) {
       projectile(i).onGraphicRender(g)
     }
+
+    removedEnemy = 0
     for (i: Int <- enemy.indices) {
-      enemy(i).onGraphicRender(g)
-      if(enemy(i).pv < 0)
-        enemy.remove(i)
+      enemy(i - removedEnemy).onGraphicRender(g)
+      if(enemy(i - removedEnemy).pv < 0)
+        removeEnemy(i)
     }
     for (i: Int <- bonusObject.indices) {
       bonusObject(i).onGraphicRender(g)
@@ -32,6 +36,11 @@ object Handler {
 
   def removeProjectile(index:Int): Unit = {
     projectile.remove(index)
+  }
+
+  def removeEnemy(index:Int): Unit = {
+    enemy.remove(index)
+    removedEnemy += 1
   }
 
 
