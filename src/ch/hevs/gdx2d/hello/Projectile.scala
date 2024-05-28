@@ -7,6 +7,8 @@ import java.awt.{Point, Rectangle}
 class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
 
   override var position: Point = _position
+  override var id: Int = ID
+  override var velocity: Point = new Point(0,0)
 
   var damage = _damage
 
@@ -25,13 +27,8 @@ class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
     }
   }
 
-  override var velocity: Point = new Point(10, 0)
-
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, 20, 10, 0, Color.RED)
-
   }
-
-  override var id: Int = ID
 }
