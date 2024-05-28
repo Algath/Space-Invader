@@ -8,7 +8,7 @@ class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
 
   override var position: Point = _position
   override var id: Int = ID
-  override var velocity: Point = new Point(0,0)
+  override var velocity: Point = new Point(10, 0)
 
   var damage = _damage
 
