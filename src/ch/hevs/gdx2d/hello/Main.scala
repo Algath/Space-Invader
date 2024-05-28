@@ -10,6 +10,8 @@ import ch.hevs.gdx2d.screen.Game
 import ch.hevs.gdx2d.screen.Menu
 import com.badlogic.gdx.controllers.{Controller, Controllers, PovDirection}
 
+import java.awt.Point
+
 
 /**
  * Hello World demo in Scala
@@ -75,6 +77,7 @@ class Main extends PortableApplication(1920, 1080) {
     s.render(g)
 
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+      Handler.player = new Player(1, new Point(50, 500), 200)
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
     }
 

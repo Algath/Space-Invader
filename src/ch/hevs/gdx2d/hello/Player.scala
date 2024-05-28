@@ -2,13 +2,14 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.{Point, Rectangle}
 
 class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage with PV {
   override var position: Point = _position
-  override var velocity: Point = new Point(0,0)
+  override var velocity: Point = new Point(1, 10)
 
   override var id: Int = ID
 
@@ -20,14 +21,16 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
   override def deplacement(): Unit = {
     // décplacement clavier
-    if (Gdx.input.isKeyPressed(Input.Keys.W)) position.setLocation(position.getX + velocity.getX, position.getY)
-    else if (Gdx.input.isKeyPressed(Input.Keys.S)) position.setLocation(position.getX - velocity.getX, position.getY)
+    if (Gdx.input.isKeyPressed(Input.Keys.W)) position.setLocation(position.getX, position.getY + velocity.getY)
+    else if (Gdx.input.isKeyPressed(Input.Keys.S)) position.setLocation(position.getX, position.getY - velocity.getY)
+
+    //println(velocity.x)
 
     // déplacement manette stick
-    Xbox.L_STICK_VERTICAL_AXIS match {
-      case -1 => position.setLocation(position.getX + velocity.getX, position.getY)
-      case 1 => position.setLocation(position.getX - velocity.getX, position.getY)
-    }
+//    Xbox.L_STICK_VERTICAL_AXIS match {
+//      case -1 => position.setLocation(position.getX + velocity.getX, position.getY)
+//      case 1 => position.setLocation(position.getX - velocity.getX, position.getY)
+//    }
 
     // déplacement manette D_Pad
   }
@@ -49,11 +52,14 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
-    if (count == 600) {
-      Handler.projectile.append(new Projectile(ID, position, getDamage))
+    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+      Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage))
       count = 0
     }
     count += 1
+
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GREEN)
+
   }
 
   override def getDamage: Int = 10

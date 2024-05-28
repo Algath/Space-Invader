@@ -29,7 +29,7 @@ class Game extends RenderingScreen {
     //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
 
-    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
       Handler.enemy.append(new Enemy(-1, 200, new Point(Random.between(1940, 1941), Random.between(10, 1070))))
     }
 

@@ -51,8 +51,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
     }
 
-    println(isVerticalDisplacement + " / " + xAdvance)
-
     //if (y > 10) y += -1
     //else if (y == 10 && x != x - 10) x += -1
     //else if (y < 1070) y += 1
@@ -65,21 +63,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
   }
 
-
-  for (i: Int <- Handler.projectile.indices) {
-    /*
-    * compare l'ID du projectile (ID > 0)
-    * compare si les hitbox se touchent (Handler.projectile(i).getHitBox.intersect(this.getHitBox))
-    * si true, perte de point de vie
-    * */
-    if (Handler.projectile(i).id > 0) {
-      if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
-        pv -= Handler.projectile(i).damage
-        // TODO
-        Handler.projectile.remove(i)
-      }
-    }
-  }
 
   override def getHitBox(): Rectangle = {
     ID match {
@@ -104,6 +87,21 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
     deplacement()
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+
+    for (i: Int <- Handler.projectile.indices) {
+      /*
+      * compare l'ID du projectile (ID > 0)
+      * compare si les hitbox se touchent (Handler.projectile(i).getHitBox.intersect(this.getHitBox))
+      * si true, perte de point de vie
+      * */
+      if (Handler.projectile(i).id > 0) {
+        if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+          pv -= Handler.projectile(i).damage
+          // TODO
+          Handler.projectile.remove(i)
+        }
+      }
+    }
 
   }
 
