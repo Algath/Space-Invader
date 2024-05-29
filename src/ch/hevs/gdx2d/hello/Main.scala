@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.hello
 
+import ch.hevs.gdx2d.Utils.Util
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication

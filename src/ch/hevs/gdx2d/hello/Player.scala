@@ -50,7 +50,7 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
-    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE))) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
       Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
       /// Multi-tire

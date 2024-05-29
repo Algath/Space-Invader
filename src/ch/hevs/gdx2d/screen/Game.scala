@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.Utils.Util
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler, Main}
 import ch.hevs.gdx2d.lib.GdxGraphics
@@ -27,22 +28,20 @@ class Game extends RenderingScreen {
     //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
 
-    if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-      if (count == 180) {
-        Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (count == 10800) {
-        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (count == 18000) {
-        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (Random.between(1, 100000) == 1)
-        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      if (Random.between(1, 10000000) == 1)
-        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      count = 0
+
+    if (Util.IsMultiple(count, 180)) {
+      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
+    if (Util.IsMultiple(count, 10800)) {
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Util.IsMultiple(count, 18000)) {
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 100000) == 1)
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (Random.between(1, 10000000) == 1)
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25,0,  Color.GREEN)
@@ -75,5 +74,7 @@ class Game extends RenderingScreen {
 
   }
 
-  override def onInit(): Unit = ???
+  override def onInit(): Unit = {
+
+  }
 }
