@@ -82,7 +82,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     //else if (y == 1070 && x != x - 10) x += -1
 
     if (isVerticalDisplacement)
-      position.setLocation(x, y + velocity.getY)
+      position.setLocation(x + velocity.getX, y + velocity.getY)
     else
       position.setLocation(x + velocity.getX, y)
 
