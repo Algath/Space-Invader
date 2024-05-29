@@ -1,10 +1,10 @@
-package ch.hevs.gdx2d.hello
+package ch.hevs.gdx2d.main
 
-import ch.hevs.gdx2d.Utils.Util
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
-import ch.hevs.gdx2d.hello.Main.{DEBUG, playerBulletImg}
+import ch.hevs.gdx2d.game.Handler
+import ch.hevs.gdx2d.main.Main.{DEBUG, playerBulletImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.math.{Interpolation, Vector2}

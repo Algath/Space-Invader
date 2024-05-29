@@ -1,4 +1,4 @@
-package ch.hevs.gdx2d.hello
+package ch.hevs.gdx2d.game
 
 trait PV {
   var pv: Int

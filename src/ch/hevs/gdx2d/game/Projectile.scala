@@ -1,5 +1,8 @@
-package ch.hevs.gdx2d.hello
+package ch.hevs.gdx2d.game
+
+import ch.hevs.gdx2d.game.Object
 import ch.hevs.gdx2d.lib.GdxGraphics
+import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}

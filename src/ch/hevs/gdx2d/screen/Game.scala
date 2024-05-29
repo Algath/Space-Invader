@@ -1,7 +1,8 @@
 package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
-import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler, Main}
+import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
+import ch.hevs.gdx2d.main.{Main}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 
