@@ -55,9 +55,16 @@ class Game extends RenderingScreen {
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
 
+    import sys.process._
+
+//    val cpuUsage = "for /f "tokens=3 delims=," %i in ('tasklist /fo csv /nh ^| findstr /c:"CPU"') do @echo %i" !
+//    val cpuUsagePercent = cpuUsage.split("%").head.toDouble / 100
+//    println(s"CPU usage: $cpuUsagePercent")
+
     if(Main.DEBUG){
       gdxGraphics.drawFPS()
       gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
+//      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
     }
 
   }
