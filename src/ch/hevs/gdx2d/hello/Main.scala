@@ -1,12 +1,15 @@
 package ch.hevs.gdx2d.hello
 
-import com.badlogic.gdx.{Gdx, Input}
-import com.badlogic.gdx.math.Interpolation
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
-import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.desktop.PortableApplication
-import ch.hevs.gdx2d.screen.Game
-import ch.hevs.gdx2d.screen.Menu
+import ch.hevs.gdx2d.hello.Main.DEBUG
+import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
+import ch.hevs.gdx2d.screen.{Game, Menu}
+import com.badlogic.gdx.controllers.Controller
+import com.badlogic.gdx.math.{Interpolation, Vector2}
+import com.badlogic.gdx.{Gdx, Input}
+
+import java.awt.Point
 
 
 /**
@@ -16,6 +19,10 @@ import ch.hevs.gdx2d.screen.Menu
  * @version 1.0
  */
 object Main {
+
+  var DEBUG:Boolean = false
+
+  //var ctrl:Controller = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -35,6 +42,9 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
+
+    //if (Controllers.getControllers().size > 0)
+      //ctrl = Controllers.getControllers().first();
 
   }
 
@@ -68,12 +78,27 @@ class Main extends PortableApplication(1920, 1080) {
     s.render(g)
 
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+      Handler.player = new Player(1, new Point(50, 500), 200)
+      Handler.Init()
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+      g.setShader("data/shaders/stars.fp")
+      g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
     }
+
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+      if(Main.DEBUG) DEBUG = false
+      else DEBUG = true
+    }
+
+//    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
+//      println("DOWN")
+//    }
+
+
 
   }
 

@@ -4,11 +4,11 @@ import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
-class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
+class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new Point(10, 0)) extends Object {
 
   override var position: Point = _position
   override var id: Int = ID
-  override var velocity: Point = new Point(0,0)
+  override var velocity: Point = _velocity
 
   var damage = _damage
 
@@ -21,14 +21,15 @@ class Projectile(ID: Int, _position : Point, _damage: Int) extends Object {
 
   override def getHitBox(): Rectangle = {
     id match {
-      case -1 => return new Rectangle(position.getX.toInt, position.getY.toInt, 30 , 30)
-      case -2 => return new Rectangle(position.getX.toInt, position.getY.toInt, 50, 50)
-      case _ => return new Rectangle(position.getX.toInt, position.getY.toInt, 100, 100)
+      case -1 => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20 , 10)
+      case -2 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 5, 30, 10)
+      case -3 => new Rectangle(position.getX.toInt - 20, position.getY.toInt - 5, 40, 10)
+      case _ => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20, 10)
     }
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, 20, 10, 0, Color.RED)
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.RED)
   }
 }

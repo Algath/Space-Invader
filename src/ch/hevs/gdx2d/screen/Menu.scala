@@ -12,12 +12,17 @@ class Menu extends RenderingScreen {
 
   }
 
-  override def onGraphicRender(gdxGraphics: GdxGraphics): Unit = {
+  var time:Float = 0
 
-    gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.CYAN)
+  override def onGraphicRender(g: GdxGraphics): Unit = {
 
-    gdxGraphics.drawStringCentered(1080 * 0.8f, "Main Menu")
-    gdxGraphics.drawFPS()
+    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.CYAN)
+
+    //g.drawShader(time);
+    //time -= 0.01f
+
+    g.drawStringCentered(1080 * 0.8f, "Main Menu")
+    g.drawFPS()
 
     //gdxGraphics.drawCircle(500, 500, 100)
 
