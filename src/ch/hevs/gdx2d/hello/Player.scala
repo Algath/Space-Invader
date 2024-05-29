@@ -10,7 +10,7 @@ import com.badlogic.gdx.{Gdx, Input}
 import java.awt.{Point, Rectangle}
 import scala.util.Random
 
-class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage with PV {
+class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage with PV {
   /*
   * ID: 1 = Player 1
   * ID: 2 = Player 2
@@ -34,16 +34,16 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
     //println(velocity.x)
 
     // déplacement manette stick
-//    Xbox.L_STICK_VERTICAL_AXIS match {
-//      case -1 => position.setLocation(position.getX + velocity.getX, position.getY)
-//      case 1 => position.setLocation(position.getX - velocity.getX, position.getY)
-//    }
+    //    Xbox.L_STICK_VERTICAL_AXIS match {
+    //      case -1 => position.setLocation(position.getX + velocity.getX, position.getY)
+    //      case 1 => position.setLocation(position.getX - velocity.getX, position.getY)
+    //    }
 
     // déplacement manette D_Pad
   }
 
   override def getHitBox(): Rectangle = {
-    new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50,50)
+    new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
@@ -63,7 +63,7 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
 
     for (i: Int <- Handler.projectile.indices) {
-      try{
+      try {
         if (Handler.projectile(i).id < 0) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage
@@ -72,12 +72,12 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
         }
       }
       catch {
-        case e:IndexOutOfBoundsException => {}
+        case e: IndexOutOfBoundsException => {}
       }
     }
 
-    for(i:Int <- Handler.bonusObject.indices){
-      try{
+    for (i: Int <- Handler.bonusObject.indices) {
+      try {
         if (Handler.bonusObject(i).id > 2) {
           if (Handler.bonusObject(i).getHitBox().intersects(this.getHitBox())) {
             Handler.bonusObject(i).id match {
@@ -100,11 +100,11 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
     }
 
-    if(pv < 0)
+    if (pv < 0)
       pv = 0
 
-    if(position.y < 55) position.y = 55
-    if(position.y > 1025) position.y = 1025
+    if (position.y < 55) position.y = 55
+    if (position.y > 1025) position.y = 1025
 
 
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GREEN)

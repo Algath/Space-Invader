@@ -1,6 +1,5 @@
 package ch.hevs.gdx2d.hello
 
-import ch.hevs.gdx2d.Utils.Util
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -19,7 +18,7 @@ import com.badlogic.gdx.{Gdx, Input}
  */
 object Main {
 
-  var DEBUG:Boolean = false
+  var DEBUG: Boolean = false
   var playerBulletImg: BitmapImage = null
 
   def main(args: Array[String]): Unit = {
@@ -30,7 +29,7 @@ object Main {
 class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
-  var s:ScreenManager = new ScreenManager()
+  var s: ScreenManager = new ScreenManager()
 
   override def onInit(): Unit = {
     setTitle("Hello World - mui 2024")
@@ -41,7 +40,6 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
-
 
 
   }
@@ -75,7 +73,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.render(g)
 
-    if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
+    if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
 
       Handler.Init()
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
@@ -87,14 +85,14 @@ class Main extends PortableApplication(1920, 1080) {
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
     }
 
-    if(Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
-      if(Main.DEBUG) DEBUG = false
+    if (Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+      if (Main.DEBUG) DEBUG = false
       else DEBUG = true
     }
 
-//    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
-//      println("DOWN")
-//    }
+    //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
+    //      println("DOWN")
+    //    }
 
     ControllerHandler.UpdatePressButton()
 

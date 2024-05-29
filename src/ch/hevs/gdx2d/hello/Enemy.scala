@@ -22,8 +22,8 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
   override var maxPV: Int = _vie
 
   var count = 0
-  var xAdvance:Int = 0;
-  var isVerticalDisplacement:Boolean = false
+  var xAdvance: Int = 0;
+  var isVerticalDisplacement: Boolean = false
 
 
   override def deplacement(): Unit = {
@@ -34,14 +34,14 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       if (position.x > 1860) x += -2
       else {
 
-        if (position.y < 10+ getHitBox().height/2) {
-          y = 10 + getHitBox().height/2
+        if (position.y < 10 + getHitBox().height / 2) {
+          y = 10 + getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
 
-        if (position.y > 1070 - getHitBox().height/2) {
-          y = 1070 - getHitBox().height/2
+        if (position.y > 1070 - getHitBox().height / 2) {
+          y = 1070 - getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
@@ -57,17 +57,17 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
         }
       }
     }
-    if (ID == -3){
+    if (ID == -3) {
       if (position.x > 1800) x += -2
       else {
         isVerticalDisplacement = true
-        if (position.y < 10 + getHitBox().height/2) {
-          y = 10 + getHitBox().height/2
+        if (position.y < 10 + getHitBox().height / 2) {
+          y = 10 + getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
-        if (position.y > 1070 - getHitBox().height/2) {
-          y = 1070 - getHitBox().height/2
+        if (position.y > 1070 - getHitBox().height / 2) {
+          y = 1070 - getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
@@ -79,7 +79,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     //else if (y < 1070) y += 1
     //else if (y == 1070 && x != x - 10) x += -1
 
-    if(isVerticalDisplacement)
+    if (isVerticalDisplacement)
       position.setLocation(x + velocity.getX, y + velocity.getY)
     else
       position.setLocation(x + velocity.getX, y)
@@ -128,7 +128,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       * si true, perte de point de vie
       * */
 
-      try{
+      try {
         if (Handler.projectile(i).id > 0) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage
@@ -136,18 +136,16 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
           }
         }
       }
-      catch{
-        case e:IndexOutOfBoundsException => {}
+      catch {
+        case e: IndexOutOfBoundsException => {}
       }
 
     }
 
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
 
-    if(Main.DEBUG)
-      g.drawString(position.getX.toInt-15, position.getY.toInt +40, "PV : " + pv)
-
-
+    if (Main.DEBUG)
+      g.drawString(position.getX.toInt - 15, position.getY.toInt + 40, "PV : " + pv)
   }
 
   override def getDamage: Int = {

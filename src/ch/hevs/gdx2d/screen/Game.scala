@@ -4,7 +4,6 @@ import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler, Main}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
 import scala.util.Random
@@ -27,21 +26,21 @@ class Game extends RenderingScreen {
     //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
     count += 1
-     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
+    // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
 
-      if (count % 300 == 0) {
-        Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (count % 10800 == 0) {
-        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (count % 18000 == 0) {
-        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      }
-      if (Random.between(1, 100000) == 1)
-        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-      if (Random.between(1, 10000000) == 1)
-        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (count % 300 == 0) {
+      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (count % 10800 == 0) {
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (count % 18000 == 0) {
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 100000) == 1)
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (Random.between(1, 10000000) == 1)
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
