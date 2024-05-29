@@ -55,7 +55,6 @@ class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage wi
       /// Multi-tire
       Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
       Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-
       Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
       Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
 
