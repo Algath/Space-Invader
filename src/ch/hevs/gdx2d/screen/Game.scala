@@ -45,10 +45,10 @@ class Game extends RenderingScreen {
     if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
-    if (Random.between(1, 10) == 1){  // 10000
+    if (Random.between(1, 100000) == 1){  // 10000
       Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
-    if (Random.between(1, 10) == 1){ // 1000000
+    if (Random.between(1, 1000000) == 1){ // 1000000
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
 
