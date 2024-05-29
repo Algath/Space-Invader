@@ -5,7 +5,6 @@ import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.controllers.PovDirection
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.{Point, Rectangle}
