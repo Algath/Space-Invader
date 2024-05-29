@@ -14,7 +14,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
   * ID: -3 = Boss
   * */
 
-  override var velocity: Point = new Point(0, 3)
+  override var velocity: Point = new Point(3, 3)
   override var position: Point = _position
 
   override var id: Int = ID
@@ -25,6 +25,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
   var count = 0
   var xAdvance: Int = 0;
   var isVerticalDisplacement: Boolean = false
+  var speed: Int = 0
 
 
   override def deplacement(): Unit = {
@@ -32,7 +33,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     var y = position.getY
 
     if (ID != -3) {
-      if (position.x > 1860) x += -2
+      if (position.x > 1860) x -= velocity.x
       else {
 
         if (position.y < 10 + getHitBox().height / 2) {
@@ -49,7 +50,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
         if (!isVerticalDisplacement) {
           xAdvance += 1
-          x -= 3
+          x -= velocity.x
         }
 
         if (xAdvance > 50) {
@@ -59,7 +60,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       }
     }
     if (ID == -3) {
-      if (position.x > 1800) x += -2
+      if (position.x > 1800) x += -velocity.x
       else {
         isVerticalDisplacement = true
         if (position.y < 10 + getHitBox().height / 2) {
@@ -81,7 +82,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     //else if (y == 1070 && x != x - 10) x += -1
 
     if (isVerticalDisplacement)
-      position.setLocation(x + velocity.getX, y + velocity.getY)
+      position.setLocation(x, y + velocity.getY)
     else
       position.setLocation(x + velocity.getX, y)
 
@@ -141,6 +142,15 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
         case e: IndexOutOfBoundsException => {}
       }
 
+    }
+
+    speed += 1
+    println(position.x)
+
+    if (speed % 60 == 0) {
+      if (velocity.y > 0) {
+        velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt + 1)
+      } else velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt - 1)
     }
 
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
