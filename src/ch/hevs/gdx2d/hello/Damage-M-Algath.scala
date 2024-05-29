@@ -1,0 +1,9 @@
+package ch.hevs.gdx2d.hello
+
+trait Damage {
+  def getDamage: Int
+
+  def setDamage(newDamage: Int): Unit
+
+  var damage: Int
+}
