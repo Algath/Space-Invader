@@ -15,16 +15,16 @@ class Game extends RenderingScreen {
   var minute: Int = 0
   var sec: Double = 0.0
 
-  override def onGraphicRender(gdxGraphics: GdxGraphics): Unit = {
+  override def onGraphicRender(g: GdxGraphics): Unit = {
 
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
 
-    gdxGraphics.drawShader(time);
+    g.drawShader(time);
     time += 0.01f
 
-    gdxGraphics.drawStringCentered(1080 * 0.8f, "Playing")
+    //g.drawStringCentered(1080 * 0.8f, "Playing")
 
-    Handler.onGraphicRender(gdxGraphics)
+    Handler.onGraphicRender(g)
 
     //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
@@ -46,11 +46,11 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
-    gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
-    gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25, 0, Color.GREEN)
-    gdxGraphics.setColor(Color.BLACK)
-    gdxGraphics.drawString(375, 1065, "PV : " + Handler.player.pv)
-    gdxGraphics.setColor(Color.WHITE)
+    g.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
+    g.drawFilledRectangle(400, 1060, Handler.player.pv, 25, 0, Color.GREEN)
+    g.setColor(Color.BLACK)
+    g.drawString(375, 1065, "PV : " + Handler.player.pv)
+    g.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
@@ -77,11 +77,13 @@ class Game extends RenderingScreen {
       sec = 0
     }
 
+    g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
+
     if (Main.DEBUG) {
-      gdxGraphics.drawFPS()
-      gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
+      g.drawFPS()
+      g.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
-      gdxGraphics.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
+      g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
     }
 
   }

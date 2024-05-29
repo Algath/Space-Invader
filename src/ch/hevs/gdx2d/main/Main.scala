@@ -4,9 +4,13 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
 import ch.hevs.gdx2d.game.Handler
-import ch.hevs.gdx2d.main.Main.{DEBUG, playerBulletImg, playerImg}
+import ch.hevs.gdx2d.main.Main.{DEBUG, icepixel40, playerBulletImg, playerImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
+import com.badlogic.gdx.files.FileHandle
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.g2d.BitmapFont
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
 import com.badlogic.gdx.{Gdx, Input}
 
@@ -22,6 +26,7 @@ object Main {
   var DEBUG: Boolean = false
   var playerBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
+  var icepixel40: BitmapFont = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -43,6 +48,19 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
+
+    val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
+
+    var generator = new FreeTypeFontGenerator(icePixelF)
+    val parameter = new FreeTypeFontGenerator.FreeTypeFontParameter
+    parameter.size = generator.scaleForPixelHeight(40)
+    parameter.color = Color.WHITE
+    parameter.borderColor = Color.BLUE
+    parameter.borderWidth = 3
+    parameter.shadowOffsetY = -8
+    parameter.shadowColor = Color.LIGHT_GRAY
+    icepixel40 = generator.generateFont(parameter)
+    generator.dispose()
 
 
   }

@@ -169,4 +169,16 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
   override def setDamage(newDamage: Int): Unit = damage = 0
 
   override var damage: Int = 0
+
+
+  def getPts(): Int = {
+
+    ID match{
+      case -1 => return 10
+      case -2 => return 25
+      case -3 => return 50
+    }
+
+  }
+
 }

@@ -18,12 +18,15 @@ object Handler {
   var removedProjectile: Int = 0
   var removedBonusObject: Int = 0
 
+  var pts:Int = 0
+
   def Init(): Unit = {
 
     enemy = new ArrayBuffer[Enemy]()
     projectile = new ArrayBuffer[Projectile]()
     bonusObject = new ArrayBuffer[Bonus_Object]()
     player = new Player(1, new Point(100, 500), 200)
+    pts = 0
   }
 
   def onGraphicRender(g: GdxGraphics): Unit = {
@@ -45,8 +48,10 @@ object Handler {
     removedEnemy = 0
     for (i: Int <- enemy.indices) {
       enemy(i - removedEnemy).onGraphicRender(g)
-      if (enemy(i - removedEnemy).pv <= 0)
+      if (enemy(i - removedEnemy).pv <= 0) {
+        pts += enemy(i).getPts()
         removeEnemy(i)
+      }
     }
 
     removedBonusObject = 0
