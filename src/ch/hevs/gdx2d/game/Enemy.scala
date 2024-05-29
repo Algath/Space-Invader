@@ -81,10 +81,12 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     //else if (y < 1070) y += 1
     //else if (y == 1070 && x != x - 10) x += -1
 
+    println(x)
+
     if (isVerticalDisplacement)
       position.setLocation(x + velocity.getX, y + velocity.getY)
     else
-      position.setLocation(x + velocity.getX, y)
+      position.setLocation(x, y)
 
   }
 
@@ -145,7 +147,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     }
 
     speed += 1
-    println(position.x)
+    //println(position.x)
 
     if (speed % 60 == 0) {
       if (velocity.y > 0) {
