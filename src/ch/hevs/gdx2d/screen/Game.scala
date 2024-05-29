@@ -69,17 +69,19 @@ class Game extends RenderingScreen {
     //    val cpuUsagePercent = cpuUsage.split("%").head.toDouble / 100
     //    println(s"CPU usage: $cpuUsagePercent")
 
+
+    // Calcule timer pour Debuggage
+    sec += 1 / 60.0
+    if (count % 3600 == 0) {
+      minute += 1
+      sec = 0
+    }
+
     if (Main.DEBUG) {
       gdxGraphics.drawFPS()
       gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
-      sec += 1/60.0
-      if (count % 3600 == 0){
-        minute += 1
-        sec = 0
-      }
       gdxGraphics.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
-//      gdxGraphics.drawString(0,50, "Timer: " + count/360 + ":" + count/60)
     }
 
   }
