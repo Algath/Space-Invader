@@ -108,7 +108,10 @@ class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage wi
     if (position.y > 1025) position.y = 1025
 
 
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GREEN)
+    if(Main.DEBUG)
+      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
+
+    g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
 
   }
 
