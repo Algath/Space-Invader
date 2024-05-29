@@ -10,13 +10,8 @@ import java.awt.Point
 import scala.util.Random
 
 class Game extends RenderingScreen {
-  override def onInit(): Unit = {
-
-
-
-  }
-
   var time:Float = 0
+  var count: Int = 0
 
   override def onGraphicRender(gdxGraphics: GdxGraphics): Unit = {
 
@@ -33,9 +28,20 @@ class Game extends RenderingScreen {
 
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      if (count == 180) {
+        Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      }
+      if (count == 10800) {
+        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      }
+      if (count == 18000) {
+        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      }
+      if (Random.between(1, 100000) == 1)
+        Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      if (Random.between(1, 10000000) == 1)
+        Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      count = 0
     }
 
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
@@ -69,4 +75,5 @@ class Game extends RenderingScreen {
 
   }
 
+  override def onInit(): Unit = ???
 }
