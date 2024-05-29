@@ -30,31 +30,48 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     var x = position.getX
     var y = position.getY
 
-    if (position.x > 1860) x += -2
-    else{
+    if (ID != -3) {
+      if (position.x > 1860) x += -2
+      else {
 
-      if(position.y < 20) {
-        y = 20
-        isVerticalDisplacement = false
-        velocity.y *= -1
+        if (position.y < 10+ getHitBox().height/2) {
+          y = 10 + getHitBox().height/2
+          isVerticalDisplacement = false
+          velocity.y *= -1
+        }
+
+        if (position.y > 1070 - getHitBox().height/2) {
+          y = 1070 - getHitBox().height/2
+          isVerticalDisplacement = false
+          velocity.y *= -1
+        }
+
+        if (!isVerticalDisplacement) {
+          xAdvance += 1
+          x -= 3
+        }
+
+        if (xAdvance > 50) {
+          xAdvance = 0
+          isVerticalDisplacement = true
+        }
       }
-
-      if (position.y > 1060) {
-        y = 1060
-        isVerticalDisplacement = false
-        velocity.y *= -1
-      }
-
-      if(!isVerticalDisplacement) {
-        xAdvance += 1
-        x -= 3
-      }
-
-      if(xAdvance > 50){
-        xAdvance = 0
+    }
+    if (ID == -3){
+      if (position.x > 1800) x += -2
+      else {
         isVerticalDisplacement = true
+        if (position.y < 10 + getHitBox().height/2) {
+          y = 10 + getHitBox().height/2
+          isVerticalDisplacement = false
+          velocity.y *= -1
+        }
+        if (position.y > 1070 - getHitBox().height/2) {
+          y = 1070 - getHitBox().height/2
+          isVerticalDisplacement = false
+          velocity.y *= -1
+        }
       }
-
     }
 
     //if (y > 10) y += -1
@@ -128,7 +145,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
 
     if(Main.DEBUG)
-      g.drawString(position.getX.toInt, position.getY.toInt + 100, "PV : " + pv)
+      g.drawString(position.getX.toInt-15, position.getY.toInt +40, "PV : " + pv)
 
 
   }
