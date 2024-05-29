@@ -49,6 +49,8 @@ object Handler {
 
     for (i: Int <- bonusObject.indices) {
       bonusObject(i).onGraphicRender(g)
+      if(bonusObject(i).position.x < -50)
+        removeBonusObject(i)
     }
 
     player.onGraphicRender(g)

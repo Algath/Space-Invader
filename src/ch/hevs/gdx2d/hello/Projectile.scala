@@ -13,9 +13,12 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
   var damage = _damage
 
   override def deplacement(): Unit = {
+
+    // Si le projectile provient d'un ennemie
     if (ID < 0){
       position.setLocation(position.getX - velocity.getX, position.getY)
     }
+    // Si le projectile provient du joueur 1
     else position.setLocation(position.getX + velocity.getX, position.getY)
   }
 
