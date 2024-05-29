@@ -145,9 +145,8 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     }
 
     speed += 1
-    //println(position.x)
 
-    if (speed % 60 == 0) {
+    if (speed % 3600 == 0 && speed < 18000) {
       if (velocity.y > 0) {
         velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt + 1)
       } else velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt - 1)

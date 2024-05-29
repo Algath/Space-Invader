@@ -2,8 +2,8 @@ package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
-import ch.hevs.gdx2d.main.{Main}
 import ch.hevs.gdx2d.lib.GdxGraphics
+import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.graphics.Color
 
 import java.awt.Point
@@ -12,6 +12,8 @@ import scala.util.Random
 class Game extends RenderingScreen {
   var time: Float = 0
   var count: Int = 0
+  var minute: Int = 0
+  var sec: Double = 0.0
 
   override def onGraphicRender(gdxGraphics: GdxGraphics): Unit = {
 
@@ -71,6 +73,13 @@ class Game extends RenderingScreen {
       gdxGraphics.drawFPS()
       gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
+      sec += 1/60.0
+      if (count % 3600 == 0){
+        minute += 1
+        sec = 0
+      }
+      gdxGraphics.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
+//      gdxGraphics.drawString(0,50, "Timer: " + count/360 + ":" + count/60)
     }
 
   }
