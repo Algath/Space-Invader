@@ -1,6 +1,9 @@
 package ch.hevs.gdx2d.hello
 
+import ch.hevs.gdx2d.controller.ControllerHandler
+import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
+import com.badlogic.gdx.controllers.PovDirection
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
 
@@ -27,8 +30,8 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
   override def deplacement(): Unit = {
     // décplacement clavier
-    if (Gdx.input.isKeyPressed(Input.Keys.W)) position.setLocation(position.getX, position.getY + velocity.getY)
-    else if (Gdx.input.isKeyPressed(Input.Keys.S)) position.setLocation(position.getX, position.getY - velocity.getY)
+    if (Gdx.input.isKeyPressed(Input.Keys.W) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north)) position.setLocation(position.getX, position.getY + velocity.getY)
+    else if (Gdx.input.isKeyPressed(Input.Keys.S) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south)) position.setLocation(position.getX, position.getY - velocity.getY)
 
     //println(velocity.x)
 
@@ -48,7 +51,7 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
-    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE))) {
       Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
       count = 0
     }

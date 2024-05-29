@@ -1,6 +1,7 @@
 package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
+import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.hello.Main.DEBUG
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
@@ -18,8 +19,6 @@ import com.badlogic.gdx.{Gdx, Input}
 object Main {
 
   var DEBUG:Boolean = false
-
-  //var ctrl:Controller = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -40,8 +39,7 @@ class Main extends PortableApplication(1920, 1080) {
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
 
-    //if (Controllers.getControllers().size > 0)
-      //ctrl = Controllers.getControllers().first();
+
 
   }
 
@@ -95,7 +93,7 @@ class Main extends PortableApplication(1920, 1080) {
 //      println("DOWN")
 //    }
 
-
+    ControllerHandler.UpdatePressButton()
 
   }
 

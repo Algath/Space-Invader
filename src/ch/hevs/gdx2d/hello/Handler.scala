@@ -15,6 +15,7 @@ object Handler {
 
   var removedEnemy:Int = 0
   var removedProjectile:Int = 0
+  var removedBonusObject:Int = 0
 
   def Init(): Unit = {
 
@@ -47,9 +48,10 @@ object Handler {
         removeEnemy(i)
     }
 
+    removedBonusObject = 0
     for (i: Int <- bonusObject.indices) {
-      bonusObject(i).onGraphicRender(g)
-      if(bonusObject(i).position.x < -50)
+      bonusObject(i - removedBonusObject).onGraphicRender(g)
+      if(bonusObject(i - removedBonusObject).position.x < -50)
         removeBonusObject(i)
     }
 
@@ -69,6 +71,7 @@ object Handler {
 
   def removeBonusObject(index:Int): Unit = {
     bonusObject.remove(index)
+    removedBonusObject += 1
   }
 
 
