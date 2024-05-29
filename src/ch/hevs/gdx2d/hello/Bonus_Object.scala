@@ -21,9 +21,9 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
 
   override def getHitBox(): Rectangle = {
     id match {
-      case 3 => new Rectangle(position.getX.toInt, position.getY.toInt, 20,20)
-      case 4 => new Rectangle(position.getX.toInt, position.getY.toInt, 20,20)
-      case _ => new Rectangle(position.getX.toInt, position.getY.toInt, 20,20)
+      case 3 => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
+      case 4 => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
+      case _ => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
     }
   }
 

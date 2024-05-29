@@ -42,7 +42,7 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
   }
 
   override def getHitBox(): Rectangle = {
-    new Rectangle(position.getX.toInt, position.getY.toInt, 50,50)
+    new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50,50)
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

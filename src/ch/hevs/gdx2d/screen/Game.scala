@@ -1,7 +1,7 @@
 package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
-import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler}
+import ch.hevs.gdx2d.hello.{Bonus_Object, Enemy, Handler, Main}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
@@ -27,8 +27,6 @@ class Game extends RenderingScreen {
 
     gdxGraphics.drawStringCentered(1080 * 0.8f, "Playing")
 
-    gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
-
     Handler.onGraphicRender(gdxGraphics)
 
     //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
@@ -47,16 +45,17 @@ class Game extends RenderingScreen {
     if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
-    if (Random.between(1, 10000) == 1){
+    if (Random.between(1, 10) == 1){  // 10000
       Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
-    if (Random.between(1, 1000000) == 1){
+    if (Random.between(1, 10) == 1){ // 1000000
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
     }
 
-    gdxGraphics.drawFPS()
-
-    //gdxGraphics.drawCircle(500, 500, 100, Color.GOLD)
+    if(Main.DEBUG){
+      gdxGraphics.drawFPS()
+      gdxGraphics.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
+    }
 
   }
 

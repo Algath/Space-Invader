@@ -15,6 +15,14 @@ object Handler {
   var removedEnemy:Int = 0
   var removedProjectile:Int = 0
 
+  def Init(): Unit = {
+
+    enemy = new ArrayBuffer[Enemy]()
+    projectile = new ArrayBuffer[Projectile]()
+    bonusObject = new ArrayBuffer[Bonus_Object]()
+
+  }
+
   def onGraphicRender(g: GdxGraphics): Unit = {
 
     removedProjectile = 0

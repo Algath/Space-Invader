@@ -72,9 +72,9 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
   override def getHitBox(): Rectangle = {
     ID match {
-      case -1 => return new Rectangle(position.getX.toInt, position.getY.toInt, 30, 30)
-      case -2 => return new Rectangle(position.getX.toInt, position.getY.toInt, 50, 50)
-      case _ => return new Rectangle(position.getX.toInt, position.getY.toInt, 100, 100)
+      case -1 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
+      case -2 => return new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
+      case _ => return new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 100, 100)
     }
   }
 
@@ -103,7 +103,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     count += Random.between(1, 5)
 
     deplacement()
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
 
     for (i: Int <- Handler.projectile.indices) {
       /*
@@ -124,8 +123,13 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
         case e:IndexOutOfBoundsException => {}
       }
 
-
     }
+
+    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+
+    if(Main.DEBUG)
+      g.drawString(position.getX.toInt, position.getY.toInt + 100, "PV : " + pv)
+
 
   }
 

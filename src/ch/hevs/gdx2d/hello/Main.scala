@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.hello.Main.DEBUG
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.controllers.Controller
@@ -19,7 +20,9 @@ import java.awt.Point
  */
 object Main {
 
-  var ctrl:Controller = null
+  var DEBUG:Boolean = false
+
+  //var ctrl:Controller = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -76,6 +79,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)){
       Handler.player = new Player(1, new Point(50, 500), 200)
+      Handler.Init()
       s.transitionTo(1, ScreenManager.TransactionType.SLICE)
       g.setShader("data/shaders/stars.fp")
       g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
@@ -83,6 +87,11 @@ class Main extends PortableApplication(1920, 1080) {
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
+    }
+
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+      if(Main.DEBUG) DEBUG = false
+      else DEBUG = true
     }
 
 //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
