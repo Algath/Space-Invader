@@ -60,7 +60,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       }
     }
     if (ID == -3) {
-      if (position.x > 1800) x += -velocity.x
+      if (position.x > 1800) x -= velocity.x
       else {
         isVerticalDisplacement = true
         if (position.y < 10 + getHitBox().height / 2) {
@@ -84,7 +84,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     println(x)
 
     if (isVerticalDisplacement)
-      position.setLocation(x + velocity.getX, y + velocity.getY)
+      position.setLocation(x, y + velocity.getY)
     else
       position.setLocation(x, y)
 
