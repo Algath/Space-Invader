@@ -52,14 +52,12 @@ object ControllerHandler {
 
   def UpdatePressButton(): Unit = {
 
-    if (controller(PLAYERONE) == null){
+    if (controller(PLAYERONE) != null) {
       if (!controller(PLAYERONE).getButton(Xbox.A)) {
         PlayerONE_A_pressed = false
         PlayerONE_A_oldpressed = false
       }
     }
-
-    println(PlayerONE_A_pressed + " / " + PlayerONE_A_oldpressed)
 
   }
 

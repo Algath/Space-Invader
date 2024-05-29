@@ -44,7 +44,7 @@ object Handler {
     removedEnemy = 0
     for (i: Int <- enemy.indices) {
       enemy(i - removedEnemy).onGraphicRender(g)
-      if(enemy(i - removedEnemy).pv < 0)
+      if(enemy(i - removedEnemy).pv <= 0)
         removeEnemy(i)
     }
 

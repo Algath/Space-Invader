@@ -5,6 +5,7 @@ import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
 import com.badlogic.gdx.controllers.PovDirection
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.{Point, Rectangle}
@@ -24,8 +25,6 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
   override var pv: Int = _vie
   override var maxPV: Int = _vie
-
-  var count = 0
 
 
   override def deplacement(): Unit = {
@@ -53,9 +52,15 @@ class Player(ID: Int, _position : Point, _vie: Int) extends Object with Damage w
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE))) {
       Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
-      count = 0
+
+      /// Multi-tire
+      Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+      Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+
+      Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+      Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+
     }
-    count += 1
 
 
     for (i: Int <- Handler.projectile.indices) {

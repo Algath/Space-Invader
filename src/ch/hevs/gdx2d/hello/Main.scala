@@ -3,7 +3,7 @@ package ch.hevs.gdx2d.hello
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
-import ch.hevs.gdx2d.hello.Main.DEBUG
+import ch.hevs.gdx2d.hello.Main.{DEBUG, playerBulletImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.math.{Interpolation, Vector2}
@@ -19,6 +19,7 @@ import com.badlogic.gdx.{Gdx, Input}
 object Main {
 
   var DEBUG:Boolean = false
+  var playerBulletImg: BitmapImage = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -35,6 +36,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
+    playerBulletImg = new BitmapImage("data/images/Bullet.png")
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
