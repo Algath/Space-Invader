@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.hello
 
 import ch.hevs.gdx2d.lib.GdxGraphics
 
+import java.awt.Point
 import scala.collection.mutable.ArrayBuffer
 
 object Handler {
@@ -20,7 +21,7 @@ object Handler {
     enemy = new ArrayBuffer[Enemy]()
     projectile = new ArrayBuffer[Projectile]()
     bonusObject = new ArrayBuffer[Bonus_Object]()
-
+    player = new Player(1, new Point(100, 500), 200)
   }
 
   def onGraphicRender(g: GdxGraphics): Unit = {

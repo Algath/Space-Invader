@@ -33,23 +33,26 @@ class Game extends RenderingScreen {
 
 
     if (Gdx.input.isKeyJustPressed(Input.Keys.Z)) { // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-//      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
-//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
-      Handler.enemy.append(new Enemy(-3, 1000, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
 
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.maxPV, 25, 0, Color.GRAY)
     gdxGraphics.drawFilledRectangle(400, 1060, Handler.player.pv, 25,0,  Color.GREEN)
+    gdxGraphics.setColor(Color.BLACK)
+    gdxGraphics.drawString(375, 1065, "PV : " + Handler.player.pv)
+    gdxGraphics.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
-      Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+      Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1){  // 10000
-      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 1000000) == 1){ // 1000000
-      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(10, 1070))))
+      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
 
     if(Main.DEBUG){
