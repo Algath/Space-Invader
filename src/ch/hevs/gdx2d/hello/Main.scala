@@ -1,9 +1,8 @@
 package ch.hevs.gdx2d.hello
 
-import ch.hevs.gdx2d.Utils.Util
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
-import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
 import ch.hevs.gdx2d.hello.Main.{DEBUG, playerBulletImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu}
@@ -87,7 +86,7 @@ class Main extends PortableApplication(1920, 1080) {
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
     }
 
-    if(Gdx.input.isKeyJustPressed(Input.Keys.F1)) {
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
       if(Main.DEBUG) DEBUG = false
       else DEBUG = true
     }
@@ -96,7 +95,8 @@ class Main extends PortableApplication(1920, 1080) {
 //      println("DOWN")
 //    }
 
-    ControllerHandler.UpdatePressButton()
+
+    //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
 
   }
 

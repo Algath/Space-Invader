@@ -10,8 +10,8 @@ object ControllerHandler {
 
   var controller:Array[Controller] = Array.ofDim(1)
 
-  var PlayerONE_A_pressed:Boolean = false
   var PlayerONE_A_oldpressed:Boolean = false
+  var PlayerONE_RTRIGGER_oldpressed: Boolean = false
 
   if (Controllers.getControllers().size > 0)
     Controllers.getControllers().first();
@@ -42,7 +42,6 @@ object ControllerHandler {
     }
 
     if (!controller(PLAYERONE).getButton(Xbox.A) && PlayerONE_A_oldpressed) {
-      PlayerONE_A_pressed = false
       PlayerONE_A_oldpressed = false
     }
 
@@ -50,16 +49,21 @@ object ControllerHandler {
 
   }
 
-  def UpdatePressButton(): Unit = {
+  def isJustPressRTRIGGER(index: Int): Boolean = {
 
-    if (controller(PLAYERONE) != null) {
-      if (!controller(PLAYERONE).getButton(Xbox.A)) {
-        PlayerONE_A_pressed = false
-        PlayerONE_A_oldpressed = false
-      }
+    if (controller(index) == null)
+      return false
+
+    if (controller(PLAYERONE).getButton(Xbox.R_TRIGGER) && !PlayerONE_RTRIGGER_oldpressed) {
+      PlayerONE_RTRIGGER_oldpressed = true
+      return true
     }
 
-  }
+    if (!controller(PLAYERONE).getButton(Xbox.R_TRIGGER) && PlayerONE_RTRIGGER_oldpressed)
+      PlayerONE_RTRIGGER_oldpressed = false
 
+    return false
+
+  }
 
 }
