@@ -4,9 +4,9 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.game.Handler
-import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.{Game, Menu}
+import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
+import ch.hevs.gdx2d.screen.{Game, Menu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -102,11 +102,14 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.render(g)
 
-    if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+    if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
       Start(g)
     }
-    else if (Gdx.input.isKeyPressed(Input.Keys.INSERT)) {
+    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
       StartMultiplaying(g)
+    }
+    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
+      StartVersus(g)
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
@@ -139,6 +142,14 @@ class Main extends PortableApplication(1920, 1080) {
     Handler.Init()
     Handler.InitPlayer(2, false)
     s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+    g.setShader("data/shaders/stars.fp")
+    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+  }
+
+  private def StartVersus(g: GdxGraphics): Unit = {
+    Handler.Init()
+    Handler.InitPlayer(2, true)
+    s.transitionTo(2, ScreenManager.TransactionType.SLICE)
     g.setShader("data/shaders/stars.fp")
     g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
   }

@@ -1,10 +1,11 @@
 package ch.hevs.gdx2d.game
 
+import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.game.{Handler, Object}
 import ch.hevs.gdx2d.lib.GdxGraphics
-import ch.hevs.gdx2d.main.{Main}
+import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.controllers.PovDirection
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
@@ -26,7 +27,6 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
 
   override var pv: Int = _vie
   override var maxPV: Int = _vie
-
 
   override def deplacement(): Unit = {
 
@@ -83,18 +83,32 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
 
     // Fire Input Player Two
     if(ID == 2){
-      if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
-        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
-        /// Multi-tire
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+      if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
+
+        if(versusEnabled){
+          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0)))
+
+          /// Multi-tire
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0)))
+        }
+        else{
+          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+
+          /// Multi-tire
+          Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+        }
+
+
 
       }
     }
-
 
 
     for (i: Int <- Handler.projectile.indices) {
@@ -105,6 +119,14 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
             Handler.projectile.remove(i)
           }
         }
+
+        else if (versusEnabled && Handler.projectile(i).id != ID) {
+          if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+            pv -= Handler.projectile(i).damage
+            Handler.projectile.remove(i)
+          }
+        }
+
       }
       catch {
         case e: IndexOutOfBoundsException => {}
@@ -145,7 +167,15 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     if(Main.DEBUG)
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
-    g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
+    if(versusEnabled && ID == 2){
+      Main.playerImg.mirrorUpDown()
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
+      Main.playerImg.mirrorUpDown()
+    }
+    else{
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
+    }
+
 
   }
 

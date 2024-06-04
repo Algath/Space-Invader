@@ -29,12 +29,15 @@ object Handler {
   
   def InitPlayer(playerNumber:Int, versusEnabled:Boolean): Unit = {
 
+    playerOne = null
+    playerTwo = null
+
     if(playerNumber == 1)
       playerOne = new Player(1, new Point(100, 1080 / 2), 200)
     else {
       if(versusEnabled){
-        playerOne = new Player(1, new Point(100, 1080 / 2), 200)
-        playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), 200)
+        playerOne = new Player(1, new Point(100, 1080 / 2), 200, true)
+        playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), 200, true)
       }
       else{
         playerOne = new Player(1, new Point(300, 1080 / 3), 200)

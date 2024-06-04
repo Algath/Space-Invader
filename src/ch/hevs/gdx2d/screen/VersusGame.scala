@@ -26,32 +26,9 @@ class VersusGame  extends RenderingScreen {
 
     Handler.onGraphicRender(g)
 
-    //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
-    count += 1
-    // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-
-    if (count % 300 == 0) {
-      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (count % 10800 == 0) {
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (count % 18000 == 0) {
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 100000) == 1)
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    if (Random.between(1, 10000000) == 1)
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-
-
-    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-    g.setColor(Color.BLACK)
-    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-    g.setColor(Color.WHITE)
-
+    //g.setColor(new Color(128, 128, 128, 0.5f))
+    //g.drawFilledRectangle(1920 / 2, 1080 / 2, 1920, 1080, 0);
 
     if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
@@ -77,7 +54,29 @@ class VersusGame  extends RenderingScreen {
       sec = 0
     }
 
-    g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
+    //g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
+
+    g.drawString(150, 1080 - 25, "PLAYER ONE", Main.icepixel40, 1)
+
+    g.drawFilledRectangle(400, 1080 - 80, 200, 20, 0, Color.GRAY)
+    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 - 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.FOREST)
+    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 + 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.GREEN)
+
+    g.setColor(Color.BLACK)
+    g.drawString(400, 1080 - 25, Handler.playerOne.pv + " / " + Handler.playerOne.maxPV, Main.icepixel40, 1)
+    g.setColor(Color.WHITE)
+
+    g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
+
+    g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
+    g.drawFilledRectangle(1920 - 400  - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
+    g.drawFilledRectangle(1920 - 400  - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+
+    g.setColor(Color.BLACK)
+    g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)
+    g.setColor(Color.WHITE)
+
+
 
     if (Main.DEBUG) {
       g.drawFPS()
