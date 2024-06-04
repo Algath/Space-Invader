@@ -3,16 +3,17 @@ package ch.hevs.gdx2d.main
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
-import ch.hevs.gdx2d.game.Handler
-import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
-import ch.hevs.gdx2d.screen.{Game, Menu, VersusGame}
+import ch.hevs.gdx2d.main.Main._
+import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
 import com.badlogic.gdx.{Gdx, Input}
+
+import java.awt.Menu
 
 
 /**
@@ -28,6 +29,7 @@ object Main {
   var playerImg: BitmapImage = null
   var icepixel40: BitmapFont = null
   var optimus150: BitmapFont = null
+  var s: ScreenManager = new ScreenManager()
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -37,7 +39,7 @@ object Main {
 class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
-  var s: ScreenManager = new ScreenManager()
+
 
   override def onInit(): Unit = {
     setTitle("Hello World - mui 2024")
@@ -103,24 +105,13 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.render(g)
 
-    if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-      Start(g)
-    }
-    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-      StartMultiplaying(g)
-    }
-    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-      StartVersus(g)
-    }
-
-    else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
-      s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
-    }
-
     if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
       if(Main.DEBUG) DEBUG = false
       else DEBUG = true
     }
+
+    g.setShader("data/shaders/stars.fp")
+    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
 
     //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
     //      println("DOWN")
@@ -129,30 +120,6 @@ class Main extends PortableApplication(1920, 1080) {
 
     //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
 
-  }
-
-  private def Start(g:GdxGraphics): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(1, false)
-    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
-    g.setShader("data/shaders/stars.fp")
-    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
-  }
-
-  private def StartMultiplaying(g: GdxGraphics): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(2, false)
-    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
-    g.setShader("data/shaders/stars.fp")
-    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
-  }
-
-  private def StartVersus(g: GdxGraphics): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(2, true)
-    s.transitionTo(2, ScreenManager.TransactionType.SLICE)
-    g.setShader("data/shaders/stars.fp")
-    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
   }
 
 
