@@ -4,7 +4,7 @@ import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.game.Handler
-import ch.hevs.gdx2d.main.Main.{DEBUG, icepixel40, playerBulletImg, playerImg}
+import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.screen.{Game, Menu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
