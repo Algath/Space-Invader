@@ -5,12 +5,12 @@ import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.Game
+import ch.hevs.gdx2d.screen.{Game, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
-import com.badlogic.gdx.math.{Interpolation, Vector2}
+import com.badlogic.gdx.math.Interpolation
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
