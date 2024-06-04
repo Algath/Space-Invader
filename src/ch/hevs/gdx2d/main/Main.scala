@@ -95,11 +95,10 @@ class Main extends PortableApplication(1920, 1080) {
     s.render(g)
 
     if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
-
-      Handler.Init()
-      s.transitionTo(1, ScreenManager.TransactionType.SLICE)
-      g.setShader("data/shaders/stars.fp")
-      g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+      Start(g)
+    }
+    else if (Gdx.input.isKeyPressed(Input.Keys.INSERT)) {
+      StartMultiplaying(g)
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
@@ -119,6 +118,23 @@ class Main extends PortableApplication(1920, 1080) {
     //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
 
   }
+
+  private def Start(g:GdxGraphics): Unit = {
+    Handler.Init()
+    Handler.InitPlayer(1)
+    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+    g.setShader("data/shaders/stars.fp")
+    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+  }
+
+  private def StartMultiplaying(g: GdxGraphics): Unit = {
+    Handler.Init()
+    Handler.InitPlayer(2)
+    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+    g.setShader("data/shaders/stars.fp")
+    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+  }
+
 
   /**
    * Compute time percentage for making a looping animation

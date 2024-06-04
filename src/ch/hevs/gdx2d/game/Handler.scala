@@ -12,7 +12,8 @@ object Handler {
   var projectile: ArrayBuffer[Projectile] = new ArrayBuffer[Projectile]()
   var bonusObject: ArrayBuffer[Bonus_Object] = new ArrayBuffer[Bonus_Object]()
 
-  var player: Player = null
+  var playerOne: Player = null
+  var playerTwo: Player = null
 
   var removedEnemy: Int = 0
   var removedProjectile: Int = 0
@@ -21,12 +22,26 @@ object Handler {
   var pts:Int = 0
 
   def Init(): Unit = {
-
     enemy = new ArrayBuffer[Enemy]()
     projectile = new ArrayBuffer[Projectile]()
     bonusObject = new ArrayBuffer[Bonus_Object]()
-    player = new Player(1, new Point(100, 500), 200)
     pts = 0
+  }
+  
+  def InitPlayer(playerNumber:Int, versusEnabled:Boolean): Unit = {
+
+    if(playerNumber == 1)
+      playerOne = new Player(1, new Point(100, 1080 / 2), 200)
+    else {
+      if(versusEnabled){
+        playerOne = new Player(1, new Point(100, 1080 / 2), 200)
+        playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), 200)
+      }
+      else{
+        playerOne = new Player(1, new Point(300, 1080 / 3), 200)
+        playerTwo = new Player(2, new Point(100, (1080 / 3) * 2), 200)
+      }
+    }
   }
 
   def onGraphicRender(g: GdxGraphics): Unit = {
@@ -61,7 +76,11 @@ object Handler {
         removeBonusObject(i)
     }
 
-    player.onGraphicRender(g)
+    playerOne.onGraphicRender(g)
+
+    if(playerTwo != null)
+      playerTwo.onGraphicRender(g)
+
   }
 
 

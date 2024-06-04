@@ -12,7 +12,7 @@ import com.badlogic.gdx.{Gdx, Input}
 import java.awt.{Point, Rectangle}
 import scala.util.Random
 
-class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage with PV {
+class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false) extends Object with Damage with PV {
   /*
   * ID: 1 = Player 1
   * ID: 2 = Player 2
@@ -29,9 +29,24 @@ class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage wi
 
 
   override def deplacement(): Unit = {
-    // décplacement clavier
-    if (Gdx.input.isKeyPressed(Input.Keys.W) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north)) position.setLocation(position.getX, position.getY + velocity.getY)
-    else if (Gdx.input.isKeyPressed(Input.Keys.S) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south)) position.setLocation(position.getX, position.getY - velocity.getY)
+
+    // Input Player One
+    if(ID == 1){
+      if (Gdx.input.isKeyPressed(Input.Keys.W) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north))
+        position.setLocation(position.getX, position.getY + velocity.getY)
+      else if (Gdx.input.isKeyPressed(Input.Keys.S) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.controller(ControllerHandler.PLAYERONE).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south))
+        position.setLocation(position.getX, position.getY - velocity.getY)
+    }
+
+    // Input Player Two
+    if(ID == 2){
+      if (Gdx.input.isKeyPressed(Input.Keys.UP) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) &&
+            ControllerHandler.controller(ControllerHandler.PLAYERTWO).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north))
+        position.setLocation(position.getX, position.getY + velocity.getY)
+      else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.controller(ControllerHandler.PLAYERTWO).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south))
+        position.setLocation(position.getX, position.getY - velocity.getY)
+    }
+
 
     //println(velocity.x)
 
@@ -51,16 +66,35 @@ class Player(ID: Int, _position: Point, _vie: Int) extends Object with Damage wi
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
 
-    if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
-      Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+    // Fire Input Player One
+    if(ID == 1){
+      if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
+        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
-      /// Multi-tire
-      Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-      Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-      Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-      Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+        /// Multi-tire
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
 
+      }
     }
+
+
+    // Fire Input Player Two
+    if(ID == 2){
+      if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
+        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+
+        /// Multi-tire
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+
+      }
+    }
+
 
 
     for (i: Int <- Handler.projectile.indices) {

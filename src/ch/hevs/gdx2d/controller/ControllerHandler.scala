@@ -26,7 +26,7 @@ object ControllerHandler {
 
   // Sert à savoir si une mannette est null
   def ControllerIsNotNull(index:Int): Boolean = {
-    if(controller(index) == null)
+    if(index >= controller.length || controller(index) == null)
       return false
     return true
   }
