@@ -1,10 +1,12 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
 import scala.util.Random
@@ -14,6 +16,7 @@ class Game extends RenderingScreen {
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
+  var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
@@ -63,7 +66,7 @@ class Game extends RenderingScreen {
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
 
-    import sys.process._
+//    import sys.process._
 
     //    val cpuUsage = "for /f "tokens=3 delims=," %i in ('tasklist /fo csv /nh ^| findstr /c:"CPU"') do @echo %i" !
     //    val cpuUsagePercent = cpuUsage.split("%").head.toDouble / 100
@@ -79,11 +82,32 @@ class Game extends RenderingScreen {
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
 
+    /*
+    * Gestion conditions du Game over + screen
+    * */
+
+
+    if (Handler.playerTwo == null){
+      if (Handler.playerOne.pv == 0){
+        // explosion + disparition du player
+        g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
+        g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
+        g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
+        g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.35f, "Thank you for playing our game!", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.2f, "CREDITS : ", Main.icepixel40)
+        g.drawStringCentered(1080*0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+      }
+    }
+
+
     if (Main.DEBUG) {
       g.drawFPS()
       g.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
+      // instant death
+      if (Gdx.input.isKeyJustPressed(Input.Keys.F4)) Handler.playerOne.pv = 0
     }
 
   }

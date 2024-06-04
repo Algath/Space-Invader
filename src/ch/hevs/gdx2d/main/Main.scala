@@ -2,7 +2,7 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
-import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
+import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.game.Handler
 import ch.hevs.gdx2d.main.Main.{DEBUG, icepixel40, playerBulletImg, playerImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
@@ -27,6 +27,7 @@ object Main {
   var playerBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
   var icepixel40: BitmapFont = null
+  var optimus150: BitmapFont = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -48,9 +49,9 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
-    s.registerScreen(classOf[VersusGame])
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
+    val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
 
     var generator = new FreeTypeFontGenerator(icePixelF)
     val parameter = new FreeTypeFontGenerator.FreeTypeFontParameter
@@ -63,6 +64,12 @@ class Main extends PortableApplication(1920, 1080) {
     icepixel40 = generator.generateFont(parameter)
     generator.dispose()
 
+    generator = new FreeTypeFontGenerator(optimusF)
+    parameter.size = generator.scaleForPixelHeight(150)
+    parameter.color = Color.RED
+    parameter.borderColor = Color.BROWN
+    optimus150 = generator.generateFont(parameter)
+    generator.dispose()
 
   }
 
