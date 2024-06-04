@@ -5,7 +5,7 @@ import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.Game
+import ch.hevs.gdx2d.screen.{Game, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -76,8 +76,6 @@ class Main extends PortableApplication(1920, 1080) {
     parameter.borderColor = Color.BROWN
     optimus150 = generator.generateFont(parameter)
     generator.dispose()
-
-    Thread.sleep(5000)
   }
 
   /**
