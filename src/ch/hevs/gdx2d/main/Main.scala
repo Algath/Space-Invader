@@ -87,6 +87,7 @@ class Main extends PortableApplication(1920, 1080) {
   final private val ANIMATION_LENGTH: Float = 2f // Animation length (in seconds)
   final private val MIN_ANGLE: Float = -20
   final private val MAX_ANGLE: Float = 20
+  var Inited:Boolean = false;
 
   /**
    * This method is called periodically by the engine
@@ -100,6 +101,12 @@ class Main extends PortableApplication(1920, 1080) {
     val t = computePercentage
     val angle: Float = Interpolation.sine.apply(MIN_ANGLE, MAX_ANGLE, t)
 
+    if(!Inited){
+      g.setShader("data/shaders/stars.fp")
+      g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+      Inited = true
+    }
+
     // Draw everything
     //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
     //g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
@@ -112,9 +119,6 @@ class Main extends PortableApplication(1920, 1080) {
       if(Main.DEBUG) DEBUG = false
       else DEBUG = true
     }
-
-    //g.setShader("data/shaders/stars.fp")
-    //g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
 
     //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
     //      println("DOWN")
