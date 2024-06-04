@@ -72,10 +72,10 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
         Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
         /// Multi-tire
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-        Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
 
       }
     }
@@ -105,11 +105,8 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
           Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
         }
 
-
-
       }
     }
-
 
     for (i: Int <- Handler.projectile.indices) {
       try {
@@ -122,7 +119,7 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
 
         else if (versusEnabled && Handler.projectile(i).id != ID) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
-            pv -= Handler.projectile(i).damage
+            pv -= Handler.projectile(i).damage / 4
             Handler.projectile.remove(i)
           }
         }

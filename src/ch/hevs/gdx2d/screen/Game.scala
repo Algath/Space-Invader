@@ -49,11 +49,11 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
-    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-    g.setColor(Color.BLACK)
-    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-    g.setColor(Color.WHITE)
+//    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
+//    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
+//    g.setColor(Color.BLACK)
+//    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
+//    g.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
@@ -82,32 +82,60 @@ class Game extends RenderingScreen {
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
 
+    /// Draw Player One Info
+    g.drawString(150, 1080 - 25, "PLAYER ONE", Main.icepixel40, 1)
+
+    g.drawFilledRectangle(400, 1080 - 80, 200, 20, 0, Color.GRAY)
+    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 - 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.FOREST)
+    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 + 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.GREEN)
+
+    g.setColor(Color.BLACK)
+    g.drawString(400, 1080 - 25, Handler.playerOne.pv + " / " + Handler.playerOne.maxPV, Main.icepixel40, 1)
+    g.setColor(Color.WHITE)
+
+
+    /// Draw Player Two Info
+    if(Handler.playerTwo != null){
+      g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
+
+      g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
+      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
+      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+
+      g.setColor(Color.BLACK)
+      g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)
+      g.setColor(Color.WHITE)
+    }
+
+
     /*
     * Gestion conditions du Game over + screen
     * */
 
 
-    if (Handler.playerTwo == null){
-      if (Handler.playerOne.pv == 0){
-        // explosion + disparition du player
-        g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
-        g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
-        g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
-        g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
-        g.drawStringCentered(1080 * 0.35f, "Thank you for playing our game!", Main.icepixel40)
-        g.drawStringCentered(1080 * 0.2f, "CREDITS : ", Main.icepixel40)
-        g.drawStringCentered(1080*0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-      }
+
+    if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
+      // explosion + disparition du player
+      g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
+      g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
+      g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
+      g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.35f, "Thank you for playing our game!", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.2f, "CREDITS : ", Main.icepixel40)
+      g.drawStringCentered(1080*0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
     }
 
 
     if (Main.DEBUG) {
       g.drawFPS()
-      g.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
+      g.drawString(1700, 1075, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
       // instant death
-      if (Gdx.input.isKeyJustPressed(Input.Keys.F4)) Handler.playerOne.pv = 0
+      if (Gdx.input.isKeyJustPressed(Input.Keys.F4)) {
+        Handler.playerOne.pv = 0
+        if(Handler.playerTwo != null) Handler.playerTwo.pv = 0
+      }
     }
 
   }

@@ -54,6 +54,7 @@ class Main extends PortableApplication(1920, 1080) {
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
+    s.registerScreen(classOf[VersusGame])
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")

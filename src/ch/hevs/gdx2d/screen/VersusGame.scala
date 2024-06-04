@@ -54,8 +54,9 @@ class VersusGame  extends RenderingScreen {
       sec = 0
     }
 
-    //g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
+    g.drawStringCentered(1080 - 25, "\\VERSUS/", Main.icepixel40)
 
+    /// Draw Player One info
     g.drawString(150, 1080 - 25, "PLAYER ONE", Main.icepixel40, 1)
 
     g.drawFilledRectangle(400, 1080 - 80, 200, 20, 0, Color.GRAY)
@@ -66,21 +67,26 @@ class VersusGame  extends RenderingScreen {
     g.drawString(400, 1080 - 25, Handler.playerOne.pv + " / " + Handler.playerOne.maxPV, Main.icepixel40, 1)
     g.setColor(Color.WHITE)
 
-    g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
 
-    g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
-    g.drawFilledRectangle(1920 - 400  - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
-    g.drawFilledRectangle(1920 - 400  - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+    /// Draw Player Two info
+    if(Handler.playerTwo != null){
+      g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
 
-    g.setColor(Color.BLACK)
-    g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)
-    g.setColor(Color.WHITE)
+      g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
+      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
+      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+
+      g.setColor(Color.BLACK)
+      g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)
+      g.setColor(Color.WHITE)
+    }
+
 
 
 
     if (Main.DEBUG) {
       g.drawFPS()
-      g.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
+      g.drawString(1700, 1075, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
     }
