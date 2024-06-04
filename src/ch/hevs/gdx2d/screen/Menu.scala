@@ -2,10 +2,7 @@ package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.lib.GdxGraphics
-import com.badlogic.gdx.graphics.Color
-import org.lwjgl.util.WritableColor
-
-import java.awt.geom.Point2D
+import ch.hevs.gdx2d.main.Main
 
 class Menu extends RenderingScreen {
   override def onInit(): Unit = {
@@ -20,8 +17,9 @@ class Menu extends RenderingScreen {
 
     //g.drawShader(time);
     //time -= 0.01f
+    g.drawStringCentered(1080 * 0.9f, "SOS Invader") //rajouter font
+    g.drawStringCentered(1080 * 0.8f, "Main Menu", Main.icepixel40)
 
-    g.drawStringCentered(1080 * 0.8f, "Main Menu")
     g.drawFPS()
 
     //gdxGraphics.drawCircle(500, 500, 100)
