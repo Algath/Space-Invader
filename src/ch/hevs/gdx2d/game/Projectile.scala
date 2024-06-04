@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
-class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new Point(10, 0)) extends Object {
+class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new Point(10, 0), versusEnabled:Boolean = false) extends Object {
 
   override var position: Point = _position
   override var id: Int = ID
@@ -36,10 +36,18 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
-    if(id != 1)
+    if(id != 1 && id != 2)
       g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.RED)
-    else
-      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
+    else {
+      if(versusEnabled && ID == 2) {
+        Main.playerBulletImg.mirrorUpDown()
+        g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
+        Main.playerBulletImg.mirrorUpDown()
+      }
+      else
+        g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
+
+    }
 
   }
 }

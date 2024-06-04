@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
 import ch.hevs.gdx2d.game.Handler
 import ch.hevs.gdx2d.main.Main.{DEBUG, icepixel40, playerBulletImg, playerImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
-import ch.hevs.gdx2d.screen.{Game, Menu}
+import ch.hevs.gdx2d.screen.{Game, Menu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -48,6 +48,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
+    s.registerScreen(classOf[VersusGame])
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
 
@@ -94,11 +95,14 @@ class Main extends PortableApplication(1920, 1080) {
 
     s.render(g)
 
-    if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+    if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
       Start(g)
     }
-    else if (Gdx.input.isKeyPressed(Input.Keys.INSERT)) {
+    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
       StartMultiplaying(g)
+    }
+    else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
+      StartVersus(g)
     }
 
     else if (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE)) {
@@ -121,7 +125,7 @@ class Main extends PortableApplication(1920, 1080) {
 
   private def Start(g:GdxGraphics): Unit = {
     Handler.Init()
-    Handler.InitPlayer(1)
+    Handler.InitPlayer(1, false)
     s.transitionTo(1, ScreenManager.TransactionType.SLICE)
     g.setShader("data/shaders/stars.fp")
     g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
@@ -129,8 +133,16 @@ class Main extends PortableApplication(1920, 1080) {
 
   private def StartMultiplaying(g: GdxGraphics): Unit = {
     Handler.Init()
-    Handler.InitPlayer(2)
+    Handler.InitPlayer(2, false)
     s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+    g.setShader("data/shaders/stars.fp")
+    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+  }
+
+  private def StartVersus(g: GdxGraphics): Unit = {
+    Handler.Init()
+    Handler.InitPlayer(2, true)
+    s.transitionTo(2, ScreenManager.TransactionType.SLICE)
     g.setShader("data/shaders/stars.fp")
     g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
   }
