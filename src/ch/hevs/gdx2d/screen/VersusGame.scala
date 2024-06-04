@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Color
 import java.awt.Point
 import scala.util.Random
 
-class Game extends RenderingScreen {
+class VersusGame  extends RenderingScreen {
   var time: Float = 0
   var count: Int = 0
   var minute: Int = 0
