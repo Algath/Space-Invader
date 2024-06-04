@@ -5,7 +5,7 @@ import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.{Game, VersusGame}
+import ch.hevs.gdx2d.screen.Game
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -76,6 +76,7 @@ class Main extends PortableApplication(1920, 1080) {
     parameter.borderColor = Color.BROWN
     optimus150 = generator.generateFont(parameter)
     generator.dispose()
+
   }
 
   /**
@@ -112,8 +113,8 @@ class Main extends PortableApplication(1920, 1080) {
       else DEBUG = true
     }
 
-    g.setShader("data/shaders/stars.fp")
-    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+    //g.setShader("data/shaders/stars.fp")
+    //g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
 
     //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
     //      println("DOWN")
