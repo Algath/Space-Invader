@@ -77,6 +77,7 @@ class VersusGame  extends RenderingScreen {
     g.setColor(Color.WHITE)
 
 
+
     if (Main.DEBUG) {
       g.drawFPS()
       g.drawString(1700, 1070, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
