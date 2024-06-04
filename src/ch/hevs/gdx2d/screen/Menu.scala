@@ -70,6 +70,9 @@ class Menu extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
+    g.drawShader(time);
+    time += 0.01f
+
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.CYAN)
     stage.act()
     stage.draw()
