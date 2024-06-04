@@ -5,12 +5,14 @@ import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.{Game, Menu}
+import ch.hevs.gdx2d.screen.Game
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Menu
@@ -30,6 +32,8 @@ object Main {
   var icepixel40: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
+  var stage: Stage = null
+  var skin: Skin = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -39,8 +43,6 @@ object Main {
 class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
-
-
   override def onInit(): Unit = {
     setTitle("Hello World - mui 2024")
 
@@ -48,7 +50,8 @@ class Main extends PortableApplication(1920, 1080) {
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     playerImg = new BitmapImage("data/images/Ship.png")
-
+    stage = new Stage()
+    skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
 
@@ -73,6 +76,7 @@ class Main extends PortableApplication(1920, 1080) {
     optimus150 = generator.generateFont(parameter)
     generator.dispose()
 
+    Thread.sleep(5000)
   }
 
   /**
