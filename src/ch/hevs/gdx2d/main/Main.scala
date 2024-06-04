@@ -5,15 +5,13 @@ import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.{Game, Menu}
+import ch.hevs.gdx2d.screen.{Game, Menu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
 import com.badlogic.gdx.{Gdx, Input}
-
-import java.awt.Menu
 
 
 /**
@@ -39,8 +37,6 @@ object Main {
 class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
-
-
   override def onInit(): Unit = {
     setTitle("Hello World - mui 2024")
 
@@ -52,6 +48,8 @@ class Main extends PortableApplication(1920, 1080) {
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
+
+    s.activateScreen(0)
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
@@ -110,8 +108,8 @@ class Main extends PortableApplication(1920, 1080) {
       else DEBUG = true
     }
 
-    g.setShader("data/shaders/stars.fp")
-    g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
+    //g.setShader("data/shaders/stars.fp")
+    //g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
 
     //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
     //      println("DOWN")

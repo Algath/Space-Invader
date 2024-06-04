@@ -4,7 +4,7 @@ import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.Handler
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
-import ch.hevs.gdx2d.main.Main.s
+import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.scenes.scene2d.ui.{Skin, TextButton}
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
@@ -12,7 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 
 class Menu extends RenderingScreen {
   override def onInit(): Unit = {
-    var stage = new Stage()
+   /*var stage = new Stage()
     Gdx.input.setInputProcessor(stage)
 
     var skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
@@ -27,10 +27,13 @@ class Menu extends RenderingScreen {
       override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
         super.clicked(event, x, y)
 
-        if (singlePlayer.isChecked)
-          Start()
+        //if (singlePlayer.isChecked)
+          //Start()
       }
-    })
+    })*/
+
+    Thread.sleep(5000)
+
   }
 
   var time:Float = 0
@@ -50,22 +53,22 @@ class Menu extends RenderingScreen {
 
   }
 
-  def Start(): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(1, false)
-    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
-  }
-
-  def StartMultiplaying(): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(2, false)
-    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
-  }
-
-  def StartVersus(): Unit = {
-    Handler.Init()
-    Handler.InitPlayer(2, true)
-    s.transitionTo(2, ScreenManager.TransactionType.SLICE)
-  }
+//  def Start(): Unit = {
+//    Handler.Init()
+//    Handler.InitPlayer(1, false)
+//    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+//  }
+//
+//  def StartMultiplaying(): Unit = {
+//    Handler.Init()
+//    Handler.InitPlayer(2, false)
+//    s.transitionTo(1, ScreenManager.TransactionType.SLICE)
+//  }
+//
+//  def StartVersus(): Unit = {
+//    Handler.Init()
+//    Handler.InitPlayer(2, true)
+//    s.transitionTo(2, ScreenManager.TransactionType.SLICE)
+//  }
 
 }
