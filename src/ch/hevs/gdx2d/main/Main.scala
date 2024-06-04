@@ -2,10 +2,10 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
-import ch.hevs.gdx2d.desktop.{PortableApplication, Xbox}
+import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.game.Handler
-import ch.hevs.gdx2d.main.Main.{DEBUG, icepixel40, playerBulletImg, playerImg}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
+import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Game, Menu}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
@@ -27,6 +27,7 @@ object Main {
   var playerBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
   var icepixel40: BitmapFont = null
+  var optimus150: BitmapFont = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -50,6 +51,7 @@ class Main extends PortableApplication(1920, 1080) {
     s.registerScreen(classOf[Game])
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
+    val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
 
     var generator = new FreeTypeFontGenerator(icePixelF)
     val parameter = new FreeTypeFontGenerator.FreeTypeFontParameter
@@ -62,6 +64,12 @@ class Main extends PortableApplication(1920, 1080) {
     icepixel40 = generator.generateFont(parameter)
     generator.dispose()
 
+    generator = new FreeTypeFontGenerator(optimusF)
+    parameter.size = generator.scaleForPixelHeight(150)
+    parameter.color = Color.RED
+    parameter.borderColor = Color.BROWN
+    optimus150 = generator.generateFont(parameter)
+    generator.dispose()
 
   }
 
@@ -121,7 +129,7 @@ class Main extends PortableApplication(1920, 1080) {
 
   private def Start(g:GdxGraphics): Unit = {
     Handler.Init()
-    Handler.InitPlayer(1)
+    Handler.InitPlayer(1, false)
     s.transitionTo(1, ScreenManager.TransactionType.SLICE)
     g.setShader("data/shaders/stars.fp")
     g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
@@ -129,7 +137,7 @@ class Main extends PortableApplication(1920, 1080) {
 
   private def StartMultiplaying(g: GdxGraphics): Unit = {
     Handler.Init()
-    Handler.InitPlayer(2)
+    Handler.InitPlayer(2, false)
     s.transitionTo(1, ScreenManager.TransactionType.SLICE)
     g.setShader("data/shaders/stars.fp")
     g.getShaderRenderer().setUniform("mouse", new Vector2(0, 10))
