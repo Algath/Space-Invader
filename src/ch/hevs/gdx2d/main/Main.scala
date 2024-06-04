@@ -11,6 +11,8 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
+import com.badlogic.gdx.scenes.scene2d.Stage
+import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
 
 
@@ -28,6 +30,8 @@ object Main {
   var icepixel40: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
+  var stage: Stage = null
+  var skin: Skin = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -44,12 +48,12 @@ class Main extends PortableApplication(1920, 1080) {
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     playerImg = new BitmapImage("data/images/Ship.png")
+    stage = new Stage()
+    skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     s.registerScreen(classOf[Menu])
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
-
-    s.activateScreen(0)
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
