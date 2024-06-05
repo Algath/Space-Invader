@@ -43,8 +43,12 @@ class Commands extends RenderingScreen {
     g.drawShader(time);
     time += 0.01f
 
+
+
     stage.act()
     stage.draw()
+
+
 
     g.drawStringCentered(1080 * 0.9F, "COMMANDS CLAVIER/MANETTE", Main.icepixel120)
 

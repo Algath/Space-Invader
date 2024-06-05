@@ -81,7 +81,7 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     // Fire Input Player Two
     if(ID == 2){
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.P) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ENTER) && Main.DEBUG)) {
 
         if(versusEnabled){
           Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
