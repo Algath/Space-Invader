@@ -1,12 +1,15 @@
 package ch.hevs.gdx2d.screen
 
-import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
-import ch.hevs.gdx2d.lib.GdxGraphics
+import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
+import ch.hevs.gdx2d.main.Main.{s, skin}
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
+import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -21,6 +24,7 @@ class Game extends RenderingScreen {
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
+  var time: Float = 0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
   var gameOverStage: Stage = new Stage()

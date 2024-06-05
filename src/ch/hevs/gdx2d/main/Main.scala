@@ -1,8 +1,11 @@
 package ch.hevs.gdx2d.main
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
