@@ -36,8 +36,22 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
-    if(id != 1 && id != 2)
-      g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.RED)
+    if (id != 1 && id != 2) {
+
+      Main.playerBulletImg.mirrorLeftRight()
+      Main.superBulletImg.mirrorLeftRight()
+
+      ID match{
+
+        case -1 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
+        case -2 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.superBulletImg)
+
+      }
+
+      Main.playerBulletImg.mirrorLeftRight()
+      Main.superBulletImg.mirrorLeftRight()
+
+    }
     else {
       if(versusEnabled && ID == 2) {
         Main.playerBulletImg.mirrorLeftRight()
@@ -46,8 +60,11 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
       }
       else
         g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
-
     }
+
+    /// Used in DEBUG mode for debugging projectile's hitbox
+    if(Main.DEBUG)
+      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
   }
 }

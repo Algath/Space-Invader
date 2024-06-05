@@ -51,15 +51,8 @@ object Handler {
     removedProjectile = 0
     for (i: Int <- projectile.indices) {
       projectile(i - removedProjectile).onGraphicRender(g)
-      if (projectile(i - removedProjectile).id > 0) {
-        if (projectile(i - removedProjectile).position.x > 1940)
-          removeProjectile(i - removedProjectile)
-      }
-
-      else if (projectile(i - removedProjectile).id < 0) {
-        if (projectile(i - removedProjectile).position.x < -10)
-          removeProjectile(i - removedProjectile)
-      }
+      if (projectile(i - removedProjectile).position.x > 1940 || projectile(i - removedProjectile).position.x < -10)
+        removeProjectile(i - removedProjectile)
     }
 
     removedEnemy = 0

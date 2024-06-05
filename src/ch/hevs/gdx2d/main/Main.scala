@@ -3,6 +3,7 @@ package ch.hevs.gdx2d.main
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
+import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Game, MainMenu, VersusGame}
@@ -11,12 +12,13 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
+import com.badlogic.gdx.physics.box2d.{Body, World}
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
 
 /**
- * Hello World demo in Scala
+ * SOS Invader
  *
  * @author Pierre-André Mudry (mui)
  * @version 1.0
@@ -25,12 +27,15 @@ object Main {
 
   var DEBUG: Boolean = false
   var playerBulletImg: BitmapImage = null
+  var superBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
   var icepixel40: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
   var stage: Stage = null
   var skin: Skin = null
+
+  var world:World = null
 
   def main(args: Array[String]): Unit = {
     new Main
@@ -46,9 +51,14 @@ class Main extends PortableApplication(1920, 1080) {
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
+    superBulletImg = new BitmapImage("data/images/Bullet_2.png")
     playerImg = new BitmapImage("data/images/Ship.png")
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
+
+    world = PhysicsWorld.getInstance()
+    world.setGravity(new Vector2(0, -0.0f))
+
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
@@ -117,6 +127,9 @@ class Main extends PortableApplication(1920, 1080) {
       else DEBUG = true
     }
 
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F12))
+      s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
+
     //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
     //      println("DOWN")
     //    }
@@ -125,6 +138,32 @@ class Main extends PortableApplication(1920, 1080) {
     //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
 
   }
+
+
+  /*private def UpdatePhysicParticle(): Unit = {
+    var  bodies:Array[Body] = Array[Body];
+    world.getBodies(bodies);
+
+    Iterator < Body > it = bodies.iterator();
+
+
+    while (it.hasNext()) {
+      Body p = it.next();
+
+      if (p.getUserData() instanceof Particle) {
+        Particle particle = (Particle) p
+      .getUserData();
+        particle.step();
+        particle.render(g);
+
+        if (particle.shouldbeDestroyed()) {
+          particle.destroy();
+        }
+      }
+    }
+
+    PhysicsWorld.updatePhysics(Gdx.graphics.getDeltaTime());
+  }*/
 
 
   /**
