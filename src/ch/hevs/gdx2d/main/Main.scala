@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.main
 
+import ch.hevs.gdx2d.ParticleSystem.{Particle, ParticleManager}
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -16,6 +17,10 @@ import com.badlogic.gdx.physics.box2d.{Body, World}
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
+import com.badlogic.gdx.utils._
+
+import java.util
+import java.util.{Iterator, Random}
 
 /**
  * SOS Invader
@@ -36,9 +41,9 @@ object Main {
   var stage: Stage = null
   var skin: Skin = null
 
-  var world:World = null
+  var shaderTime:Float = 0
 
-  def main(args: Array[String]): Unit = {
+  def main(args: scala.Array[String]): Unit = {
     new Main
   }
 }
@@ -56,9 +61,6 @@ class Main extends PortableApplication(1920, 1080) {
     playerImg = new BitmapImage("data/images/Ship.png")
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
-
-    world = PhysicsWorld.getInstance()
-    world.setGravity(new Vector2(0, -0.0f))
 
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])
@@ -119,6 +121,7 @@ class Main extends PortableApplication(1920, 1080) {
       Inited = true
     }
 
+
     // Draw everything
     //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
     //g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
@@ -126,6 +129,8 @@ class Main extends PortableApplication(1920, 1080) {
     //g.drawSchoolLogo()
 
     s.render(g)
+
+    ParticleManager.UpdatePhysicParticle(g)
 
     if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
       if(Main.DEBUG) DEBUG = false
@@ -145,38 +150,12 @@ class Main extends PortableApplication(1920, 1080) {
   }
 
 
-  /*private def UpdatePhysicParticle(): Unit = {
-    var  bodies:Array[Body] = Array[Body];
-    world.getBodies(bodies);
-
-    Iterator < Body > it = bodies.iterator();
-
-
-    while (it.hasNext()) {
-      Body p = it.next();
-
-      if (p.getUserData() instanceof Particle) {
-        Particle particle = (Particle) p
-      .getUserData();
-        particle.step();
-        particle.render(g);
-
-        if (particle.shouldbeDestroyed()) {
-          particle.destroy();
-        }
-      }
-    }
-
-    PhysicsWorld.updatePhysics(Gdx.graphics.getDeltaTime());
-  }*/
-
-
   /**
    * Compute time percentage for making a looping animation
    *
    * @return the current normalized time
    */
-  private def computePercentage: Float = {
+  private def computePercentage = {
     if (direction == 1) {
       currentTime += Gdx.graphics.getDeltaTime
       if (currentTime > ANIMATION_LENGTH) {

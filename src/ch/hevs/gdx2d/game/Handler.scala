@@ -71,10 +71,12 @@ object Handler {
         removeBonusObject(i)
     }
 
-    playerOne.onGraphicRender(g)
+    if(playerOne.pv > 0)
+      playerOne.onGraphicRender(g)
 
     if(playerTwo != null)
-      playerTwo.onGraphicRender(g)
+      if(playerTwo.pv > 0)
+        playerTwo.onGraphicRender(g)
 
   }
 

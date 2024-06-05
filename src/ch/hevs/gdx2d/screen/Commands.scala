@@ -42,8 +42,8 @@ class Commands extends RenderingScreen {
 //  var back: MainMenu = new MainMenu
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
-    g.drawShader(time);
-    time -= 0.01f
+    g.drawShader(Main.shaderTime)
+    Main.shaderTime -= 0.01f
 
     commandButtons.act()
     commandButtons.draw()

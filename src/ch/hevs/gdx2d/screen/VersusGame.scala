@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.GdxGraphics
@@ -15,7 +16,6 @@ import scala.util.Random
  *
  */
 class VersusGame  extends RenderingScreen {
-  var time: Float = 0
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
@@ -24,13 +24,13 @@ class VersusGame  extends RenderingScreen {
 
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
 
-    g.drawShader(time);
-    time += 0.01f
+    g.drawShader(Main.shaderTime)
+    Main.shaderTime += 0.01f
 
     //g.drawStringCentered(1080 * 0.8f, "Playing")
 
     Handler.onGraphicRender(g)
-
+    //ParticleManager.UpdatePhysicParticle(g)
 
     //g.setColor(new Color(128, 128, 128, 0.5f))
     //g.drawFilledRectangle(1920 / 2, 1080 / 2, 1920, 1080, 0);

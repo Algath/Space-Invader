@@ -91,13 +91,10 @@ class MainMenu extends RenderingScreen {
     })
   }
 
-  var time: Float = 0
-//  val com: Commands = new Commands
-
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
-    g.drawShader(time);
-    time += 0.01f
+    g.drawShader(Main.shaderTime)
+    Main.shaderTime += 0.01f
 
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.CYAN)
     stage.act()

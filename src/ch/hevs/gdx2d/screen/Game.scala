@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
@@ -17,7 +18,6 @@ import scala.util.Random
  *
  */
 class Game extends RenderingScreen {
-  var time: Float = 0
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
@@ -27,10 +27,10 @@ class Game extends RenderingScreen {
 
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
 
-    g.drawShader(time);
-    time += 0.01f
-
     //g.drawStringCentered(1080 * 0.8f, "Playing")
+
+    g.drawShader(Main.shaderTime)
+    Main.shaderTime += 0.01f
 
     Handler.onGraphicRender(g)
 
