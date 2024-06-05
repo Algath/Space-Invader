@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
-import com.badlogic.gdx.physics.box2d.{Body, World}
+import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.{Gdx, Input}
@@ -60,10 +60,10 @@ class Main extends PortableApplication(1920, 1080) {
     world = PhysicsWorld.getInstance()
     world.setGravity(new Vector2(0, -0.0f))
 
-    s.registerScreen(classOf[MainMenu])
-    s.registerScreen(classOf[Game])
-    s.registerScreen(classOf[VersusGame])
-    s.registerScreen(classOf[Commands])
+    s.registerScreen(classOf[MainMenu]) // 0
+    s.registerScreen(classOf[Game]) // 1
+    s.registerScreen(classOf[VersusGame]) // 2
+    s.registerScreen(classOf[Commands]) // 3
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")

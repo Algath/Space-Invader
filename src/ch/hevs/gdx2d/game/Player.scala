@@ -25,6 +25,8 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
   override var pv: Int = _vie
   override var maxPV: Int = _vie
 
+  var nbreCanon: Int = 1
+
   override def deplacement(): Unit = {
 
     // Input Player One
@@ -43,17 +45,6 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
       else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.controller(ControllerHandler.PLAYERTWO).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south))
         position.setLocation(position.getX, position.getY - velocity.getY)
     }
-
-
-    //println(velocity.x)
-
-    // déplacement manette stick
-    //    Xbox.L_STICK_VERTICAL_AXIS match {
-    //      case -1 => position.setLocation(position.getX + velocity.getX, position.getY)
-    //      case 1 => position.setLocation(position.getX - velocity.getX, position.getY)
-    //    }
-
-    // déplacement manette D_Pad
   }
 
   override def getHitBox(): Rectangle = {
@@ -66,14 +57,20 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     // Fire Input Player One
     if(ID == 1){
       if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
-        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+//        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
         /// Multi-tire
-        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-        //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
-
+        nbreCanon match {
+          case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+          case 2 =>
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+          case 3 =>
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+            Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+        }
       }
     }
 
@@ -87,19 +84,33 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
           Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
 
           /// Multi-tire
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0), true))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0), true))
+          nbreCanon match {
+            case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
+            case 2 => Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
+            case 3 => Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0), true))
+          }
         }
         else{
           Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
           /// Multi-tire
-          Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+          nbreCanon match {
+            case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+            case 2 => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+            case 3 => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+            case _ => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+          }
         }
 
       }
@@ -139,7 +150,11 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
               }
               case 4 => maxPV += 50
                 Handler.removeBonusObject(i)
-              case _ => setDamage(damage * 2)
+              case 5 => setDamage(damage * 2)
+                Handler.removeBonusObject(i)
+              case _ => nbreCanon += 1
+                println(nbreCanon)
+                if (nbreCanon > 3) nbreCanon = 3
                 Handler.removeBonusObject(i)
             }
           }
@@ -157,7 +172,6 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     if (position.y < 55) position.y = 55
     if (position.y > 1025) position.y = 1025
 
-
     if(Main.DEBUG)
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
@@ -169,8 +183,6 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     else{
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
     }
-
-
   }
 
   override def getDamage: Int = {

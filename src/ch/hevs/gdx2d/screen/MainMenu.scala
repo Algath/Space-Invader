@@ -17,9 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
  *
  */
 class MainMenu extends RenderingScreen {
-  def mainMenu(args: Array[String]): Unit = {
-    new MainMenu
-  }
 
   override def onInit(): Unit = {
     Gdx.input.setInputProcessor(stage)

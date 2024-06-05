@@ -10,6 +10,7 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
   * ID: 3 = Récupération PV
   * ID: 4 = Augmentation du nombre de point max
   * ID: 5 = Augmentation des dégats
+  * ID: 6 = +2 arme
   * */
 
   override var position: Point = _position
@@ -24,6 +25,7 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
     id match {
       case 3 => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
       case 4 => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
+      case 5 => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
       case _ => new Rectangle(position.getX.toInt - 10, position.getY.toInt - 10, 20,20)
     }
   }
@@ -34,7 +36,8 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
     id match {
       case 3 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.YELLOW)
       case 4 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ROYAL)
-      case _ => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.GOLD)
+      case 5 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.WHITE)
+      case _ => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.WHITE)
     }
 
   }

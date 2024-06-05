@@ -3,9 +3,13 @@ package ch.hevs.gdx2d.screen
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
-import ch.hevs.gdx2d.lib.GdxGraphics
+import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
+import ch.hevs.gdx2d.main.Main.{s, skin}
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -23,18 +27,14 @@ class Game extends RenderingScreen {
   var sec: Double = 0.0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
-  override def onGraphicRender(g: GdxGraphics): Unit = {
+  var gameOverStage: Stage = new Stage()
 
-    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
+  override def onGraphicRender(g: GdxGraphics): Unit = {
 
     g.drawShader(time);
     time += 0.01f
 
-    //g.drawStringCentered(1080 * 0.8f, "Playing")
-
     Handler.onGraphicRender(g)
-
-    //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
     count += 1
     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
@@ -54,15 +54,16 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
-//    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-//    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-//    g.setColor(Color.BLACK)
-//    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-//    g.setColor(Color.WHITE)
+    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
+    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
+    //    g.setColor(Color.BLACK)
+    //    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
+    //    g.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//      Handler.bonusObject.append(new Bonus_Object(6, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1) { // 10000
       Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
@@ -70,13 +71,6 @@ class Game extends RenderingScreen {
     if (Random.between(1, 1000000) == 1) { // 1000000
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-
-//    import sys.process._
-
-    //    val cpuUsage = "for /f "tokens=3 delims=," %i in ('tasklist /fo csv /nh ^| findstr /c:"CPU"') do @echo %i" !
-    //    val cpuUsagePercent = cpuUsage.split("%").head.toDouble / 100
-    //    println(s"CPU usage: $cpuUsagePercent")
-
 
     // Calcule timer pour Debuggage
     sec += 1 / 60.0
@@ -100,7 +94,7 @@ class Game extends RenderingScreen {
 
 
     /// Draw Player Two Info
-    if(Handler.playerTwo != null){
+    if (Handler.playerTwo != null) {
       g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
 
       g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
@@ -112,36 +106,66 @@ class Game extends RenderingScreen {
       g.setColor(Color.WHITE)
     }
 
-
     /*
     * Gestion conditions du Game over + screen
     * */
 
     if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
       // explosion + disparition du player
-      g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
+
+      //      gameOverStage.act()
+      ////      gameOverStage.draw()
+      //
+            g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
       g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
       g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
       g.drawStringCentered(1080 * 0.35f, "Thank you for playing our game!", Main.icepixel40)
       g.drawStringCentered(1080 * 0.2f, "CREDITS : ", Main.icepixel40)
-      g.drawStringCentered(1080*0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+      //
+      ////      gameOverStage.act()
+      //      gameOverStage.draw()
     }
 
 
     if (Main.DEBUG) {
       g.drawFPS()
       g.drawString(1700, 1075, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
-      //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
+
       // instant death
       if (Gdx.input.isKeyJustPressed(Input.Keys.F4)) {
         Handler.playerOne.pv = 0
-        if(Handler.playerTwo != null) Handler.playerTwo.pv = 0
+        if (Handler.playerTwo != null) Handler.playerTwo.pv = 0
       }
     }
 
   }
 
-  override def onInit(): Unit = {}
+  override def onInit(): Unit = {
+    Gdx.input.setInputProcessor(gameOverStage)
+    val bWith: Int = 180
+    val bHeight: Int = 30
+
+    val back: TextButton = new TextButton("Back to menu", skin)
+    back.setWidth(bWith)
+    back.setHeight(bHeight)
+    back.setPosition((1920 - bWith) * 0.005f, (1080 * 0.95f).toInt)
+
+    gameOverStage.addActor(back)
+
+    back.addListener(new ClickListener() {
+      override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
+        super.clicked(event, x, y)
+
+        if (back.isChecked)
+          Back()
+      }
+    })
+  }
+
+  def Back(): Unit = {
+    s.transitionTo(0, ScreenManager.TransactionType.SLICE)
+  }
 }

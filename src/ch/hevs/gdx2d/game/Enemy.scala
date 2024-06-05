@@ -76,11 +76,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       }
     }
 
-    //if (y > 10) y += -1
-    //else if (y == 10 && x != x - 10) x += -1
-    //else if (y < 1070) y += 1
-    //else if (y == 1070 && x != x - 10) x += -1
-
     if (isVerticalDisplacement)
       position.setLocation(x, y + velocity.getY)
     else
@@ -91,9 +86,9 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
   override def getHitBox(): Rectangle = {
     ID match {
-      case -1 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
-      case -2 => return new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
-      case _ => return new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 100, 100)
+      case -1 => new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
+      case -2 => new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
+      case _ => new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 100, 100)
     }
   }
 
@@ -160,9 +155,9 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
   override def getDamage: Int = {
     ID match {
-      case -1 => return 10
-      case -2 => return 30
-      case _ => return 50
+      case -1 => 10
+      case -2 => 30
+      case _ => 50
     }
   }
 
@@ -172,13 +167,10 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
 
   def getPts(): Int = {
-
     ID match{
-      case -1 => return 10
-      case -2 => return 25
-      case -3 => return 50
+      case -1 => 10
+      case -2 => 25
+      case -3 => 50
     }
-
   }
-
 }
