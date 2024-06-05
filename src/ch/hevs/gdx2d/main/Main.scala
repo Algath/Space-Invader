@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.desktop.PortableApplication
 import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
-import ch.hevs.gdx2d.screen.{Game, MainMenu, VersusGame}
+import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -63,6 +63,7 @@ class Main extends PortableApplication(1920, 1080) {
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
+    s.registerScreen(classOf[Commands])
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
