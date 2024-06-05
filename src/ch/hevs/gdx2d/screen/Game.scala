@@ -117,8 +117,6 @@ class Game extends RenderingScreen {
     * Gestion conditions du Game over + screen
     * */
 
-
-
     if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
       // explosion + disparition du player
       g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)

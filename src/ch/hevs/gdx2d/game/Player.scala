@@ -1,13 +1,10 @@
 package ch.hevs.gdx2d.game
 
-import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.Xbox
-import ch.hevs.gdx2d.game.{Handler, Object}
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.controllers.PovDirection
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.{Point, Rectangle}
@@ -84,7 +81,7 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     // Fire Input Player Two
     if(ID == 2){
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.P) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
 
         if(versusEnabled){
           Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))

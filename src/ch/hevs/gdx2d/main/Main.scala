@@ -30,6 +30,7 @@ object Main {
   var superBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
   var icepixel40: BitmapFont = null
+  var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
   var stage: Stage = null
@@ -75,6 +76,9 @@ class Main extends PortableApplication(1920, 1080) {
     parameter.shadowOffsetY = -8
     parameter.shadowColor = Color.LIGHT_GRAY
     icepixel40 = generator.generateFont(parameter)
+
+    parameter.size = generator.scaleForPixelHeight(120)
+    icepixel120 = generator.generateFont(parameter)
     generator.dispose()
 
     generator = new FreeTypeFontGenerator(optimusF)
