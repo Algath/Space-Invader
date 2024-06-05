@@ -87,13 +87,13 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
       if (Gdx.input.isKeyJustPressed(Input.Keys.ALT_RIGHT) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ALT_RIGHT) && Main.DEBUG)) {
 
         if(versusEnabled){
-          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0)))
+          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
 
           /// Multi-tire
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0)))
-          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0)))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0), true))
+          Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0), true))
         }
         else{
           Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))

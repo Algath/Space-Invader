@@ -3,6 +3,11 @@ package ch.hevs.gdx2d.controller
 import ch.hevs.gdx2d.desktop.Xbox
 import com.badlogic.gdx.controllers.{Controller, Controllers}
 
+/**
+*
+* Used for catch controllers input for two players
+*
+**/
 object ControllerHandler {
 
   var PLAYERONE = 0

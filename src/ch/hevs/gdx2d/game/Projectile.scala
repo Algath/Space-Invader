@@ -40,9 +40,9 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
       g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.RED)
     else {
       if(versusEnabled && ID == 2) {
-        Main.playerBulletImg.mirrorUpDown()
+        Main.playerBulletImg.mirrorLeftRight()
         g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
-        Main.playerBulletImg.mirrorUpDown()
+        Main.playerBulletImg.mirrorLeftRight()
       }
       else
         g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)

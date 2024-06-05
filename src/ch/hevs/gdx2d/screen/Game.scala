@@ -11,6 +11,11 @@ import com.badlogic.gdx.{Gdx, Input}
 import java.awt.Point
 import scala.util.Random
 
+/**
+ *
+ * The Screen of Game in One Player Mode and in Two Players Mode (not Versus Mode)
+ *
+ */
 class Game extends RenderingScreen {
   var time: Float = 0
   var count: Int = 0

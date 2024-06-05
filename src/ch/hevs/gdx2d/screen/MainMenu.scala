@@ -10,7 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
-class Menu extends RenderingScreen {
+
+/**
+ *
+ * The Screen of Main Menu
+ *
+ */
+class MainMenu extends RenderingScreen {
 
   override def onInit(): Unit = {
     Gdx.input.setInputProcessor(stage)

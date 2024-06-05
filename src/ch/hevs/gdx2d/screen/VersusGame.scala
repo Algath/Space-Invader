@@ -9,6 +9,11 @@ import com.badlogic.gdx.graphics.Color
 import java.awt.Point
 import scala.util.Random
 
+/**
+ *
+ * The Screen of Versus Mode
+ *
+ */
 class VersusGame  extends RenderingScreen {
   var time: Float = 0
   var count: Int = 0
@@ -40,19 +45,12 @@ class VersusGame  extends RenderingScreen {
       Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
 
-    import sys.process._
-
-    //    val cpuUsage = "for /f "tokens=3 delims=," %i in ('tasklist /fo csv /nh ^| findstr /c:"CPU"') do @echo %i" !
-    //    val cpuUsagePercent = cpuUsage.split("%").head.toDouble / 100
-    //    println(s"CPU usage: $cpuUsagePercent")
-
-
     // Calcule timer pour Debuggage
-    sec += 1 / 60.0
+    /*sec += 1 / 60.0
     if (count % 3600 == 0) {
       minute += 1
       sec = 0
-    }
+    }*/
 
     g.drawStringCentered(1080 - 25, "\\VERSUS/", Main.icepixel40)
 
@@ -82,8 +80,7 @@ class VersusGame  extends RenderingScreen {
     }
 
 
-
-
+    /// Used in DEBUG Mode
     if (Main.DEBUG) {
       g.drawFPS()
       g.drawString(1700, 1075, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
