@@ -17,16 +17,19 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
  *
  */
 class MainMenu extends RenderingScreen {
+  def mainMenu(args: Array[String]): Unit = {
+    new MainMenu
+  }
 
   override def onInit(): Unit = {
     Gdx.input.setInputProcessor(stage)
-    var bWith: Int = 180
-    var bHeight: Int = 30
+    val bWith: Int = 180
+    val bHeight: Int = 30
 
     val singlePlayer: TextButton = new TextButton("Single Player", skin)
     singlePlayer.setWidth(bWith)
     singlePlayer.setHeight(bHeight)
-    singlePlayer.setPosition(1920/2 - bWith / 2, (1080 * 0.6).toInt)
+    singlePlayer.setPosition(1920 / 2 - bWith / 2, (1080 * 0.6).toInt)
 
     stage.addActor(singlePlayer)
 
@@ -42,7 +45,7 @@ class MainMenu extends RenderingScreen {
     val multiPlayer: TextButton = new TextButton("Multiplayer", skin)
     multiPlayer.setWidth(bWith)
     multiPlayer.setHeight(bHeight)
-    multiPlayer.setPosition(1920/2 - bWith / 2, (1080 * 0.5).toInt)
+    multiPlayer.setPosition(1920 / 2 - bWith / 2, (1080 * 0.5).toInt)
 
     stage.addActor(multiPlayer)
 
@@ -58,7 +61,7 @@ class MainMenu extends RenderingScreen {
     val versusPlayer: TextButton = new TextButton("1 VS 1", skin)
     versusPlayer.setWidth(bWith)
     versusPlayer.setHeight(bHeight)
-    versusPlayer.setPosition(1920/2 - bWith / 2, (1080 * 0.4).toInt)
+    versusPlayer.setPosition(1920 / 2 - bWith / 2, (1080 * 0.4).toInt)
 
     stage.addActor(versusPlayer)
 
@@ -70,9 +73,26 @@ class MainMenu extends RenderingScreen {
           StartVersus()
       }
     })
+
+    val commandButton: TextButton = new TextButton("Commands", skin)
+    commandButton.setWidth(bWith)
+    commandButton.setHeight(bHeight)
+    commandButton.setPosition(1920 / 2 - bWith / 2, (1080 * 0.3).toInt)
+
+    stage.addActor(commandButton)
+
+    commandButton.addListener(new ClickListener() {
+      override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
+        super.clicked(event, x, y)
+
+        if (commandButton.isChecked)
+          CommandCall()
+      }
+    })
   }
 
-  var time:Float = 0
+  var time: Float = 0
+//  val com: Commands = new Commands
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
@@ -108,6 +128,11 @@ class MainMenu extends RenderingScreen {
     Handler.Init()
     Handler.InitPlayer(2, true)
     s.transitionTo(2, ScreenManager.TransactionType.SLICE)
+  }
+
+  def CommandCall(): Unit = {
+//    com.onInit()
+    s.transitionTo(3, ScreenManager.TransactionType.SLICE)
   }
 
 }
