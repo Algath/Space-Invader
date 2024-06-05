@@ -176,7 +176,8 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
     /// Draw the player on the screen
-    if(versusEnabled && ID == 2){
+    if(versusEnabled && ID == 2) {
+
       Main.playerImg.mirrorUpDown()
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 1, Main.playerImg)
       Main.playerImg.mirrorUpDown()
