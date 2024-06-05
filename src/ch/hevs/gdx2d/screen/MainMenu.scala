@@ -131,7 +131,6 @@ class MainMenu extends RenderingScreen {
   }
 
   def CommandCall(): Unit = {
-//    com.onInit()
     s.transitionTo(3, ScreenManager.TransactionType.SLICE)
   }
 

@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
 import ch.hevs.gdx2d.main.Main.{s, skin, stage}
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.scenes.scene2d.InputEvent
+import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
@@ -14,6 +14,8 @@ class Commands extends RenderingScreen {
   var time: Float = 0
   var clavier: BitmapImage = new BitmapImage("data/images/clavier.png")
   var manette: BitmapImage = new BitmapImage("data/images/manette.png")
+
+  var commandButtons:Stage = new Stage()
 
   override def onInit(): Unit = {
     Gdx.input.setInputProcessor(stage)
@@ -25,7 +27,7 @@ class Commands extends RenderingScreen {
     back.setHeight(bHeight)
     back.setPosition(1920 - bWith / 2, (1080 *0.9f).toInt)
 
-    stage.addActor(back)
+    commandButtons.addActor(back)
 
     back.addListener(new ClickListener() {
       override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
@@ -41,14 +43,10 @@ class Commands extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     g.drawShader(time);
-    time += 0.01f
+    time -= 0.01f
 
-
-
-    stage.act()
-    stage.draw()
-
-
+    commandButtons.act()
+    commandButtons.draw()
 
     g.drawStringCentered(1080 * 0.9F, "COMMANDS CLAVIER/MANETTE", Main.icepixel120)
 
