@@ -3,7 +3,6 @@ package ch.hevs.gdx2d.main
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
-import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
@@ -12,9 +11,9 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
-import com.badlogic.gdx.physics.box2d.World
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
+import com.badlogic.gdx.utils._
 import com.badlogic.gdx.{Gdx, Input}
 
 /**
@@ -36,9 +35,9 @@ object Main {
   var stage: Stage = null
   var skin: Skin = null
 
-  var world:World = null
+  var shaderTime:Float = 0
 
-  def main(args: Array[String]): Unit = {
+  def main(args: scala.Array[String]): Unit = {
     new Main
   }
 }
@@ -57,6 +56,10 @@ class Main extends PortableApplication(1920, 1080) {
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
+    s.registerScreen(classOf[MainMenu])
+    s.registerScreen(classOf[Game])
+    s.registerScreen(classOf[VersusGame])
+    s.registerScreen(classOf[Commands])
     world = PhysicsWorld.getInstance()
     world.setGravity(new Vector2(0, -0.0f))
 
@@ -119,6 +122,7 @@ class Main extends PortableApplication(1920, 1080) {
       Inited = true
     }
 
+
     // Draw everything
     //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
     //g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
@@ -126,6 +130,8 @@ class Main extends PortableApplication(1920, 1080) {
     //g.drawSchoolLogo()
 
     s.render(g)
+
+    ParticleManager.UpdatePhysicParticle(g)
 
     if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
       if(Main.DEBUG) DEBUG = false
@@ -176,7 +182,7 @@ class Main extends PortableApplication(1920, 1080) {
    *
    * @return the current normalized time
    */
-  private def computePercentage: Float = {
+  private def computePercentage = {
     if (direction == 1) {
       currentTime += Gdx.graphics.getDeltaTime
       if (currentTime > ANIMATION_LENGTH) {

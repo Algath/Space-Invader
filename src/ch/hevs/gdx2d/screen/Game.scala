@@ -1,15 +1,12 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
-import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
+import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
-import ch.hevs.gdx2d.main.Main.{s, skin}
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -21,7 +18,6 @@ import scala.util.Random
  *
  */
 class Game extends RenderingScreen {
-  var time: Float = 0
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
@@ -34,7 +30,16 @@ class Game extends RenderingScreen {
     g.drawShader(time);
     time += 0.01f
 
+    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
+
+    //g.drawStringCentered(1080 * 0.8f, "Playing")
+
+    g.drawShader(Main.shaderTime)
+    Main.shaderTime += 0.01f
+
     Handler.onGraphicRender(g)
+
+    //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
 
     count += 1
     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
@@ -54,16 +59,15 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
-    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-    //    g.setColor(Color.BLACK)
-    //    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-    //    g.setColor(Color.WHITE)
+//    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
+//    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
+//    g.setColor(Color.BLACK)
+//    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
+//    g.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
       Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//      Handler.bonusObject.append(new Bonus_Object(6, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1) { // 10000
       Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
@@ -84,9 +88,9 @@ class Game extends RenderingScreen {
     /// Draw Player One Info
     g.drawString(150, 1080 - 25, "PLAYER ONE", Main.icepixel40, 1)
 
-    g.drawFilledRectangle(400, 1080 - 80, 200, 20, 0, Color.GRAY)
-    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 - 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.FOREST)
-    g.drawFilledRectangle(400 - (Handler.playerOne.maxPV - Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 + 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.GREEN)
+    g.drawFilledRectangle(400, 1080 - 80, (Handler.playerOne.maxPV * 200 / Handler.playerOne.maxPV), 20, 0, Color.GRAY)
+    g.drawFilledRectangle(400 - 100 + (Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 - 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.FOREST)
+    g.drawFilledRectangle(400 - 100 + (Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 + 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.GREEN)
 
     g.setColor(Color.BLACK)
     g.drawString(400, 1080 - 25, Handler.playerOne.pv + " / " + Handler.playerOne.maxPV, Main.icepixel40, 1)
@@ -97,9 +101,9 @@ class Game extends RenderingScreen {
     if (Handler.playerTwo != null) {
       g.drawString(1920 - 150, 1080 - 25, "PLAYER TWO", Main.icepixel40, 1)
 
-      g.drawFilledRectangle(1920 - 400, 1080 - 80, 200, 20, 0, Color.GRAY)
-      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
-      g.drawFilledRectangle(1920 - 400 - (Handler.playerTwo.maxPV - Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+      g.drawFilledRectangle(1920 - 400, 1080 - 80, (Handler.playerTwo.maxPV * 200 / Handler.playerTwo.maxPV), 20, 0, Color.GRAY)
+      g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
+      g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
 
       g.setColor(Color.BLACK)
       g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)

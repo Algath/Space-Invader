@@ -49,10 +49,10 @@ public class Particle extends PhysicsBox {
 		final Color col = g.sbGetColor();
 		final Vector2 pos = getBodyPosition();
 
-		if (!init) {
+		//if (!init) {
 			g.setBlendFunction(GL20.GL_SRC_ALPHA, GL20.GL_ONE);
 			init = true;
-		}
+		//}
 
 		// Make the particle disappear with time
 		g.sbSetColor(.5f, 0.7f, 0.9f, 1.0f - age / (float) (maxAge + 5));

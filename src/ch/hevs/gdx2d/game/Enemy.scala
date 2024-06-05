@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.game
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.graphics.Color
@@ -129,6 +130,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
         if (Handler.projectile(i).id > 0) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage
+            ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.removeProjectile(i)
           }
         }

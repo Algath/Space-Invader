@@ -36,7 +36,7 @@ object Handler {
       playerOne = new Player(1, new Point(100, 1080 / 2), 200)
     else {
       if(versusEnabled){
-        playerOne = new Player(1, new Point(100, 1080 / 2), 200, true)
+        playerOne = new Player(1, new Point(100, 1080 / 2), 500, true)
         playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), 200, true)
       }
       else{
@@ -73,10 +73,12 @@ object Handler {
         removeBonusObject(i)
     }
 
-    playerOne.onGraphicRender(g)
+    if(playerOne.pv > 0)
+      playerOne.onGraphicRender(g)
 
     if(playerTwo != null)
-      playerTwo.onGraphicRender(g)
+      if(playerTwo.pv > 0)
+        playerTwo.onGraphicRender(g)
 
   }
 

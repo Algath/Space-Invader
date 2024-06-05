@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.game
 
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.Xbox
 import ch.hevs.gdx2d.lib.GdxGraphics
@@ -10,6 +11,20 @@ import com.badlogic.gdx.{Gdx, Input}
 import java.awt.{Point, Rectangle}
 import scala.util.Random
 
+/**
+ *
+ * It's the Player class.
+ * For create new Player, create instance of this and call onGraphicsRendering.
+ *
+ * @param ID
+ * ID of the Player
+ * @param _position
+ * Spawn Position of the Player
+ * @param _vie
+ * [Deprectated] The PV of the Player in the Initalization
+ * @param versusEnabled
+ * Set if the Versus mode is enabled for the Player with ID 2
+ */
 class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false) extends Object with Damage with PV {
   /*
   * ID: 1 = Player 1
@@ -45,13 +60,19 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
       else if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.controller(ControllerHandler.PLAYERTWO).getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.south))
         position.setLocation(position.getX, position.getY - velocity.getY)
     }
+
+    if (position.y < 55) position.y = 55
+    if (position.y > 1025) position.y = 1025
+
   }
 
+  /// Get the HitBox of Player
   override def getHitBox(): Rectangle = {
     new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
+
     deplacement()
 
     // Fire Input Player One
@@ -121,14 +142,20 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
         if (Handler.projectile(i).id < 0) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage
+            ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.projectile.remove(i)
+            if (pv <= 0)
+              ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 50, 100, 3)
           }
         }
 
         else if (versusEnabled && Handler.projectile(i).id != ID) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage / 4
+            ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.projectile.remove(i)
+            if (pv <= 0)
+              ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 50, 100, 3)
           }
         }
 
@@ -172,16 +199,19 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
     if (position.y < 55) position.y = 55
     if (position.y > 1025) position.y = 1025
 
+    /// Used in DEBUG Mode for debug hitbox
     if(Main.DEBUG)
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
-    if(versusEnabled && ID == 2){
+    /// Draw the player on the screen
+    if(versusEnabled && ID == 2) {
+
       Main.playerImg.mirrorUpDown()
-      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 1, Main.playerImg)
       Main.playerImg.mirrorUpDown()
     }
     else{
-      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 3, Main.playerImg)
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 1, Main.playerImg)
     }
   }
 
