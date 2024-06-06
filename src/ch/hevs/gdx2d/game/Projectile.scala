@@ -5,9 +5,33 @@ import ch.hevs.gdx2d.game.Object
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.physics.box2d.Body
 
 import java.awt.{Point, Rectangle}
+import java.util.Iterator
 
+/*
+* ID :
+*
+*  -3   - Bullet Boss
+*  -2   - Bullet Mini-Boss
+*  -1   - Bullet Enemy
+*   0   - /
+*   1   - Basic Bullet Player 1
+*   2   - Basic Bullet Player 2
+*   3   - Fireball Player 1
+*   4   - FireBall Player 2
+*
+*/
+
+/**
+ * Class of all projectile of the game
+ * @param ID
+ * @param _position
+ * @param _damage
+ * @param _velocity
+ * @param versusEnabled
+ */
 class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new Point(10, 0), versusEnabled:Boolean = false) extends Object {
 
   override var position: Point = _position
@@ -37,7 +61,7 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
     deplacement()
-    if (id != 1 && id != 2) {
+    if (id != 1 && id != 2 && id != 3 && id != 4) {
 
       Main.playerBulletImg.mirrorLeftRight()
       Main.superBulletImg.mirrorLeftRight()
@@ -67,5 +91,32 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
     if(Main.DEBUG)
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
+    if(ID == 3 || ID == 4) {
+      ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 3, 25, 2)
+      ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 3, 10, 1)
+    }
+
+    if(ID == 3 || ID == 4)
+      collision()
+
   }
+
+  def collision(): Unit = {
+
+    var it: scala.Iterator[Projectile] = Handler.projectile.iterator;
+
+    while(it.hasNext){
+
+      var p:Projectile = it.next()
+
+      if((p.id == 3 || p.id == 4) && p != this && p.getHitBox().intersects(getHitBox())){
+        ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 100, 50, 6)
+        //Handler.removeProjectile(it.indexOf(this))
+        //Handler.removeProjectile(it.indexOf(p))
+      }
+
+    }
+
+  }
+
 }

@@ -40,6 +40,9 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
   override var pv: Int = _vie
   override var maxPV: Int = _vie
 
+  var ps:Int = 200
+  var maxPS:Int = 200
+
   /// Manage the Player displacment
   override def deplacement(): Unit = {
 
@@ -86,6 +89,15 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
         //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
 
       }
+
+      if (Gdx.input.isKeyJustPressed(Input.Keys.Q) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.Q) && Main.DEBUG)) {
+        if(ps == 200){
+          Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(45, 0)))
+          ps = 0
+        }
+
+      }
+
     }
 
 
@@ -114,6 +126,17 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
         }
 
       }
+
+      if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) && Main.DEBUG)) {
+        if (ps == 200) {
+          if(versusEnabled)
+            Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(-45, 0), true))
+          else
+            Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(45, 0)))
+          ps = 0
+        }
+      }
+
     }
 
     for (i: Int <- Handler.projectile.indices) {
@@ -128,7 +151,7 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
           }
         }
 
-        else if (versusEnabled && Handler.projectile(i).id != ID) {
+        else if (versusEnabled && Handler.projectile(i).id != ID  && Handler.projectile(i).id != ID + 2) {
           if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
             pv -= Handler.projectile(i).damage / 4
             ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
@@ -170,6 +193,9 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
 
     if (pv < 0)
       pv = 0
+
+    if(ps < 200)
+      ps += 1
 
     /// Used in DEBUG Mode for debug hitbox
     if(Main.DEBUG)

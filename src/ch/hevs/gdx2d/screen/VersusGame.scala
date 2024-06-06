@@ -62,6 +62,10 @@ class VersusGame  extends RenderingScreen {
     g.drawFilledRectangle(400 - 100 + (Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 - 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.FOREST)
     g.drawFilledRectangle(400 - 100 + (Handler.playerOne.pv * 200 / Handler.playerOne.maxPV) / 2, 1080 - 80 + 5, Handler.playerOne.pv * 200 / Handler.playerOne.maxPV, 10, 0, Color.GREEN)
 
+    g.drawFilledRectangle(400, 1080 - 100, Handler.playerOne.maxPS * 200 / Handler.playerOne.maxPS, 10, 0, Color.GRAY)
+    g.drawFilledRectangle(400 - 100 + (Handler.playerOne.ps * 200 / Handler.playerOne.maxPS) / 2, 1080 - 100 - 2.5f, Handler.playerOne.ps * 200 / Handler.playerOne.maxPS, 5, 0, Color.RED)
+    g.drawFilledRectangle(400 - 100 + (Handler.playerOne.ps * 200 / Handler.playerOne.maxPS) / 2, 1080 - 100 + 2.5f, Handler.playerOne.ps * 200 / Handler.playerOne.maxPS, 5, 0, Color.SALMON)
+
     g.setColor(Color.BLACK)
     g.drawString(400, 1080 - 25, Handler.playerOne.pv + " / " + Handler.playerOne.maxPV, Main.icepixel40, 1)
     g.setColor(Color.WHITE)
@@ -73,6 +77,10 @@ class VersusGame  extends RenderingScreen {
       g.drawFilledRectangle(1920 - 400, 1080 - 80, (Handler.playerTwo.maxPV * 200 / Handler.playerTwo.maxPV), 20, 0, Color.GRAY)
       g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 - 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.FOREST)
       g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV) / 2, 1080 - 80 + 5, Handler.playerTwo.pv * 200 / Handler.playerTwo.maxPV, 10, 0, Color.GREEN)
+
+      g.drawFilledRectangle(1920 - 400, 1080 - 100, Handler.playerTwo.maxPS * 200 / Handler.playerTwo.maxPS, 10, 0, Color.GRAY)
+      g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.ps * 200 / Handler.playerTwo.maxPS) / 2, 1080 - 100 - 2.5f, Handler.playerTwo.ps * 200 / Handler.playerTwo.maxPS, 5, 0, Color.RED)
+      g.drawFilledRectangle(1920 - 500 + (Handler.playerTwo.ps * 200 / Handler.playerTwo.maxPS) / 2, 1080 - 100 + 2.5f, Handler.playerTwo.ps * 200 / Handler.playerTwo.maxPS, 5, 0, Color.SALMON)
 
       g.setColor(Color.BLACK)
       g.drawString(1920 - 400, 1080 - 25, Handler.playerTwo.pv + " / " + Handler.playerTwo.maxPV, Main.icepixel40, 1)
