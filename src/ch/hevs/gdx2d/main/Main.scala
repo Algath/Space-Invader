@@ -31,6 +31,8 @@ object Main {
   var playerBulletImg: BitmapImage = null
   var superBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
+  var bossImg: BitmapImage = null
+  var miniBossImg: BitmapImage = null
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
@@ -56,6 +58,8 @@ class Main extends PortableApplication(1920, 1080) {
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     superBulletImg = new BitmapImage("data/images/Bullet_2.png")
     playerImg = new BitmapImage("data/images/Ship.png")
+    bossImg = new BitmapImage("data/images/Boss.png")
+    miniBossImg = new BitmapImage("data/images/mini-boss.png")
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 

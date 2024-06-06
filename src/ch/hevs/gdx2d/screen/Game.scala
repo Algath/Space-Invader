@@ -1,6 +1,5 @@
 package ch.hevs.gdx2d.screen
 
-import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
@@ -51,7 +50,7 @@ class Game extends RenderingScreen {
     if (count % 10800 == 0) {
       Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-    if (count % 18000 == 0) {
+    if (count % 300 == 0) { // 18000
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1)
