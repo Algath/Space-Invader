@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
+import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -58,6 +59,10 @@ class Main extends PortableApplication(1920, 1080) {
     playerImg = new BitmapImage("data/images/Ship.png")
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
+
+    /// Read Save for High Score
+    SaveManager.ReadSave()
+    SaveManager.WriteSave(10, 2000)
 
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])

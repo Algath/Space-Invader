@@ -25,7 +25,7 @@ import scala.util.Random
  * @param versusEnabled
  * Set if the Versus mode is enabled for the Player with ID 2
  */
-class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false) extends Object with Damage with PV {
+class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends Object with Damage with PV {
   /*
   * ID: 1 = Player 1
   * ID: 2 = Player 2
@@ -37,8 +37,8 @@ class Player(ID: Int, _position: Point, _vie: Int, versusEnabled:Boolean = false
 
   override var id: Int = ID
 
-  override var pv: Int = _vie
-  override var maxPV: Int = _vie
+  override var pv: Int = 200
+  override var maxPV: Int = pv
 
   var nbreCanon: Int = 1
 
