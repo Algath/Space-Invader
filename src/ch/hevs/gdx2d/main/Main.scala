@@ -1,6 +1,7 @@
 package ch.hevs.gdx2d.main
 
-import ch.hevs.gdx2d.ParticleSystem.{Particle, ParticleManager}
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager
+import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -13,14 +14,10 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
-import com.badlogic.gdx.physics.box2d.{Body, World}
 import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
-import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.utils._
-
-import java.util
-import java.util.{Iterator, Random}
+import com.badlogic.gdx.{Gdx, Input}
 
 /**
  * SOS Invader
@@ -66,6 +63,13 @@ class Main extends PortableApplication(1920, 1080) {
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
     s.registerScreen(classOf[Commands])
+    world = PhysicsWorld.getInstance()
+    world.setGravity(new Vector2(0, -0.0f))
+
+    s.registerScreen(classOf[MainMenu]) // 0
+    s.registerScreen(classOf[Game]) // 1
+    s.registerScreen(classOf[VersusGame]) // 2
+    s.registerScreen(classOf[Commands]) // 3
 
     val icePixelF: FileHandle = Gdx.files.internal("data/fonts/ice_pixel-7.ttf")
     val optimusF: FileHandle = Gdx.files.internal("data/fonts/OptimusPrinceps.ttf")
@@ -148,6 +152,32 @@ class Main extends PortableApplication(1920, 1080) {
     //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
 
   }
+
+
+  /*private def UpdatePhysicParticle(): Unit = {
+    var  bodies:Array[Body] = Array[Body];
+    world.getBodies(bodies);
+
+    Iterator < Body > it = bodies.iterator();
+
+
+    while (it.hasNext()) {
+      Body p = it.next();
+
+      if (p.getUserData() instanceof Particle) {
+        Particle particle = (Particle) p
+      .getUserData();
+        particle.step();
+        particle.render(g);
+
+        if (particle.shouldbeDestroyed()) {
+          particle.destroy();
+        }
+      }
+    }
+
+    PhysicsWorld.updatePhysics(Gdx.graphics.getDeltaTime());
+  }*/
 
 
   /**
