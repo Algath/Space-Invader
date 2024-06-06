@@ -44,13 +44,14 @@ class Game extends RenderingScreen {
     count += 1
     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
 
-    if (count % 300 == 0) {
+    if (count % 500 == 0) {
       Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
+
     if (count % 10800 == 0) {
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+     Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-    if (count % 300 == 0) { // 18000
+    if (count % 18000 == 0) { // 18000
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1)
