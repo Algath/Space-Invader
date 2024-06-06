@@ -2,7 +2,7 @@ package ch.hevs.gdx2d.SaveSystem
 
 import com.badlogic.gdx.math.Vector2
 
-import java.io.{BufferedReader, BufferedWriter, File, FileNotFoundException, FileReader, FileWriter}
+import java.io.{BufferedOutputStream, BufferedReader, BufferedWriter, File, FileNotFoundException, FileOutputStream, FileReader, FileWriter, PrintStream}
 import java.nio.file
 import javax.tools.StandardJavaFileManager.PathFactory
 import scala.reflect.io.Path
@@ -28,12 +28,11 @@ object SaveManager {
       if(save.createNewFile())
         println("[SYSTEM] New Save File Has Created !")
 
-      var bw: BufferedWriter = new BufferedWriter(new FileWriter("save/save.txt"))
+      val f = new PrintStream(new BufferedOutputStream(new FileOutputStream("save/save.txt")))
 
-      bw.write("0")
-      bw.write("0")
-
-      bw.close()
+      f.println("0")
+      f.println("0")
+      f.close()
 
       result.x = 0
       result.y = 0
@@ -74,10 +73,11 @@ object SaveManager {
 
     }
 
-    var bw:BufferedWriter = new BufferedWriter(new FileWriter("save/save.txt"))
+    val f = new PrintStream(new BufferedOutputStream(new FileOutputStream("save/save.txt")))
 
-    bw.write(highScore)
-    bw.write(highScoreMulti)
+    f.println(highScore)
+    f.println(highScoreMulti)
+    f.close()
 
   }
 
