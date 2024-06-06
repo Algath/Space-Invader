@@ -64,10 +64,6 @@ class Main extends PortableApplication(1920, 1080) {
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
-    /// Read Save for High Score
-    SaveManager.ReadSave()
-    SaveManager.WriteSave(10, 2000)
-
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])
     s.registerScreen(classOf[VersusGame])
