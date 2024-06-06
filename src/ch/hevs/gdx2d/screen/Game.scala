@@ -1,16 +1,12 @@
 package ch.hevs.gdx2d.screen
 
-import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
-import ch.hevs.gdx2d.main.Main.{s, skin}
+import ch.hevs.gdx2d.main.Main.s
 import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
-import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -26,8 +22,6 @@ class Game extends RenderingScreen {
   var minute: Int = 0
   var sec: Double = 0.0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
-
-  var gameOverStage: Stage = new Stage()
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
@@ -45,13 +39,16 @@ class Game extends RenderingScreen {
     count += 1
     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
 
-    if (count % 300 == 0) {
+    //    if (Handler.enemy.length != 1) Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+
+    if (count % 500 == 0) {
       Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
+
     if (count % 10800 == 0) {
       Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-    if (count % 18000 == 0) {
+    if (count % 18000 == 0) { // 18000
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
     if (Random.between(1, 100000) == 1)
@@ -60,11 +57,11 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
-//    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-//    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-//    g.setColor(Color.BLACK)
-//    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-//    g.setColor(Color.WHITE)
+    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
+    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
+    //    g.setColor(Color.BLACK)
+    //    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
+    //    g.setColor(Color.WHITE)
 
 
     if (Random.between(1, 600) == 1) {
@@ -126,21 +123,18 @@ class Game extends RenderingScreen {
     if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
       // explosion + disparition du player
 
-      //      gameOverStage.act()
-      ////      gameOverStage.draw()
-      //
-            g.drawAlphaPicture(1920/2, 1080/2, 0.7f, fondGameOver)
+      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
       g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
       g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.35f, "Thank you for playing our game!", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.2f, "CREDITS : ", Main.icepixel40)
-      g.drawStringCentered(1080*0.15f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-      //g.drawStringCentered(1080*0.10f, "InfiniteRight ∞", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-      //
-      ////      gameOverStage.act()
-      //      gameOverStage.draw()
+      g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
+      if (Gdx.input.isKeyJustPressed(Input.Keys.X))
+        s.transitionTo(0, ScreenManager.TransactionType.SLICE)
+      //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
+      //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
     }
 
 
@@ -158,29 +152,8 @@ class Game extends RenderingScreen {
 
   }
 
-  override def onInit(): Unit = {
-    Gdx.input.setInputProcessor(gameOverStage)
-    val bWith: Int = 180
-    val bHeight: Int = 30
-
-    val back: TextButton = new TextButton("Back to menu", skin)
-    back.setWidth(bWith)
-    back.setHeight(bHeight)
-    back.setPosition((1920 - bWith) * 0.005f, (1080 * 0.95f).toInt)
-
-    gameOverStage.addActor(back)
-
-    back.addListener(new ClickListener() {
-      override def clicked(event: InputEvent, x: Float, y: Float): Unit = {
-        super.clicked(event, x, y)
-
-        if (back.isChecked)
-          Back()
-      }
-    })
-  }
-
-  def Back(): Unit = {
+  override def onInit(): Unit = {}
+  /*def Back(): Unit = {
     s.transitionTo(0, ScreenManager.TransactionType.SLICE)
-  }
+  }*/
 }

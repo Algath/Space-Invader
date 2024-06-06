@@ -36,25 +36,25 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     if (ID != -3) {
       if (position.x > 1860) x -= velocity.x
       else {
-
-        if (position.y < 10 + getHitBox().height / 2) {
+        println(position.x)
+        if (position.y < 10 + getHitBox().height / 2) { // monte
           y = 10 + getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
 
-        if (position.y > 1070 - getHitBox().height / 2) {
+        if (position.y > 1070 - getHitBox().height / 2) { // descend
           y = 1070 - getHitBox().height / 2
           isVerticalDisplacement = false
           velocity.y *= -1
         }
 
-        if (!isVerticalDisplacement) {
+        if (!isVerticalDisplacement && position.x > 960) { // début déplacement x
           xAdvance += 1
           x -= velocity.x
         }
 
-        if (xAdvance > 50) {
+        if (xAdvance > 50 || position.x < 960) { // avance de 50 clocks
           xAdvance = 0
           isVerticalDisplacement = true
         }
@@ -81,7 +81,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       position.setLocation(x, y + velocity.getY)
     else
       position.setLocation(x, y)
-
   }
 
 
@@ -149,7 +148,12 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       } else velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt - 1)
     }
 
-    g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+    //g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+    if (ID == -3){
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.bossImg)
+    } else if (ID == -2) {
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.miniBossImg)
+    } else g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
 
     if (Main.DEBUG)
       g.drawString(position.getX.toInt - 15, position.getY.toInt + 40, "PV : " + pv)

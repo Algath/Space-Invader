@@ -1,14 +1,10 @@
 package ch.hevs.gdx2d.game
 
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
-import ch.hevs.gdx2d.game.Object
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.physics.box2d.Body
 
 import java.awt.{Point, Rectangle}
-import java.util.Iterator
 
 /*
 * ID :
@@ -70,6 +66,7 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
         case -1 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
         case -2 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.superBulletImg)
+        case _ => g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
       }
 
