@@ -131,34 +131,31 @@ class Game extends RenderingScreen {
       // explosion + disparition du player
 
       /// Check Score and HighScore
-      if(Handler.playerTwo != null){
-        if(Handler.score > Handler.highScoreMulti)
+      if (Handler.playerTwo != null) {
+        if (Handler.score > Handler.highScoreMulti)
           Handler.highScoreMulti = Handler.score
-      }else{
-        if (Handler.score > Handler.highScore)
-          Handler.highScore = Handler.score
-      }
-
+      } else if (Handler.score > Handler.highScore) Handler.highScore = Handler.score
 
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
       g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.score, Main.icepixel40)
       if (Handler.playerTwo != null)
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScoreMulti, Main.icepixel40)
-      else
+      else {
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScore, Main.icepixel40)
-      g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-      g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+        g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
+      }
 
       if (Gdx.input.isKeyJustPressed(Input.Keys.X))
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
-        SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
-      }
-      //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
-      //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+      SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
     }
+    //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
+    //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+
 
 
     if (Main.DEBUG) {
@@ -172,8 +169,8 @@ class Game extends RenderingScreen {
         if (Handler.playerTwo != null) Handler.playerTwo.pv = 0
       }
     }
-
-  override def onInit(): Unit = ???
+  }
+  override def onInit(): Unit = {}
 
   /*def Back(): Unit = {
     s.transitionTo(0, ScreenManager.TransactionType.SLICE)
