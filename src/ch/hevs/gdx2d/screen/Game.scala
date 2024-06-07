@@ -173,9 +173,8 @@ class Game extends RenderingScreen {
       }
     }
 
-  }
+  override def onInit(): Unit = ???
 
-  override def onInit(): Unit = {}
   /*def Back(): Unit = {
     s.transitionTo(0, ScreenManager.TransactionType.SLICE)
   }*/
