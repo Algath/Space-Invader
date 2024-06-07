@@ -131,6 +131,7 @@ class Game extends RenderingScreen {
       g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
       g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
       g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
+      
       if (Gdx.input.isKeyJustPressed(Input.Keys.X))
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
       //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)

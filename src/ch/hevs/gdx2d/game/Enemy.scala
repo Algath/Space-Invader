@@ -36,7 +36,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     if (ID != -3) {
       if (position.x > 1860) x -= velocity.x
       else {
-        println(position.x)
+        
         if (position.y < 10 + getHitBox().height / 2) { // monte
           y = 10 + getHitBox().height / 2
           isVerticalDisplacement = false
