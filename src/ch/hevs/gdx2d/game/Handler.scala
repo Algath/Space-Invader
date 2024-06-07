@@ -18,13 +18,15 @@ object Handler {
   var removedProjectile: Int = 0
   var removedBonusObject: Int = 0
 
-  var pts:Int = 0
+  var score:Int = 0
+  var highScore:Int = 0
+  var highScoreMulti:Int = 0
 
   def Init(): Unit = {
     enemy = new ArrayBuffer[Enemy]()
     projectile = new ArrayBuffer[Projectile]()
     bonusObject = new ArrayBuffer[Bonus_Object]()
-    pts = 0
+    score = 0
   }
   
   def InitPlayer(playerNumber:Int, versusEnabled:Boolean): Unit = {
@@ -33,15 +35,15 @@ object Handler {
     playerTwo = null
 
     if(playerNumber == 1)
-      playerOne = new Player(1, new Point(100, 1080 / 2), 200)
+      playerOne = new Player(1, new Point(100, 1080 / 2))
     else {
       if(versusEnabled){
-        playerOne = new Player(1, new Point(100, 1080 / 2), 200, true)
-        playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), 200, true)
+        playerOne = new Player(1, new Point(100, 1080 / 2), true)
+        playerTwo = new Player(2, new Point(1920 - 100, 1080 / 2), true)
       }
       else{
-        playerOne = new Player(1, new Point(300, 1080 / 3), 200)
-        playerTwo = new Player(2, new Point(100, (1080 / 3) * 2), 200)
+        playerOne = new Player(1, new Point(300, 1080 / 3))
+        playerTwo = new Player(2, new Point(100, (1080 / 3) * 2))
       }
     }
   }
@@ -59,7 +61,7 @@ object Handler {
     for (i: Int <- enemy.indices) {
       enemy(i - removedEnemy).onGraphicRender(g)
       if (enemy(i - removedEnemy).pv <= 0) {
-        pts += enemy(i).getPts()
+        score += enemy(i).getPts()
         if (enemy(i).id == 2)
           bonusObject.append(new Bonus_Object(6, new Point (enemy(i).position.x, enemy(i).position.y)))
         removeEnemy(i)

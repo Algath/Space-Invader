@@ -1,5 +1,6 @@
 package ch.hevs.gdx2d.screen
 
+import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
@@ -7,6 +8,7 @@ import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
 import ch.hevs.gdx2d.main.Main.s
 import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.math.Vector2
 import com.badlogic.gdx.{Gdx, Input}
 
 import java.awt.Point
@@ -22,6 +24,11 @@ class Game extends RenderingScreen {
   var minute: Int = 0
   var sec: Double = 0.0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
+
+  /// Init Data HighScore
+  var scoreData:Vector2 = SaveManager.ReadSave()
+  Handler.highScore = scoreData.x.toInt
+  Handler.highScoreMulti = scoreData.y.toInt
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
@@ -81,7 +88,7 @@ class Game extends RenderingScreen {
       sec = 0
     }
 
-    g.drawStringCentered(1080 - 25, "SCORE : " + Handler.pts, Main.icepixel40)
+    g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 
     /// Draw Player One Info
     g.drawString(150, 1080 - 25, "PLAYER ONE", Main.icepixel40, 1)
@@ -123,17 +130,32 @@ class Game extends RenderingScreen {
     if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
       // explosion + disparition du player
 
+      /// Check Score and HighScore
+      if(Handler.playerTwo != null){
+        if(Handler.score > Handler.highScoreMulti)
+          Handler.highScoreMulti = Handler.score
+      }else{
+        if (Handler.score > Handler.highScore)
+          Handler.highScore = Handler.score
+      }
+
+
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
-      g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.pts, Main.icepixel40)
-      g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : ", Main.icepixel40)
+      g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.score, Main.icepixel40)
+      if (Handler.playerTwo != null)
+        g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScoreMulti, Main.icepixel40)
+      else
+        g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScore, Main.icepixel40)
       g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
       g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
       g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
       g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
-      
+
       if (Gdx.input.isKeyJustPressed(Input.Keys.X))
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
+        SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
+      }
       //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
       //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
     }
