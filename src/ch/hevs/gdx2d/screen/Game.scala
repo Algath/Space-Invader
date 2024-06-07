@@ -25,6 +25,8 @@ class Game extends RenderingScreen {
   var sec: Double = 0.0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
+  var isPaused:Boolean = false
+
   /// Init Data HighScore
   var scoreData:Vector2 = SaveManager.ReadSave()
   Handler.highScore = scoreData.x.toInt
@@ -32,16 +34,20 @@ class Game extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
-    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
-
-    //g.drawStringCentered(1080 * 0.8f, "Playing")
-
     g.drawShader(Main.shaderTime)
-    Main.shaderTime += 0.01f
+    if(!isPaused)
+      Main.shaderTime += 0.01f
 
-    Handler.onGraphicRender(g)
+    /// Gestion du menu de pause
+    if(!Handler.playerOne.isDeath() || (!Handler.playerOne.isDeath() && Handler.playerTwo != null && !Handler.playerTwo.isDeath())) {
+      if(Gdx.input.isKeyJustPressed(Input.Keys.P) && !isPaused)
+        isPaused = true
+      else if(Gdx.input.isKeyJustPressed(Input.Keys.P) && isPaused)
+        isPaused = false
+    }
 
-    //Handler.projectile.append(new Projectile(1, new Point(Random.between(0, 1000), Random.between(0, 1000)), 10))
+    if(!isPaused)
+      Handler.onGraphicRender(g)
 
     count += 1
     // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
@@ -62,6 +68,11 @@ class Game extends RenderingScreen {
       Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     if (Random.between(1, 10000000) == 1)
       Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+
+
+    /// DEBUG
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
+      Handler.enemy.append(new Enemy(-3, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
     //    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
@@ -123,6 +134,14 @@ class Game extends RenderingScreen {
       g.setColor(Color.WHITE)
     }
 
+
+    /// Dessin du menu de pause
+    if(isPaused){
+      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
+      g.drawString(1920 / 2, 1080 * 0.55f, "PAUSE", Main.icepixel40, 1)
+    }
+
+
     /*
     * Gestion conditions du Game over + screen
     * */
@@ -138,7 +157,6 @@ class Game extends RenderingScreen {
         if (Handler.score > Handler.highScore)
           Handler.highScore = Handler.score
       }
-
 
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)

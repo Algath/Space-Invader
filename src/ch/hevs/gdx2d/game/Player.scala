@@ -88,9 +88,11 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
         nbreCanon match {
           case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
           case 2 =>
+            Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
             Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
             Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
           case 3 =>
+            Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
             Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
             Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
             Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
@@ -115,40 +117,47 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
       if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ENTER) && Main.DEBUG)) {
 
         if(versusEnabled){
-          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
 
           /// Multi-tire
           nbreCanon match {
             case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
-            case 2 => Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
+            case 2 =>
+              Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
               Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
-            case 3 => Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
+            case 3 =>
+              Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(-40, 0), true))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y + 15), getDamage, new Point(-40, 0), true))
               Handler.projectile.append(new Projectile(ID, new Point(position.x + 10, position.y - 15), getDamage, new Point(-40, 0), true))
               Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y + 30), getDamage, new Point(-40, 0), true))
               Handler.projectile.append(new Projectile(ID, new Point(position.x + 20, position.y - 30), getDamage, new Point(-40, 0), true))
           }
         }
         else{
-          Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
           /// Multi-tire
           nbreCanon match {
             case 1 => Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
-            case 2 => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+            case 2 =>
+              Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-            case 3 => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+            case 3 =>
+              Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
+              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
-            case _ => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-              Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-              Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
+            //case _ => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
+              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
+              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
+              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
           }
         }
 
       }
 
+      /// Player 2 Fireball Input
       if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) && Main.DEBUG)) {
         if (ps == 200) {
           if(versusEnabled)
@@ -174,7 +183,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
         }
 
         else if (versusEnabled && Handler.projectile(i).id != ID  && Handler.projectile(i).id != ID + 2) {
-          if (Handler.projectile(i).getHitBox().intersects(this.getHitBox())) {
+          if (Handler.projectile(i).getHitBox().intersects(getHitBox())) {
             pv -= Handler.projectile(i).damage / 4
             ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.projectile.remove(i)
@@ -226,10 +235,6 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     if(ps < 200)
       ps += 1
 
-    /// Used in DEBUG Mode for debug hitbox
-    if(Main.DEBUG)
-      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
-
     /// Draw the player on the screen
     if(versusEnabled && ID == 2) {
 
@@ -240,6 +245,11 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     else{
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 1, Main.playerImg)
     }
+
+    /// Used in DEBUG Mode for debug hitbox
+    if (Main.DEBUG)
+      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
+
   }
 
   override def getDamage: Int = {
@@ -251,4 +261,14 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
   }
 
   override var damage: Int = 10
+
+  def isDeath(): Boolean = {
+
+    if(pv <= 0)
+      return true
+
+    return false
+
+  }
+
 }
