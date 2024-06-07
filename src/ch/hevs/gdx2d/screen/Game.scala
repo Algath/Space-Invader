@@ -176,8 +176,6 @@ class Game extends RenderingScreen {
       }
       //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
       //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-    }
-
 
     if (Main.DEBUG) {
       g.drawFPS()
@@ -190,8 +188,9 @@ class Game extends RenderingScreen {
         if (Handler.playerTwo != null) Handler.playerTwo.pv = 0
       }
     }
+  }
 
-  override def onInit(): Unit = ???
+  override def onInit(): Unit = {}
 
   /*def Back(): Unit = {
     s.transitionTo(0, ScreenManager.TransactionType.SLICE)
