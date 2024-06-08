@@ -3,6 +3,8 @@ package ch.hevs.gdx2d.game
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
+import com.badlogic.gdx.{Gdx, Input}
+import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
@@ -51,6 +53,8 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
       case -1 => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20 , 10)
       case -2 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 5, 30, 10)
       case -3 => new Rectangle(position.getX.toInt - 20, position.getY.toInt - 5, 40, 10)
+      case 3 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
+      case 4 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
       case _ => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20, 10)
     }
   }
@@ -84,10 +88,6 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
         g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
     }
 
-    /// Used in DEBUG mode for debugging projectile's hitbox
-    if(Main.DEBUG)
-      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
-
     if(ID == 3 || ID == 4) {
       ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 3, 25, 2)
       ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 3, 10, 1)
@@ -95,6 +95,11 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
     if(ID == 3 || ID == 4)
       collision()
+
+    /// Used in DEBUG mode for debugging projectile's hitbox
+    if (Main.DEBUG) {
+      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
+    }
 
   }
 

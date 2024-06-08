@@ -46,58 +46,17 @@ class Game extends RenderingScreen {
         isPaused = false
     }
 
-    if(!isPaused)
+    if(!isPaused) {
       Handler.onGraphicRender(g)
-
-    count += 1
-    // || Main.ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.north) {
-
-    //    if (Handler.enemy.length != 1) Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-
-    if (count % 500 == 0) {
-      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      UpdateEnemySpawn()
+      UpdateObjectSpawn()
+      ComputeDebugTimer()
     }
-
-    if (count % 10800 == 0) {
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (count % 18000 == 0) { // 18000
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 100000) == 1)
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    if (Random.between(1, 10000000) == 1)
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
 
     /// DEBUG
     if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
       Handler.enemy.append(new Enemy(-3, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-
-
-    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.maxPV, 25, 0, Color.GRAY)
-    //    g.drawFilledRectangle(400, 1060, Handler.playerOne.pv, 25, 0, Color.GREEN)
-    //    g.setColor(Color.BLACK)
-    //    g.drawString(375, 1065, "PV : " + Handler.playerOne.pv)
-    //    g.setColor(Color.WHITE)
-
-
-    if (Random.between(1, 600) == 1) {
-      Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 100000) == 1) { // 10000
-      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 1000000) == 1) { // 1000000
-      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-
-    // Calcule timer pour Debuggage
-    sec += 1 / 60.0
-    if (count % 3600 == 0) {
-      minute += 1
-      sec = 0
-    }
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 
@@ -145,7 +104,6 @@ class Game extends RenderingScreen {
     /*
     * Gestion conditions du Game over + screen
     * */
-
     if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
       // explosion + disparition du player
 
@@ -169,13 +127,14 @@ class Game extends RenderingScreen {
       g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
       g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
       g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
+      //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
+      //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.X))
+      if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
         SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
       }
-      //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
-      //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
+    }
 
     if (Main.DEBUG) {
       g.drawFPS()
@@ -188,6 +147,54 @@ class Game extends RenderingScreen {
         if (Handler.playerTwo != null) Handler.playerTwo.pv = 0
       }
     }
+  }
+
+  /// Manage Enemy Spawn
+  def UpdateEnemySpawn(): Unit = {
+
+    count += 1
+
+    if (count % 500 == 0) {
+      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+
+    if (count % 10800 == 0) {
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (count % 18000 == 0) { // 18000
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 100000) == 1)
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (Random.between(1, 10000000) == 1)
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+
+  }
+
+  /// Manage Bonus Object Spawn
+  def UpdateObjectSpawn(): Unit = {
+
+    if (Random.between(1, 600) == 1) {
+      Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 100000) == 1) { // 10000
+      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 1000000) == 1) { // 1000000
+      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+
+  }
+
+  /// Calcule timer pour Debuggage
+  def ComputeDebugTimer(): Unit = {
+
+    sec += 1 / 60.0
+    if (count % 3600 == 0) {
+      minute += 1
+      sec = 0
+    }
+
   }
 
   override def onInit(): Unit = {}

@@ -102,7 +102,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
 
       if (Gdx.input.isKeyJustPressed(Input.Keys.Q) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.Q) && Main.DEBUG)) {
         if(ps == 200){
-          Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(45, 0)))
+          Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(45, 0))) // 45
           ps = 0
         }
 
