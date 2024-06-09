@@ -55,7 +55,7 @@ class Main extends PortableApplication(1920, 1080) {
   private var imgBitmap: BitmapImage = null
 
   override def onInit(): Unit = {
-    setTitle("Hello World - mui 2024")
+    setTitle("SOS INVADERS - ERROR 404")
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
