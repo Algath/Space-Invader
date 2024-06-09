@@ -62,7 +62,7 @@ object Handler {
       enemy(i - removedEnemy).onGraphicRender(g)
       if (enemy(i - removedEnemy).pv <= 0) {
         score += enemy(i).getPts()
-        if (enemy(i).id == 2)
+        if (enemy(i).id == -2)
           bonusObject.append(new Bonus_Object(6, new Point (enemy(i).position.x, enemy(i).position.y)))
         removeEnemy(i)
       }
