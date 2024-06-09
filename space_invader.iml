@@ -28,5 +28,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="scala-sdk-2.13.12" level="project" />
+    <orderEntry type="library" name="gdx2d-desktop-1.2.2" level="project" />
+    <orderEntry type="library" name="gdx2d-desktop-1.2.2-sources" level="project" />
   </component>
 </module>

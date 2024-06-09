@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="gdx2d-desktop-1.2.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/gdx2d-desktop-1.2.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/gdx2d-desktop-1.2.2.jar!/" />
+    </SOURCES>
+  </library>
+</component>

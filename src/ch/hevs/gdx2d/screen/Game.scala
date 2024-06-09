@@ -25,6 +25,8 @@ class Game extends RenderingScreen {
   var sec: Double = 0.0
   var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
+  var isPaused:Boolean = false
+
   /// Init Data HighScore
   var scoreData:Vector2 = SaveManager.ReadSave()
   Handler.highScore = scoreData.x.toInt
