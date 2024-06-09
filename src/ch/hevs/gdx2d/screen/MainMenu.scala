@@ -91,18 +91,18 @@ class MainMenu extends RenderingScreen {
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
     g.drawShader(Main.shaderTime)
-    Main.shaderTime += 0.01f
+    Main.shaderTime += 0.005f
 
-    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.CYAN)
     stage.act()
     stage.draw()
-    //g.drawShader(time);
-    //time -= 0.01f
-    g.drawStringCentered(1080 * 0.9f, "SOS Invader") //rajouter font
-    g.drawStringCentered(1080 * 0.8f, "Main Menu", Main.icepixel40)
+
+    g.drawTransformedPicture(1920/2, 1080 - 150, 0f, 1f, Main.bannerImg)
+
+    //g.drawStringCentered(1080 * 0.9f, "SOS Invader") //rajouter font
+    //g.drawStringCentered(1080 * 0.8f, "Main Menu", Main.icepixel40)
     g.drawFPS()
 
-    //gdxGraphics.drawCircle(500, 500, 100)
+    g.drawString(1920 - 10, 20, "verison 0.1", 2)
 
   }
 

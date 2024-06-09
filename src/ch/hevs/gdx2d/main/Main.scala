@@ -29,6 +29,7 @@ import com.badlogic.gdx.{Gdx, Input}
 object Main {
 
   var DEBUG: Boolean = false
+  var bannerImg: BitmapImage = null
   var playerBulletImg: BitmapImage = null
   var soldatBulletImg: BitmapImage = null
   var bossBulletImg: BitmapImage = null
@@ -58,6 +59,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
+    bannerImg = new BitmapImage("data/images/Banner.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     superBulletImg = new BitmapImage("data/images/Bullet_2.png")
     soldatBulletImg = new BitmapImage("data/images/Bullet_3.png")
