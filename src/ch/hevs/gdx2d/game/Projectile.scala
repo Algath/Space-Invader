@@ -51,8 +51,8 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
   override def getHitBox(): Rectangle = {
     id match {
       case -1 => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20 , 10)
-      case -2 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 5, 30, 10)
-      case -3 => new Rectangle(position.getX.toInt - 20, position.getY.toInt - 5, 40, 10)
+      case -2 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 5, 23, 10)
+      case -3 => new Rectangle(position.getX.toInt - 20, position.getY.toInt - 5, 40, 20)
       case 3 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
       case 4 => return new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
       case _ => return new Rectangle(position.getX.toInt - 10, position.getY.toInt - 5, 20, 10)
@@ -65,17 +65,20 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
       Main.playerBulletImg.mirrorLeftRight()
       Main.superBulletImg.mirrorLeftRight()
+      Main.soldatBulletImg.mirrorLeftRight()
 
       ID match{
 
-        case -1 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.playerBulletImg)
+        case -1 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.soldatBulletImg)
         case -2 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.superBulletImg)
+        case -3 => g.drawTransformedPicture (position.getX.toInt, position.getY.toInt, 0, 1, Main.bossBulletImg)
         case _ => g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
 
       }
 
       Main.playerBulletImg.mirrorLeftRight()
       Main.superBulletImg.mirrorLeftRight()
+      Main.soldatBulletImg.mirrorLeftRight()
 
     }
     else {

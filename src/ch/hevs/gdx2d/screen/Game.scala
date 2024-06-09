@@ -56,7 +56,7 @@ class Game extends RenderingScreen {
 
     /// DEBUG
     if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
-      Handler.enemy.append(new Enemy(-3, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 

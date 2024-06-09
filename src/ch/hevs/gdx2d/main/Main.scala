@@ -30,6 +30,8 @@ object Main {
 
   var DEBUG: Boolean = false
   var playerBulletImg: BitmapImage = null
+  var soldatBulletImg: BitmapImage = null
+  var bossBulletImg: BitmapImage = null
   var superBulletImg: BitmapImage = null
   var playerImg: BitmapImage = null
   var bossImg: BitmapImage = null
@@ -58,6 +60,8 @@ class Main extends PortableApplication(1920, 1080) {
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     superBulletImg = new BitmapImage("data/images/Bullet_2.png")
+    soldatBulletImg = new BitmapImage("data/images/Bullet_3.png")
+    bossBulletImg = new BitmapImage("data/images/Bullet_4.png")
     playerImg = new BitmapImage("data/images/Ship.png")
     bossImg = new BitmapImage("data/images/Boss.png")
     miniBossImg = new BitmapImage("data/images/mini-boss.png")
