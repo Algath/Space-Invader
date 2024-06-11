@@ -19,6 +19,13 @@ import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils._
 import com.badlogic.gdx.{Gdx, Input}
+import com.badlogic.gdx.graphics.Pixmap
+import com.badlogic.gdx.graphics.Pixmap.{Blending, Format}
+import com.badlogic.gdx.{Files, Gdx}
+import org.lwjgl.opengl.Display
+
+import java.nio.ByteBuffer
+import scala.collection.convert.ImplicitConversions.`iterable AsScalaIterable`
 
 /**
  * SOS Invader
@@ -56,6 +63,7 @@ class Main extends PortableApplication(1920, 1080) {
 
   override def onInit(): Unit = {
     setTitle("SOS INVADERS - ERROR 404")
+    setIcons(scala.Array("res/icon16x16.png", "res/icon64x64.png"))
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
     imgBitmap = new BitmapImage("data/images/ISC_logo.png")
@@ -213,4 +221,23 @@ class Main extends PortableApplication(1920, 1080) {
     }
     currentTime / ANIMATION_LENGTH
   }
+
+  def setIcons(paths: scala.Array[String]): Unit = {
+    val icons: scala.Array[ByteBuffer] = new scala.Array(paths.length)
+    for ((path: String, i: Int) <- paths.zipWithIndex) {
+      var pixmap: Pixmap = new Pixmap(Gdx.files.getFileHandle(path, Files.FileType.Internal))
+      if (pixmap.getFormat != Format.RGBA8888) {
+        val rgba: Pixmap = new Pixmap(pixmap.getWidth, pixmap.getHeight, Format.RGBA8888)
+        rgba.setBlending(Blending.None)
+        rgba.drawPixmap(pixmap, 0, 0)
+        pixmap.dispose()
+        pixmap = rgba
+      }
+      icons(i) = ByteBuffer.allocateDirect(pixmap.getPixels.limit())
+      icons(i).put(pixmap.getPixels).flip()
+      pixmap.dispose()
+    }
+    Display.setIcon(icons)
+  }
+
 }
