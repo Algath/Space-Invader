@@ -157,19 +157,18 @@ class Game extends RenderingScreen {
     count += 1
 
     if (count % 500 == 0) {
-      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      Handler.enemy.append(new Enemy(-3, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-
-    if (count % 10800 == 0) {
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (count % 18000 == 0) { // 18000
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 100000) == 1)
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    if (Random.between(1, 10000000) == 1)
-      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//    if (count % 10800 == 0) {
+//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//    }
+//    if (count % 18000 == 0) { // 18000
+//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//    }
+//    if (Random.between(1, 100000) == 1)
+//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+//    if (Random.between(1, 10000000) == 1)
+//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
   }
 

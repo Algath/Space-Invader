@@ -3,7 +3,6 @@ package ch.hevs.gdx2d.game
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
-import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 import scala.reflect.internal.util.Position
@@ -110,9 +109,9 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
 
   override def getHitBox(): Rectangle = {
     ID match {
-      case -1 => new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 30, 30)
-      case -2 => new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
-      case _ => new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 100, 100)
+      case -1 => new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 45, 40)
+      case -2 => new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 75, 60)
+      case _ => new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 120, 110)
     }
   }
 
@@ -176,8 +175,8 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     if (ID == -3){
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.bossImg)
     } else if (ID == -2) {
-      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.miniBossImg)
-    } else g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 0.5f, Main.miniBossImg)
+    } else g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 0.5f, Main.soldatImg)
 
     if (Main.DEBUG)
       g.drawString(position.getX.toInt - 15, position.getY.toInt + 40, "PV : " + pv)

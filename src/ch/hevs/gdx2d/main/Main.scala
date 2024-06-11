@@ -2,7 +2,6 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
-import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -15,7 +14,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
-import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils._
 import com.badlogic.gdx.{Gdx, Input}
@@ -45,6 +43,7 @@ object Main {
   var bossImg: BitmapImage = null
   var miniBossImg: BitmapImage = null
   var fondGameOver: BitmapImage = null
+  var soldatImg: BitmapImage = null
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
@@ -76,6 +75,8 @@ class Main extends PortableApplication(1920, 1080) {
     bossImg = new BitmapImage("data/images/Boss.png")
     miniBossImg = new BitmapImage("data/images/mini-boss.png")
     fondGameOver = new BitmapImage("data/images/fond-game-over.png")
+    miniBossImg = new BitmapImage("data/images/mini-boss-v3.png")
+    soldatImg = new BitmapImage("data/images/soldat-v2.png")
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     s.registerScreen(classOf[MainMenu])
