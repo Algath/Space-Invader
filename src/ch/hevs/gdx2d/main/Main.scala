@@ -2,7 +2,6 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
-import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -37,6 +36,7 @@ object Main {
   var playerImg: BitmapImage = null
   var bossImg: BitmapImage = null
   var miniBossImg: BitmapImage = null
+  var soldatImg: BitmapImage = null
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
@@ -66,7 +66,8 @@ class Main extends PortableApplication(1920, 1080) {
     bossBulletImg = new BitmapImage("data/images/Bullet_4.png")
     playerImg = new BitmapImage("data/images/Ship.png")
     bossImg = new BitmapImage("data/images/Boss.png")
-    miniBossImg = new BitmapImage("data/images/mini-boss.png")
+    miniBossImg = new BitmapImage("data/images/mini-boss-v3.png")
+    soldatImg = new BitmapImage("data/images/soldat-v2.png")
     stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
