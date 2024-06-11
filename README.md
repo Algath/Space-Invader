@@ -22,7 +22,9 @@ Copiez l'URL HTTPS du repositories et ouvrez-le dans votre IDE.
 
 Lancer le programme dans le fichier 'main'.
 
-![img.png](data/images/img.png)
+<img src="https://github.com/Algath/Space-Invader/blob/master/data/images/img.png" alt="Emplacement du fichier 'Main'" style="width: 200px; height: auto;">
+
+[//]: # (![img.png]&#40;data/images/img.png&#41;)
 
 ## Instruction de jeu
 Le jeu est compatible clavier/manette, mais uniquement durant la partie.
@@ -36,3 +38,16 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
   - Backspace: Tire spécial Joueur 2
   - P : pause
   - X : retour au menu depuis l'écran Game Over
+
+- Commandes manettes
+  - D-pad : Déplacement joueur
+  - A : Tire
+  - x : Tire spécial
+  - START : retour au menu depuis l'écran Game Over
+
+- Objectif
+  - Survivre le plus longtemps possible en faisant un high score
+
+## Auteurs
+- Joshua Siedel - https://github.com/Discretos2022
+- Maroua Zanad - https://github.com/Algath
