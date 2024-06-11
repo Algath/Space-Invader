@@ -24,7 +24,6 @@ class Game extends RenderingScreen {
   var count: Int = 0
   var minute: Int = 0
   var sec: Double = 0.0
-  var fondGameOver: BitmapImage = new BitmapImage("data/images/fond-game-over.png")
 
   var isPaused:Boolean = false
 
@@ -59,7 +58,7 @@ class Game extends RenderingScreen {
 
     /// DEBUG
     if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
-      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025)))) //Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 
@@ -99,7 +98,7 @@ class Game extends RenderingScreen {
 
     /// Dessin du menu de pause
     if(isPaused){
-      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
+      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, Main.fondGameOver)
       g.drawString(1920 / 2, 1080 * 0.55f, "PAUSE", Main.icepixel40, 1)
     }
 
@@ -116,17 +115,14 @@ class Game extends RenderingScreen {
           Handler.highScoreMulti = Handler.score
       } else if (Handler.score > Handler.highScore) Handler.highScore = Handler.score
 
-      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, fondGameOver)
+      g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, Main.fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
-      g.drawStringCentered(1080 * 0.7f, "SCORE : " + Handler.score, Main.icepixel40)
+      g.drawStringCentered(1080 * 0.75f, "error 404 : ship not found" + Handler.score, Main.icepixel40)
+      g.drawStringCentered(1080 * 0.65f, "SCORE : " + Handler.score, Main.icepixel40)
       if (Handler.playerTwo != null)
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScoreMulti, Main.icepixel40)
       else {
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScore, Main.icepixel40)
-        g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
-        g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
-        g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-        g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
       }
       g.drawStringCentered(1080 * 0.40f, "Thank you for playing our game!", Main.icepixel40)
       g.drawStringCentered(1080 * 0.35f, "CREDITS : ", Main.icepixel40)
@@ -140,7 +136,6 @@ class Game extends RenderingScreen {
         SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
       }
     }
-      SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
 
 
     if (Main.DEBUG) {
