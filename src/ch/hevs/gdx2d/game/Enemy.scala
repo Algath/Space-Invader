@@ -111,7 +111,7 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
     ID match {
       case -1 => new Rectangle(position.getX.toInt - 15, position.getY.toInt - 15, 45, 40)
       case -2 => new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 75, 60)
-      case _ => new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 120, 110)
+      case _ => new Rectangle(position.getX.toInt - 50, position.getY.toInt - 50, 100, 110) // 120
     }
   }
 
