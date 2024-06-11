@@ -44,6 +44,8 @@ object Main {
   var soldatImg: BitmapImage = null
   var recupImg: BitmapImage = null
   var augmentImg: BitmapImage = null
+  var degatImg: BitmapImage = null
+  var armeImg: BitmapImage = null
 
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
@@ -81,6 +83,8 @@ class Main extends PortableApplication(1920, 1080) {
     soldatImg = new BitmapImage("data/images/soldat-v2.png")
     recupImg = new BitmapImage("data/images/recup_pv-v2.png")
     augmentImg = new BitmapImage("data/images/augm_pv.png")
+    degatImg = new BitmapImage("data/images/degat_plus.png")
+    armeImg = new BitmapImage("data/images/arme_plus.png")
 
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
