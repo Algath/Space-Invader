@@ -6,7 +6,7 @@ import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
 import ch.hevs.gdx2d.main.Main._
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.scenes.scene2d.InputEvent
+import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 
@@ -18,7 +18,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
  */
 class MainMenu extends RenderingScreen {
 
+  var stage:Stage = null
+
   override def onInit(): Unit = {
+
+    stage = new Stage()
     Gdx.input.setInputProcessor(stage)
     val bWith: Int = 180
     val bHeight: Int = 30
@@ -89,6 +93,8 @@ class MainMenu extends RenderingScreen {
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
+
+    Gdx.input.setInputProcessor(stage)
 
     g.drawShader(Main.shaderTime)
     Main.shaderTime += 0.005f

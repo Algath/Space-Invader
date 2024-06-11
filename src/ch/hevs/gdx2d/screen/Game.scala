@@ -35,6 +35,8 @@ class Game extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
+    Gdx.input.setInputProcessor(null)
+
     g.drawShader(Main.shaderTime)
     if(!isPaused)
       Main.shaderTime += 0.01f

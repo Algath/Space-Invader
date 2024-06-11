@@ -41,7 +41,6 @@ object Main {
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
-  var stage: Stage = null
   var skin: Skin = null
 
   var shaderTime:Float = 0
@@ -67,7 +66,6 @@ class Main extends PortableApplication(1920, 1080) {
     playerImg = new BitmapImage("data/images/Ship.png")
     bossImg = new BitmapImage("data/images/Boss.png")
     miniBossImg = new BitmapImage("data/images/mini-boss.png")
-    stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     s.registerScreen(classOf[MainMenu])

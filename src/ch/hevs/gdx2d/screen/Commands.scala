@@ -40,6 +40,9 @@ class Commands extends RenderingScreen {
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
+
+    Gdx.input.setInputProcessor(commandButtons)
+
     g.drawShader(Main.shaderTime)
     Main.shaderTime -= 0.01f
 
