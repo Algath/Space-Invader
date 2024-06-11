@@ -58,7 +58,7 @@ class Game extends RenderingScreen {
 
     /// DEBUG
     if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
-      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025)))) //Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 
@@ -117,7 +117,7 @@ class Game extends RenderingScreen {
 
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, Main.fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
-      g.drawStringCentered(1080 * 0.75f, "error 404 : ship not found" + Handler.score, Main.icepixel40)
+      g.drawStringCentered(1080 * 0.75f, "error 404 : ship not found", Main.icepixel40)
       g.drawStringCentered(1080 * 0.65f, "SCORE : " + Handler.score, Main.icepixel40)
       if (Handler.playerTwo != null)
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScoreMulti, Main.icepixel40)
