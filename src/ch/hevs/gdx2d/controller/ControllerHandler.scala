@@ -17,6 +17,8 @@ object ControllerHandler {
 
   var PlayerONE_A_oldpressed:Boolean = false
   var PlayerONE_RTRIGGER_oldpressed: Boolean = false
+  var PlayerONE_X_oldpressed: Boolean = false
+  var PlayerONE_START_oldpressed: Boolean = false
 
   if (Controllers.getControllers().size > 0)
     Controllers.getControllers().first();
@@ -38,15 +40,15 @@ object ControllerHandler {
 
   def isJustPressA(index:Int): Boolean = {
 
-    if (controller(index) == null)
+    if (index >= controller.length || controller(index) == null)
       return false
 
-    if(controller(PLAYERONE).getButton(Xbox.A) && !PlayerONE_A_oldpressed) {
+    if(controller(index).getButton(Xbox.A) && !PlayerONE_A_oldpressed) {
       PlayerONE_A_oldpressed = true
       return true
     }
 
-    if (!controller(PLAYERONE).getButton(Xbox.A) && PlayerONE_A_oldpressed) {
+    if (!controller(index).getButton(Xbox.A) && PlayerONE_A_oldpressed) {
       PlayerONE_A_oldpressed = false
     }
 
@@ -56,16 +58,50 @@ object ControllerHandler {
 
   def isJustPressRTRIGGER(index: Int): Boolean = {
 
-    if (controller(index) == null)
+    if (index >= controller.length || controller(index) == null)
       return false
 
-    if (controller(PLAYERONE).getButton(Xbox.R_TRIGGER) && !PlayerONE_RTRIGGER_oldpressed) {
+    if (controller(index).getButton(Xbox.R_TRIGGER) && !PlayerONE_RTRIGGER_oldpressed) {
       PlayerONE_RTRIGGER_oldpressed = true
       return true
     }
 
-    if (!controller(PLAYERONE).getButton(Xbox.R_TRIGGER) && PlayerONE_RTRIGGER_oldpressed)
+    if (!controller(index).getButton(Xbox.R_TRIGGER) && PlayerONE_RTRIGGER_oldpressed)
       PlayerONE_RTRIGGER_oldpressed = false
+
+    return false
+
+  }
+
+  def isJustPressX(index: Int): Boolean = {
+
+    if (index >= controller.length || controller(index) == null)
+      return false
+
+    if (controller(index).getButton(Xbox.X) && !PlayerONE_X_oldpressed) {
+      PlayerONE_X_oldpressed = true
+      return true
+    }
+
+    if (!controller(index).getButton(Xbox.X) && PlayerONE_X_oldpressed)
+      PlayerONE_X_oldpressed = false
+
+    return false
+
+  }
+
+  def isJustPressSTART(index: Int): Boolean = {
+
+    if (index >= controller.length || controller(index) == null)
+      return false
+
+    if (controller(index).getButton(Xbox.START) && !PlayerONE_START_oldpressed) {
+      PlayerONE_START_oldpressed = true
+      return true
+    }
+
+    if (!controller(index).getButton(Xbox.START) && PlayerONE_START_oldpressed)
+      PlayerONE_START_oldpressed = false
 
     return false
 

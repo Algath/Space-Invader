@@ -3,6 +3,7 @@ package ch.hevs.gdx2d.screen
 import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
+import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
@@ -34,15 +35,17 @@ class Game extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
+    Gdx.input.setInputProcessor(null)
+
     g.drawShader(Main.shaderTime)
     if(!isPaused)
       Main.shaderTime += 0.01f
 
     /// Gestion du menu de pause
     if(!Handler.playerOne.isDeath() || (!Handler.playerOne.isDeath() && Handler.playerTwo != null && !Handler.playerTwo.isDeath())) {
-      if(Gdx.input.isKeyJustPressed(Input.Keys.P) && !isPaused)
+      if((Gdx.input.isKeyJustPressed(Input.Keys.P) || isSTART_Input()) && !isPaused)
         isPaused = true
-      else if(Gdx.input.isKeyJustPressed(Input.Keys.P) && isPaused)
+      else if((Gdx.input.isKeyJustPressed(Input.Keys.P) || isSTART_Input()) && isPaused)
         isPaused = false
     }
 
@@ -139,10 +142,6 @@ class Game extends RenderingScreen {
     }
       SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
 
-    //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
-    //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
-
-
 
     if (Main.DEBUG) {
       g.drawFPS()
@@ -193,6 +192,15 @@ class Game extends RenderingScreen {
 
   }
 
+  def isSTART_Input(): Boolean = {
+
+    if(ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERTWO) || ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERONE))
+      return true
+
+    return false
+
+  }
+
   /// Calcule timer pour Debuggage
   def ComputeDebugTimer(): Unit = {
 
@@ -206,7 +214,4 @@ class Game extends RenderingScreen {
 
   override def onInit(): Unit = {}
 
-  /*def Back(): Unit = {
-    s.transitionTo(0, ScreenManager.TransactionType.SLICE)
-  }*/
 }

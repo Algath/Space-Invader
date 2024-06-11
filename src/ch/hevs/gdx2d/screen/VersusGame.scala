@@ -23,6 +23,8 @@ class VersusGame  extends RenderingScreen {
 
   override def onGraphicRender(g: GdxGraphics): Unit = {
 
+    Gdx.input.setInputProcessor(null)
+
     //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
 
     g.drawShader(Main.shaderTime)

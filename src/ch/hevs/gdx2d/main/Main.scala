@@ -14,7 +14,6 @@ import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
 import com.badlogic.gdx.math.{Interpolation, Vector2}
-import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils._
 import com.badlogic.gdx.{Gdx, Input}
@@ -41,7 +40,6 @@ object Main {
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
   var s: ScreenManager = new ScreenManager()
-  var stage: Stage = null
   var skin: Skin = null
 
   var shaderTime:Float = 0
@@ -66,9 +64,9 @@ class Main extends PortableApplication(1920, 1080) {
     bossBulletImg = new BitmapImage("data/images/Bullet_4.png")
     playerImg = new BitmapImage("data/images/Ship.png")
     bossImg = new BitmapImage("data/images/Boss.png")
+    miniBossImg = new BitmapImage("data/images/mini-boss.png")
     miniBossImg = new BitmapImage("data/images/mini-boss-v3.png")
     soldatImg = new BitmapImage("data/images/soldat-v2.png")
-    stage = new Stage()
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     s.registerScreen(classOf[MainMenu])
@@ -148,7 +146,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     ParticleManager.UpdatePhysicParticle(g)
 
-    if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)) {
       if(Main.DEBUG) DEBUG = false
       else DEBUG = true
     }
