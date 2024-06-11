@@ -147,7 +147,7 @@ class Main extends PortableApplication(1920, 1080) {
 
     ParticleManager.UpdatePhysicParticle(g)
 
-    if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && (ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)))) {
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F1) || ControllerHandler.isJustPressRTRIGGER(ControllerHandler.PLAYERONE)) {
       if(Main.DEBUG) DEBUG = false
       else DEBUG = true
     }

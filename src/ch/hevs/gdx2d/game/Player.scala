@@ -20,8 +20,6 @@ import scala.util.Random
  * ID of the Player
  * @param _position
  * Spawn Position of the Player
- * @param _vie
- * [Deprectated] The PV of the Player in the Initalization
  * @param versusEnabled
  * Set if the Versus mode is enabled for the Player with ID 2
  */
@@ -81,7 +79,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
 
     // Fire Input Player One
     if(ID == 1){
-      if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
 //        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
         /// Multi-tire
@@ -100,7 +98,8 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
         }
       }
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.Q) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERONE) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE)) || (Gdx.input.isKeyPressed(Input.Keys.Q) && Main.DEBUG)) {
+      /// Player 1 Fireball input
+      if (Gdx.input.isKeyJustPressed(Input.Keys.Q) || ControllerHandler.isJustPressX(ControllerHandler.PLAYERONE) || (Gdx.input.isKeyPressed(Input.Keys.Q) && Main.DEBUG)) {
         if(ps == 200){
           Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(45, 0))) // 45
           ps = 0
@@ -114,7 +113,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     // Fire Input Player Two
     if(ID == 2){
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.ENTER) && Main.DEBUG)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO) || (Gdx.input.isKeyPressed(Input.Keys.ENTER) && Main.DEBUG)) {
 
         if(versusEnabled){
 
@@ -148,17 +147,13 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
               Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
-            //case _ => Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y + 15), getDamage, new Point(40, 0)))
-              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 10, position.y - 15), getDamage, new Point(40, 0)))
-              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y + 30), getDamage, new Point(40, 0)))
-              //Handler.projectile.append(new Projectile(ID, new Point(position.x - 20, position.y - 30), getDamage, new Point(40, 0)))
           }
         }
 
       }
 
       /// Player 2 Fireball Input
-      if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE) || (ControllerHandler.ControllerIsNotNull(ControllerHandler.PLAYERTWO) && ControllerHandler.isJustPressA(ControllerHandler.PLAYERTWO)) || (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) && Main.DEBUG)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE) || ControllerHandler.isJustPressX(ControllerHandler.PLAYERTWO) || (Gdx.input.isKeyPressed(Input.Keys.BACKSPACE) && Main.DEBUG)) {
         if (ps == 200) {
           if(versusEnabled)
             Handler.projectile.append(new Projectile(ID + 2, position.clone().asInstanceOf[Point], getDamage * 10, new Point(-45, 0), true))
