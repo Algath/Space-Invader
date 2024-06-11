@@ -118,7 +118,7 @@ class Game extends RenderingScreen {
 
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, Main.fondGameOver)
       g.drawStringCentered(1080 * 0.9f, "Game Over", Main.optimus150)
-      g.drawStringCentered(1080 * 0.75f, "error 404 : ship not found" + Handler.score, Main.icepixel40)
+      g.drawStringCentered(1080 * 0.75f, "error 404 : ship not found", Main.icepixel40)
       g.drawStringCentered(1080 * 0.65f, "SCORE : " + Handler.score, Main.icepixel40)
       if (Handler.playerTwo != null)
         g.drawStringCentered(1080 * 0.6f, "HIGH SCORE : " + Handler.highScoreMulti, Main.icepixel40)
