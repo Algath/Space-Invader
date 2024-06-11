@@ -14,7 +14,7 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
   * */
 
   override var position: Point = _position
-  override var velocity: Point = new Point(3, 0)
+  override var velocity: Point = new Point(3, 0) // 3
   override var id: Int = ID
 
   override def deplacement(): Unit = {

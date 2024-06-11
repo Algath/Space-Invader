@@ -96,7 +96,7 @@ object Handler {
   }
 
   def removeBonusObject(index: Int): Unit = {
-    bonusObject.remove(index)
+    try{bonusObject.remove(index)} catch{ case e:IndexOutOfBoundsException => }
     removedBonusObject += 1
   }
 
