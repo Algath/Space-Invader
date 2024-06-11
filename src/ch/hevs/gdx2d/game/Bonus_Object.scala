@@ -1,14 +1,14 @@
 package ch.hevs.gdx2d.game
 
 import ch.hevs.gdx2d.lib.GdxGraphics
-import com.badlogic.gdx.graphics.Color
+import ch.hevs.gdx2d.main.Main
 
 import java.awt.{Point, Rectangle}
 
 class Bonus_Object(ID: Int, _position : Point) extends Object {
   /*
   * ID: 3 = Récupération PV
-  * ID: 4 = Augmentation du nombre de point max
+  * ID: 4 = Augmentation du nombre de pv max
   * ID: 5 = Augmentation des dégats
   * ID: 6 = +2 arme
   * */
@@ -34,10 +34,10 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
     deplacement()
 
     id match {
-      case 3 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.YELLOW)
-      case 4 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ROYAL)
-      case 5 => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.WHITE)
-      case _ => g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.WHITE)
+      case 3 => g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.recupImg)
+      case 4 => g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.augmentImg)
+      case 5 => g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.degatImg)
+      case _ => g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.armeImg)
     }
 
   }

@@ -10,20 +10,17 @@ import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
 import com.badlogic.gdx.files.FileHandle
-import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.Pixmap.{Blending, Format}
 import com.badlogic.gdx.graphics.g2d.BitmapFont
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator
+import com.badlogic.gdx.graphics.{Color, Pixmap}
 import com.badlogic.gdx.math.{Interpolation, Vector2}
 import com.badlogic.gdx.scenes.scene2d.ui.Skin
 import com.badlogic.gdx.utils._
-import com.badlogic.gdx.{Gdx, Input}
-import com.badlogic.gdx.graphics.Pixmap
-import com.badlogic.gdx.graphics.Pixmap.{Blending, Format}
-import com.badlogic.gdx.{Files, Gdx}
+import com.badlogic.gdx.{Files, Gdx, Input}
 import org.lwjgl.opengl.Display
 
 import java.nio.ByteBuffer
-import scala.collection.convert.ImplicitConversions.`iterable AsScalaIterable`
 
 /**
  * SOS Invader
@@ -34,6 +31,7 @@ import scala.collection.convert.ImplicitConversions.`iterable AsScalaIterable`
 object Main {
 
   var DEBUG: Boolean = false
+
   var bannerImg: BitmapImage = null
   var playerBulletImg: BitmapImage = null
   var soldatBulletImg: BitmapImage = null
@@ -44,9 +42,15 @@ object Main {
   var miniBossImg: BitmapImage = null
   var fondGameOver: BitmapImage = null
   var soldatImg: BitmapImage = null
+  var recupImg: BitmapImage = null
+  var augmentImg: BitmapImage = null
+  var degatImg: BitmapImage = null
+  var armeImg: BitmapImage = null
+
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
+
   var s: ScreenManager = new ScreenManager()
   var skin: Skin = null
 
@@ -77,6 +81,11 @@ class Main extends PortableApplication(1920, 1080) {
     fondGameOver = new BitmapImage("data/images/fond-game-over.png")
     miniBossImg = new BitmapImage("data/images/mini-boss-v3.png")
     soldatImg = new BitmapImage("data/images/soldat-v2.png")
+    recupImg = new BitmapImage("data/images/recup_pv-v2.png")
+    augmentImg = new BitmapImage("data/images/augm_pv.png")
+    degatImg = new BitmapImage("data/images/degat_plus.png")
+    armeImg = new BitmapImage("data/images/arme_plus.png")
+
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     s.registerScreen(classOf[MainMenu])
