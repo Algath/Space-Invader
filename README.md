@@ -41,11 +41,13 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
   - P : pause
   - X : retour au menu depuis l'écran Game Over
 
+
 - Commandes manettes
   - D-pad : Déplacement joueur
   - A : Tire
   - x : Tire spécial
   - START : retour au menu depuis l'écran Game Over
+
 
 - Objectif
   - Survivre le plus longtemps possible en faisant un high score
