@@ -5,7 +5,6 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
 
 import java.awt.{Point, Rectangle}
-import scala.reflect.internal.util.Position
 import scala.util.Random
 
 class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage with PV {

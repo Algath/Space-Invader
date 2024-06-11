@@ -1,7 +1,6 @@
 package ch.hevs.gdx2d.screen
 
 import ch.hevs.gdx2d.SaveSystem.SaveManager
-import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
@@ -57,8 +56,10 @@ class Game extends RenderingScreen {
 
 
     /// DEBUG
-    if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG)
-      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025)))) //Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if(Gdx.input.isKeyJustPressed(Input.Keys.F) && Main.DEBUG) {
+      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      //Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
 
     g.drawStringCentered(1080 - 25, "SCORE : " + Handler.score, Main.icepixel40)
 
@@ -157,18 +158,18 @@ class Game extends RenderingScreen {
     count += 1
 
     if (count % 500 == 0) {
-      Handler.enemy.append(new Enemy(-3, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+      Handler.enemy.append(new Enemy(-1, 100, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
     }
-//    if (count % 10800 == 0) {
-//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//    }
-//    if (count % 18000 == 0) { // 18000
-//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//    }
-//    if (Random.between(1, 100000) == 1)
-//      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-//    if (Random.between(1, 10000000) == 1)
-//      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (count % 10800 == 0) {
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (count % 18000 == 0) { // 18000
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    }
+    if (Random.between(1, 100000) == 1)
+      Handler.enemy.append(new Enemy(-2, 500, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
+    if (Random.between(1, 10000000) == 1)
+      Handler.enemy.append(new Enemy(-3, 5000, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
 
   }
 
