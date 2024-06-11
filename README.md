@@ -1,5 +1,7 @@
 # SOS Invader
 
+<img src="https://github.com/Algath/Space-Invader/blob/master/data/images/Banner.png" alt="Emplacement du fichier 'Main'" style="width: 200px; height: auto;">
+
 ## 101.2 - POO Game Project
 
 Inspiré du classique "Space Invader", contrôllez un vaisseau dans l'espace et abattez le plus d'ennemis possible.
