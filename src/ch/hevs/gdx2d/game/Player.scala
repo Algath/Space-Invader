@@ -70,7 +70,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
 
   /// Get the HitBox of Player
   override def getHitBox(): Rectangle = {
-    new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 80, 50)
+    new Rectangle(position.getX.toInt - 25, position.getY.toInt - 25, 50, 50)
   }
 
   override def onGraphicRender(g: GdxGraphics): Unit = {

@@ -3,6 +3,7 @@ package ch.hevs.gdx2d.screen
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
+import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
@@ -118,7 +119,7 @@ class VersusGame  extends RenderingScreen {
       g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
       g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.X) || isSTART_Input()) {
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
       }
     }
@@ -131,6 +132,16 @@ class VersusGame  extends RenderingScreen {
       //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
     }
+
+  }
+
+  def isSTART_Input(): Boolean = {
+
+    if (ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERTWO) || ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERONE)) {
+      return true
+    }
+
+    return false
 
   }
 

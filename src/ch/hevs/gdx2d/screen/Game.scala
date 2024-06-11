@@ -41,11 +41,15 @@ class Game extends RenderingScreen {
 
     /// Gestion du menu de pause
     if(!Handler.playerOne.isDeath() || (!Handler.playerOne.isDeath() && Handler.playerTwo != null && !Handler.playerTwo.isDeath())) {
-      if((Gdx.input.isKeyJustPressed(Input.Keys.P) || isSTART_Input()) && !isPaused)
+      var Start_Input:Boolean = isSTART_Input()
+      if((Gdx.input.isKeyJustPressed(Input.Keys.P) || Start_Input) && !isPaused)
         isPaused = true
-      else if((Gdx.input.isKeyJustPressed(Input.Keys.P) || isSTART_Input()) && isPaused)
+      else if((Gdx.input.isKeyJustPressed(Input.Keys.P) || Start_Input) && isPaused) {
         isPaused = false
+      }
     }
+
+    println(isPaused)
 
     if(!isPaused) {
       Handler.onGraphicRender(g)
@@ -132,7 +136,7 @@ class Game extends RenderingScreen {
       //      g.drawStringCentered(1080 * 0.10f, "InfiniteRight ∞", Main.icepixel40)
       //      g.drawStringCentered(1080 * 0.15f, "Joshua Siedel - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
 
-      if (Gdx.input.isKeyJustPressed(Input.Keys.X)) {
+      if (Gdx.input.isKeyJustPressed(Input.Keys.X) || isSTART_Input()) {
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
         SaveManager.WriteSave(Handler.highScore, Handler.highScoreMulti)
       }
@@ -190,8 +194,9 @@ class Game extends RenderingScreen {
 
   def isSTART_Input(): Boolean = {
 
-    if(ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERTWO) || ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERONE))
+    if(ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERTWO) || ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERONE)) {
       return true
+    }
 
     return false
 
