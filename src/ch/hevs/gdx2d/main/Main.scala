@@ -2,6 +2,7 @@ package ch.hevs.gdx2d.main
 
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager.world
+import ch.hevs.gdx2d.components.audio.MusicPlayer
 import ch.hevs.gdx2d.components.bitmaps.BitmapImage
 import ch.hevs.gdx2d.controller.ControllerHandler
 import ch.hevs.gdx2d.desktop.PortableApplication
@@ -51,6 +52,8 @@ object Main {
   var icepixel120: BitmapFont = null
   var optimus150: BitmapFont = null
 
+  var boom:MusicPlayer = null
+
   var s: ScreenManager = new ScreenManager()
   var skin: Skin = null
 
@@ -87,6 +90,8 @@ class Main extends PortableApplication(1920, 1080) {
     armeImg = new BitmapImage("data/images/arme_plus.png")
 
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
+
+    boom = new MusicPlayer("data/sounds/boom.wav")
 
     s.registerScreen(classOf[MainMenu])
     s.registerScreen(classOf[Game])

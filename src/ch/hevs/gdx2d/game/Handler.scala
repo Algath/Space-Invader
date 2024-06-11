@@ -1,6 +1,7 @@
 package ch.hevs.gdx2d.game
 
 import ch.hevs.gdx2d.lib.GdxGraphics
+import ch.hevs.gdx2d.main.Main
 
 import java.awt.Point
 import scala.collection.mutable.ArrayBuffer
@@ -65,6 +66,9 @@ object Handler {
         if (enemy(i).id == -2)
           bonusObject.append(new Bonus_Object(6, new Point (enemy(i).position.x, enemy(i).position.y)))
         removeEnemy(i)
+        if(Main.boom.isPlaying())
+          Main.boom.stop()
+        Main.boom.play()
       }
     }
 

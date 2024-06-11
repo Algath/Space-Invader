@@ -172,6 +172,11 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
             pv -= Handler.projectile(i).damage
             ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.projectile.remove(i)
+
+            if (Main.boom.isPlaying())
+              Main.boom.stop()
+            Main.boom.play()
+
             if (pv <= 0)
               ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 50, 100, 3)
           }
@@ -182,6 +187,11 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
             pv -= Handler.projectile(i).damage / 4
             ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.projectile.remove(i)
+
+            if (Main.boom.isPlaying())
+              Main.boom.stop()
+            Main.boom.play()
+
             if (pv <= 0)
               ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 50, 100, 3)
           }

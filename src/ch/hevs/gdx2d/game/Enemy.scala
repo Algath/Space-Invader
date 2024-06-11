@@ -153,6 +153,9 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
             pv -= Handler.projectile(i).damage
             ParticleManager.CreateParticles(Handler.projectile(i).position.clone.asInstanceOf[Point])
             Handler.removeProjectile(i)
+            if (Main.boom.isPlaying())
+              Main.boom.stop()
+            Main.boom.play()
           }
         }
       }
