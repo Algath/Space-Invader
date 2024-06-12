@@ -40,6 +40,10 @@ class Bonus_Object(ID: Int, _position : Point) extends Object {
       case _ => g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.armeImg)
     }
 
+    /// Used in DEBUG Mode for debug hitbox
+    if (Main.DEBUG)
+      g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
+
   }
 
 }

@@ -1,0 +1,12 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="space_invader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/space_invader_jar</output-path>
+    <root id="archive" name="space_invader.jar">
+      <element id="module-output" name="space_invader" />
+      <element id="extracted-dir" path="$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.12/scala-library-2.13.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.12/scala-reflect-2.13.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/libs/gdx2d-desktop-1.2.2.jar" path-in-jar="/" />
+      <element id="library" level="project" name="gdx2d-desktop-1.2.2-sources" />
+    </root>
+  </artifact>
+</component>

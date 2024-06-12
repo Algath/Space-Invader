@@ -7,6 +7,12 @@ import java.nio.file
 import javax.tools.StandardJavaFileManager.PathFactory
 import scala.reflect.io.Path
 
+
+/**
+ *
+ * The SaveManager, used to save highscores in save.txt
+ *
+ */
 object SaveManager {
 
   def ReadSave(): Vector2 = {

@@ -26,8 +26,9 @@ import java.nio.ByteBuffer
 
 /**
  * SOS Invader
- *
- * @author Pierre-André Mudry (mui)
+ * / InfiniteRight ∞ SIEDEL™
+ * @author ZANAD Maroua
+ * @author SIEDEL Joshua
  * @version 1.0
  */
 object Main {
@@ -51,6 +52,7 @@ object Main {
   var playerDebugImg: BitmapImage = null
   var enemyDebugImg: BitmapImage = null
   var projectileDebugImg: BitmapImage = null
+  var ISC_logo: BitmapImage = null
 
   var icepixel40: BitmapFont = null
   var icepixel120: BitmapFont = null
@@ -70,14 +72,13 @@ object Main {
 }
 
 class Main extends PortableApplication(1920, 1080) {
-  private var imgBitmap: BitmapImage = null
 
   override def onInit(): Unit = {
     setTitle("SOS INVADERS - ERROR 404")
     setIcons(scala.Array("res/icon16x16.png", "res/icon64x64.png"))
 
     // Load a custom image (or from the lib "res/lib/icon64.png")
-    imgBitmap = new BitmapImage("data/images/ISC_logo.png")
+    ISC_logo = new BitmapImage("data/images/ISC_logo_8bit.png")
     bannerImg = new BitmapImage("data/images/Banner.png")
     playerBulletImg = new BitmapImage("data/images/Bullet.png")
     superBulletImg = new BitmapImage("data/images/Bullet_2.png")
@@ -166,12 +167,6 @@ class Main extends PortableApplication(1920, 1080) {
 
     music.loop()
 
-    // Draw everything
-    //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)
-    //g.drawStringCentered(getWindowHeight * 0.8f, "Welcome to gdx2d !")
-    //g.drawFPS()
-    //g.drawSchoolLogo()
-
     s.render(g)
 
     ParticleManager.UpdatePhysicParticle(g)
@@ -184,41 +179,7 @@ class Main extends PortableApplication(1920, 1080) {
     if(Gdx.input.isKeyJustPressed(Input.Keys.F12))
       s.transitionTo(0, ScreenManager.TransactionType.SLIDE)
 
-    //    if(ctrl.getPov(Xbox.L_STICK_VERTICAL_AXIS) == PovDirection.west) {
-    //      println("DOWN")
-    //    }
-
-
-    //println(ControllerHandler.controller(ControllerHandler.PLAYERONE).getAxis(Xbox.L_TRIGGER))
-
   }
-
-
-  /*private def UpdatePhysicParticle(): Unit = {
-    var  bodies:Array[Body] = Array[Body];
-    world.getBodies(bodies);
-
-    Iterator < Body > it = bodies.iterator();
-
-
-    while (it.hasNext()) {
-      Body p = it.next();
-
-      if (p.getUserData() instanceof Particle) {
-        Particle particle = (Particle) p
-      .getUserData();
-        particle.step();
-        particle.render(g);
-
-        if (particle.shouldbeDestroyed()) {
-          particle.destroy();
-        }
-      }
-    }
-
-    PhysicsWorld.updatePhysics(Gdx.graphics.getDeltaTime());
-  }*/
-
 
   /**
    * Compute time percentage for making a looping animation
