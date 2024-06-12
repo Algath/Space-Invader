@@ -41,7 +41,7 @@ class Game extends RenderingScreen {
 
     /// Gestion du menu de pause
     if(!Handler.playerOne.isDeath() || (!Handler.playerOne.isDeath() && Handler.playerTwo != null && !Handler.playerTwo.isDeath())) {
-      var Start_Input:Boolean = isSTART_Input()
+      val Start_Input: Boolean = isSTART_Input()
       if((Gdx.input.isKeyJustPressed(Input.Keys.P) || Start_Input) && !isPaused)
         isPaused = true
       else if((Gdx.input.isKeyJustPressed(Input.Keys.P) || Start_Input) && isPaused) {
