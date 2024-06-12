@@ -49,8 +49,6 @@ class Game extends RenderingScreen {
       }
     }
 
-    println(isPaused)
-
     if(!isPaused) {
       Handler.onGraphicRender(g)
       UpdateEnemySpawn()
