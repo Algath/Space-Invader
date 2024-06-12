@@ -43,6 +43,9 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
   var ps:Int = 200
   var maxPS:Int = 200
 
+  if(versusEnabled)
+    nbreCanon = 2
+
   /// Manage the Player displacment
   override def deplacement(): Unit = {
 
