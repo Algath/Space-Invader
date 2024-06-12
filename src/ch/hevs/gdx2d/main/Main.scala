@@ -10,6 +10,8 @@ import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
+import org.lwjgl.opengl.DisplayMode
+//import com.badlogic.gdx.Graphics.DisplayMode
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Pixmap.{Blending, Format}
 import com.badlogic.gdx.graphics.g2d.BitmapFont
@@ -53,6 +55,7 @@ object Main {
   var optimus150: BitmapFont = null
 
   var boom:MusicPlayer = null
+  var music:MusicPlayer = null
 
   var s: ScreenManager = new ScreenManager()
   var skin: Skin = null
@@ -92,11 +95,8 @@ class Main extends PortableApplication(1920, 1080) {
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     boom = new MusicPlayer("data/sounds/boom.wav")
+    music = new MusicPlayer("data/music/Space Invaders.mp3")
 
-    s.registerScreen(classOf[MainMenu])
-    s.registerScreen(classOf[Game])
-    s.registerScreen(classOf[VersusGame])
-    s.registerScreen(classOf[Commands])
     world = PhysicsWorld.getInstance()
     world.setGravity(new Vector2(0, -0.0f))
 
@@ -159,6 +159,7 @@ class Main extends PortableApplication(1920, 1080) {
       Inited = true
     }
 
+    music.loop()
 
     // Draw everything
     //g.drawTransformedPicture(getWindowWidth / 2.0f, getWindowHeight / 2.0f, angle, 0.7f, imgBitmap)

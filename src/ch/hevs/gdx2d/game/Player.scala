@@ -80,7 +80,6 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     // Fire Input Player One
     if(ID == 1){
       if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || ControllerHandler.isJustPressA(ControllerHandler.PLAYERONE) || (Gdx.input.isKeyPressed(Input.Keys.SPACE) && Main.DEBUG)) {
-//        Handler.projectile.append(new Projectile(ID, position.clone().asInstanceOf[Point], getDamage, new Point(40, 0)))
 
         /// Multi-tire
         nbreCanon match {
