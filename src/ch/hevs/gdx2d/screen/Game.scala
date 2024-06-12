@@ -114,7 +114,7 @@ class Game extends RenderingScreen {
     /*
     * Gestion conditions du Game over + screen
     * */
-    if (Handler.playerOne.pv == 0 && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.pv == 0 && Handler.playerTwo.pv == 0)) {
+    if (Handler.playerOne.isDeath() && Handler.playerTwo == null || (Handler.playerTwo != null && Handler.playerOne.isDeath() && Handler.playerTwo.isDeath())) {
       // explosion + disparition du player
 
       /// Check Score and HighScore
