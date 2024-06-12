@@ -3,8 +3,6 @@ package ch.hevs.gdx2d.game
 import ch.hevs.gdx2d.ParticleSystem.ParticleManager
 import ch.hevs.gdx2d.lib.GdxGraphics
 import ch.hevs.gdx2d.main.Main
-import com.badlogic.gdx.{Gdx, Input}
-import com.badlogic.gdx.graphics.Color
 
 import java.awt.{Point, Rectangle}
 
@@ -102,6 +100,9 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
     /// Used in DEBUG mode for debugging projectile's hitbox
     if (Main.DEBUG) {
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
+      if (ID > 0)
+        g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 270, 0.2f, Main.projectileDebugImg)
+      else g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 90, 0.2f, Main.projectileDebugImg)
     }
 
   }
