@@ -92,14 +92,8 @@ class VersusGame  extends RenderingScreen {
       g.setColor(Color.WHITE)
     }
 
+    /// Si l'un ou les deux joueur ont été vaincu
     if (Handler.playerOne.isDeath() || Handler.playerTwo.isDeath()) {
-      // explosion + disparition du player
-
-      /// Check Score and HighScore
-      if (Handler.playerTwo != null) {
-        if (Handler.score > Handler.highScoreMulti)
-          Handler.highScoreMulti = Handler.score
-      } else if (Handler.score > Handler.highScore) Handler.highScore = Handler.score
 
       g.drawAlphaPicture(1920 / 2, 1080 / 2, 0.7f, Main.fondGameOver)
 
@@ -119,6 +113,7 @@ class VersusGame  extends RenderingScreen {
       g.drawStringCentered(1080 * 0.30f, "Joshua SIEDEL - Maroua Zanad, ISC2 2023-2024", Main.icepixel40)
       g.drawStringCentered(1080 * 0.20f, "Click 'X' to go back to menu", Main.icepixel40)
 
+      /// Return to Main Menu
       if (Gdx.input.isKeyJustPressed(Input.Keys.X) || isSTART_Input()) {
         s.transitionTo(0, ScreenManager.TransactionType.SLICE)
       }
@@ -129,12 +124,12 @@ class VersusGame  extends RenderingScreen {
     if (Main.DEBUG) {
       g.drawFPS()
       g.drawString(1700, 1075, "number of object : " + (Handler.projectile.length + Handler.enemy.length + 1 + Handler.bonusObject.length))
-      //      gdxGraphics.drawString(1700, 1060, "CPU usage: " + cpuUsagePercent)
       g.drawString(0, 30, "Timer: " + minute + ":" + sec.toInt)
     }
 
   }
 
+  /// Evite de mettre le IF partout
   def isSTART_Input(): Boolean = {
 
     if (ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERTWO) || ControllerHandler.isJustPressSTART(ControllerHandler.PLAYERONE)) {
@@ -142,8 +137,8 @@ class VersusGame  extends RenderingScreen {
     }
 
     return false
-
   }
 
+  /// Non utilisé
   override def onInit(): Unit = {}
 }

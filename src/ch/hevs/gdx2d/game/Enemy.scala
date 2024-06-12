@@ -173,7 +173,6 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       } else velocity = new Point(velocity.getX.toInt + 1, velocity.getY.toInt - 1)
     }
 
-    //g.drawFilledRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0, Color.ORANGE)
     if (ID == -3){
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 1, Main.bossImg)
     } else if (ID == -2) {

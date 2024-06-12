@@ -4,6 +4,10 @@ import ch.hevs.gdx2d.lib.GdxGraphics
 
 import java.awt.{Point, Rectangle}
 
+
+/**
+ * Base of all objects in the game (except Particle)
+ */
 abstract class Object {
 
   var position:Point

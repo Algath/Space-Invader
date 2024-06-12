@@ -102,13 +102,12 @@ class MainMenu extends RenderingScreen {
     stage.act()
     stage.draw()
 
+    if(DEBUG)
+      g.drawFPS()
+
     g.drawTransformedPicture(1920/2, 1080 - 150, 0f, 1f, Main.bannerImg)
-
-    //g.drawStringCentered(1080 * 0.9f, "SOS Invader") //rajouter font
-    //g.drawStringCentered(1080 * 0.8f, "Main Menu", Main.icepixel40)
-    g.drawFPS()
-
     g.drawString(1920 - 10, 20, "verison 0.1", 2)
+    g.drawTransformedPicture(350, 100, 0, 0.5f, Main.ISC_logo)
 
   }
 

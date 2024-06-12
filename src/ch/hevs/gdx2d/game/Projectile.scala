@@ -106,6 +106,7 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
   }
 
+  /// Check collision, only Fireballs
   def collision(): Unit = {
 
     var it: scala.Iterator[Projectile] = Handler.projectile.iterator;
@@ -114,11 +115,8 @@ class Projectile(ID: Int, _position : Point, _damage: Int, _velocity:Point = new
 
       var p:Projectile = it.next()
 
-      if((p.id == 3 || p.id == 4) && p != this && p.getHitBox().intersects(getHitBox())){
+      if((p.id == 3 || p.id == 4) && p != this && p.getHitBox().intersects(getHitBox()))
         ParticleManager.CreateParticles(position.clone.asInstanceOf[Point], 100, 50, 6)
-        //Handler.removeProjectile(it.indexOf(this))
-        //Handler.removeProjectile(it.indexOf(p))
-      }
 
     }
 
