@@ -97,7 +97,7 @@ class Main extends PortableApplication(1920, 1080) {
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 
     boom = new MusicPlayer("data/sounds/boom.wav")
-    music = new MusicPlayer("data/music/Space Invaders.mp3")
+    music = new MusicPlayer("data/music/SOS Invaders.wav")
 
     world = PhysicsWorld.getInstance()
     world.setGravity(new Vector2(0, -0.0f))
@@ -161,7 +161,7 @@ class Main extends PortableApplication(1920, 1080) {
       Inited = true
     }
 
-    music.loop()
+    //music.loop()
 
     s.render(g)
 
