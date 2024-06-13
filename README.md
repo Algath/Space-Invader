@@ -54,8 +54,9 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
 
 ## Trailer
 
-https://github.com/Algath/Space-Invader/assets/152215212/b54456db-f105-43bc-8b18-a4ceeee973f9
+![SOS Invaders](https://github.com/Algath/Space-Invader/assets/152215212/2b2342c2-a9e2-4e85-b9b9-e5bc1810d516)
 
+https://github.com/Algath/Space-Invader/assets/152215212/b54456db-f105-43bc-8b18-a4ceeee973f9
 
 
 ## Auteurs
