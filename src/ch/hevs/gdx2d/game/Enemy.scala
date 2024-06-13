@@ -183,9 +183,10 @@ class Enemy(ID: Int, _vie: Int, _position: Point) extends Object with Damage wit
       g.drawString(position.getX.toInt - 15, position.getY.toInt + 40, "PV : " + pv)
 
     /// Used in DEBUG Mode for debug hitbox
-    if (Main.DEBUG)
+    if (Main.DEBUG) {
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
       g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 0.7f, Main.enemyDebugImg)
+    }
   }
 
   override def getDamage: Int = {
