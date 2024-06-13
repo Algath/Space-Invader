@@ -10,7 +10,6 @@ import ch.hevs.gdx2d.lib.physics.PhysicsWorld
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main._
 import ch.hevs.gdx2d.screen.{Commands, Game, MainMenu, VersusGame}
-import org.lwjgl.opengl.DisplayMode
 //import com.badlogic.gdx.Graphics.DisplayMode
 import com.badlogic.gdx.files.FileHandle
 import com.badlogic.gdx.graphics.Pixmap.{Blending, Format}
@@ -31,7 +30,6 @@ import java.nio.ByteBuffer
  * @author ZANAD Maroua
  * @author SIEDEL Joshua
  * @version 1.0
- *
  */
 object Main {
 
@@ -51,6 +49,9 @@ object Main {
   var augmentImg: BitmapImage = null
   var degatImg: BitmapImage = null
   var armeImg: BitmapImage = null
+  var playerDebugImg: BitmapImage = null
+  var enemyDebugImg: BitmapImage = null
+  var projectileDebugImg: BitmapImage = null
   var ISC_logo: BitmapImage = null
 
   var icepixel40: BitmapFont = null
@@ -93,6 +94,9 @@ class Main extends PortableApplication(1920, 1080) {
     augmentImg = new BitmapImage("data/images/augm_pv.png")
     degatImg = new BitmapImage("data/images/degat_plus.png")
     armeImg = new BitmapImage("data/images/arme_plus.png")
+    playerDebugImg = new BitmapImage("data/images/Player-Debug.png")
+    enemyDebugImg = new BitmapImage("data/images/Ennemie-Debug.png")
+    projectileDebugImg = new BitmapImage("data/images/Projectile_Debug.png")
 
     skin = new Skin(Gdx.files.internal("data/ui/uiskin.json"))
 

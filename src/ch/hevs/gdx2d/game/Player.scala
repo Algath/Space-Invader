@@ -254,9 +254,10 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     }
 
     /// Used in DEBUG Mode for debug hitbox
-    if (Main.DEBUG)
+    if (Main.DEBUG) {
       g.drawRectangle(position.getX.toInt, position.getY.toInt, getHitBox().width, getHitBox().height, 0)
-
+      g.drawTransformedPicture(position.getX.toInt, position.getY.toInt, 0, 0.5f, Main.playerDebugImg)
+    }
   }
 
   override def getDamage: Int = {
