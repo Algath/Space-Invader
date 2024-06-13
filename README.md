@@ -54,7 +54,9 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
 
 ## Trailer
 
-[Timeline1.mp4](data%2FTimeline1.mp4)
+https://github.com/Algath/Space-Invader/assets/152215212/b54456db-f105-43bc-8b18-a4ceeee973f9
+
+
 
 ## Auteurs
 - Joshua Siedel - https://github.com/Discretos2022
