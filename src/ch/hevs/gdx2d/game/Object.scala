@@ -17,10 +17,9 @@ abstract class Object {
   def deplacement(): Unit
 
   def getHitBox(): Rectangle = {
-    return new Rectangle(position.getX.toInt, position.getY.toInt, 100, 100)
+    new Rectangle(position.getX.toInt, position.getY.toInt, 100, 100)
   }
 
   def onGraphicRender(g: GdxGraphics): Unit
-
 
 }

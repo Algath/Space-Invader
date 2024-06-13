@@ -35,7 +35,7 @@ object ControllerHandler {
   def ControllerIsNotNull(index:Int): Boolean = {
     if(index >= controller.length || controller(index) == null)
       return false
-    return true
+    true
   }
 
   def isJustPressA(index:Int): Boolean = {
@@ -52,7 +52,7 @@ object ControllerHandler {
       PlayerONE_A_oldpressed = false
     }
 
-    return false
+    false
 
   }
 
@@ -69,7 +69,7 @@ object ControllerHandler {
     if (!controller(index).getButton(Xbox.R_TRIGGER) && PlayerONE_RTRIGGER_oldpressed)
       PlayerONE_RTRIGGER_oldpressed = false
 
-    return false
+    false
 
   }
 
@@ -86,7 +86,7 @@ object ControllerHandler {
     if (!controller(index).getButton(Xbox.X) && PlayerONE_X_oldpressed)
       PlayerONE_X_oldpressed = false
 
-    return false
+    false
 
   }
 
@@ -103,7 +103,7 @@ object ControllerHandler {
     if (!controller(index).getButton(Xbox.START) && PlayerONE_START_oldpressed)
       PlayerONE_START_oldpressed = false
 
-    return false
+    false
 
   }
 
