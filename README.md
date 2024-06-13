@@ -22,7 +22,7 @@ Pour lancer le jeu, vous devez posséder un IDE pouvant lire et exécuter des fi
 ## Lancement
 Copiez l'URL HTTPS du repositories et ouvrez-le dans votre IDE.
 
-Lancer le programme dans le fichier 'main'.
+Lancer le programme dans le fichier 'src/ch.hevs.gdx2d/main/Main.scala'.
 
 <img src="https://github.com/Algath/Space-Invader/blob/master/data/images/img.png" alt="Emplacement du fichier 'Main'" style="width: 200px; height: auto;">
 
@@ -45,12 +45,16 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
 - Commandes manettes
   - D-pad : Déplacement joueur
   - A : Tire
-  - x : Tire spécial
-  - START : retour au menu depuis l'écran Game Over
+  - X : Tire spécial
+  - START : retour au menu depuis l'écran Game Over / Pause
 
 
 - Objectif
-  - Survivre le plus longtemps possible en faisant un high score
+  - Survivre le plus longtemps possible en faisant le meilleurs score possible
+
+## Trailer
+
+[Timeline 1.mov](data%2FTimeline%201.mov)
 
 ## Auteurs
 - Joshua Siedel - https://github.com/Discretos2022
