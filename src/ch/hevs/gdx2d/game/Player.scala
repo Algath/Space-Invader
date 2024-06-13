@@ -275,7 +275,7 @@ class Player(ID: Int, _position: Point, versusEnabled:Boolean = false) extends O
     if(pv <= 0)
       return true
 
-    return false
+    false
 
   }
 

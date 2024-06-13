@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener
 import com.badlogic.gdx.scenes.scene2d.{InputEvent, Stage}
 
 class Commands extends RenderingScreen {
-  var time: Float = 0
   var clavier: BitmapImage = new BitmapImage("data/images/clavier.png")
   var manette: BitmapImage = new BitmapImage("data/images/manette.png")
 

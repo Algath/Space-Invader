@@ -85,9 +85,7 @@ object Handler {
     if(playerTwo != null)
       if(playerTwo.pv > 0)
         playerTwo.onGraphicRender(g)
-
   }
-
 
   def removeProjectile(index: Int): Unit = {
     projectile.remove(index)
@@ -103,6 +101,5 @@ object Handler {
     try{bonusObject.remove(index)} catch{ case e:IndexOutOfBoundsException => }
     removedBonusObject += 1
   }
-
 
 }

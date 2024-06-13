@@ -1,18 +1,13 @@
 package ch.hevs.gdx2d.screen
 
-import ch.hevs.gdx2d.ParticleSystem.ParticleManager
-import ch.hevs.gdx2d.SaveSystem.SaveManager
 import ch.hevs.gdx2d.components.screen_management.RenderingScreen
 import ch.hevs.gdx2d.controller.ControllerHandler
-import ch.hevs.gdx2d.game.{Bonus_Object, Enemy, Handler}
+import ch.hevs.gdx2d.game.Handler
 import ch.hevs.gdx2d.lib.{GdxGraphics, ScreenManager}
 import ch.hevs.gdx2d.main.Main
 import ch.hevs.gdx2d.main.Main.s
-import com.badlogic.gdx.{Gdx, Input}
 import com.badlogic.gdx.graphics.Color
-
-import java.awt.Point
-import scala.util.Random
+import com.badlogic.gdx.{Gdx, Input}
 
 /**
  *
@@ -28,35 +23,17 @@ class VersusGame  extends RenderingScreen {
 
     Gdx.input.setInputProcessor(null)
 
-    //gdxGraphics.drawFilledRectangle(1920/2, 1080/2, 1920, 1080, 0, Color.BLUE)
-
     g.drawShader(Main.shaderTime)
     Main.shaderTime += 0.01f
 
-    //g.drawStringCentered(1080 * 0.8f, "Playing")
-
     Handler.onGraphicRender(g)
-    //ParticleManager.UpdatePhysicParticle(g)
-
-    //g.setColor(new Color(128, 128, 128, 0.5f))
-    //g.drawFilledRectangle(1920 / 2, 1080 / 2, 1920, 1080, 0);
-
-    /*if (Random.between(1, 600) == 1) {
-      Handler.bonusObject.append(new Bonus_Object(3, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 100000) == 1) { // 10000
-      Handler.bonusObject.append(new Bonus_Object(4, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }
-    if (Random.between(1, 1000000) == 1) { // 1000000
-      Handler.bonusObject.append(new Bonus_Object(5, new Point(Random.between(1940, 1950), Random.between(55, 1025))))
-    }*/
 
     // Calcule timer pour Debuggage
-    /*sec += 1 / 60.0
+    sec += 1 / 60.0
     if (count % 3600 == 0) {
       minute += 1
       sec = 0
-    }*/
+    }
 
     g.drawStringCentered(1080 - 25, "\\VERSUS/", Main.icepixel40)
 
@@ -136,7 +113,7 @@ class VersusGame  extends RenderingScreen {
       return true
     }
 
-    return false
+    false
   }
 
   /// Non utilisé
