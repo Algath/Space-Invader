@@ -54,7 +54,7 @@ Le jeu est compatible clavier/manette, mais uniquement durant la partie.
 
 ## Trailer
 
-[Timeline 1.mov](data%2FTimeline%201.mov)
+[Timeline1.mp4](data%2FTimeline1.mp4)
 
 ## Auteurs
 - Joshua Siedel - https://github.com/Discretos2022
